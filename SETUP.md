@@ -141,7 +141,7 @@ truncate public.events;
    the repo name here, that causes the doubled-path 404)
 6. Save and Deploy
 
-You get `https://storage-demand-test.pages.dev`. Every `git push` redeploys.
+You get `https://getstorage.pages.dev`. Every `git push` redeploys.
 
 After the first deploy, replace `REPLACE-WITH-YOUR-DOMAIN` in `index.html`,
 `sitemap.xml` and `robots.txt` with the real hostname (needed for correct SEO
@@ -152,11 +152,11 @@ canonical + Facebook share previews).
 ## 6. Ad URLs
 
 ```
-https://storage-demand-test.pages.dev/?utm_source=fb&utm_area=thapra
-https://storage-demand-test.pages.dev/?utm_source=fb&utm_area=rama3
-https://storage-demand-test.pages.dev/?utm_source=fb&utm_area=pinklao
-https://storage-demand-test.pages.dev/?utm_source=fb&utm_area=iconsiam
-https://storage-demand-test.pages.dev/?utm_source=google&utm_area=thapra
+https://getstorage.pages.dev/?utm_source=fb&utm_area=thapra
+https://getstorage.pages.dev/?utm_source=fb&utm_area=rama3
+https://getstorage.pages.dev/?utm_source=fb&utm_area=pinklao
+https://getstorage.pages.dev/?utm_source=fb&utm_area=iconsiam
+https://getstorage.pages.dev/?utm_source=google&utm_area=thapra
 ```
 
 `utm_area` also pre-selects that area on the page, so an ad-targeted visitor
