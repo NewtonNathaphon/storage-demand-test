@@ -99,18 +99,27 @@ If they are empty, the page still works but shows a red warning and saves nothin
 
 ---
 
-## 4. Test locally before deploying
+## 4. Test it
 
-```bash
-cd storage-demand-test
-python -m http.server 8000
-# open http://localhost:8000
-```
+Python is **not installed** on your machine (that `python` command is only a
+Microsoft Store placeholder), so skip the local web server the original handoff
+suggested. Test on the real deployed site instead — it is the environment that
+actually matters, and Cloudflare Pages redeploys about a minute after every
+push. So: do step 5 first, then come back here.
 
-Submit 2-3 test leads across different areas. Then Supabase -> Table Editor ->
-`leads` and `events`. Your rows should be there.
+On the live URL:
 
-Add `?admin=1` to the URL to see this session's own tally.
+1. Open it on your **phone**. This is a mobile ad campaign — test where the
+   traffic will be.
+2. Submit 2-3 test leads across different areas.
+3. Supabase -> Table Editor -> `leads` and `events`. Your rows should be there.
+4. Add `?admin=1` to the URL to see this session's own tally, broken down by area.
+5. Try an ad-style URL: `?utm_source=fb&utm_area=rama3`. Rama 3 should already be
+   selected when the page loads, and `utm_source` should appear on the saved row.
+
+If nothing lands in Supabase, open the browser console. The page logs the exact
+Supabase error there and still shows the user a success screen on purpose — a
+backend problem must never cost you a lead.
 
 Delete the test rows before running ads:
 
