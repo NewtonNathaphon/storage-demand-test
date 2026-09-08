@@ -25,4 +25,4 @@ Supported area values: thapra, rama3, pinklao, iconsiam.
 
 ## Custom domain
 
-Verify ownership of getstorage.com before connecting it in Cloudflare Pages Custom domains. Once active, update canonical/OG URLs, structured data, robots.txt and sitemap.xml together. Until then, the Pages URL is the working public address.
+Choose and register a location-neutral domain before connecting it in Cloudflare Pages Custom domains. Newton does not own getstorage.com, and it is unavailable for registration. See SETUP_STATUS.md for the latest candidates; no replacement has been selected or purchased. Once the chosen domain is active, update canonical/OG URLs, structured data, robots.txt and sitemap.xml together. Until then, the Pages URL is the working public address.
