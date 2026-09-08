@@ -1,6 +1,7 @@
 ﻿# GetStorage launch status - 2026-09-07
 
 - LIVE: https://getstorage.pages.dev
+- NEW DIRECTION SAVED 2026-09-08: PROJECT_HANDOFF.md records Newton's demand-led storage network vision, P0/P1/P2 requirements and MVP acceptance criteria. SpaceBuddy is the preferred brand candidate under discussion, with parking as possible future scope only. No rebrand, new MVP implementation, parking workflow or domain purchase has been performed. FUTURE.md records deferred scope.
 - Backend: https://supabase.com/dashboard/project/tmynmthxjcrnnukmpyox/editor/18424?schema=public
 - Existing Flowcraft Supabase project renamed storage and reused; no new database instance created.
 - Cloudflare Pages getstorage deploys GitHub NewtonNathaphon/storage-demand-test main using node build.cjs, output public. Only the website, robots.txt and sitemap.xml are published.
