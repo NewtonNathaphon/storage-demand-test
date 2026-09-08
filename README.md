@@ -25,4 +25,6 @@ area that produces the most deposit-ready leads wins.
 
 For the latest end-of-night checkpoint and next-chat instructions, read `RESUME_HERE.md` first. Newton paused building on 2026-09-08; the expanded MVP is documented but not implemented.
 
+`BUSINESS_THESIS.md` preserves the commercial thesis to test, including economics scenarios, risks and expansion evidence gates. Its supplied research claims require verification before reliance.
+
 Read `PROJECT_HANDOFF.md` for Newton's expanded business direction and MVP requirements, `SETUP_STATUS.md` for what is actually live, and `SETUP.md` for current operations. The existing four-area landing page described above is the current implementation, not the limit of the planned network. SpaceBuddy is the preferred brand candidate under discussion; parking remains future scope. See `FUTURE.md` for exclusions.

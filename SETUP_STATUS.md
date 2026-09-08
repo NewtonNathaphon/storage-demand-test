@@ -2,6 +2,7 @@
 
 - LIVE: https://getstorage.pages.dev
 - PAUSED FOR THE NIGHT 2026-09-08 at Newton's request. Full restart checkpoint: RESUME_HERE.md. Documentation saved only; do not start the expanded MVP until Newton returns and asks to resume.
+- Latest commercial thesis saved in BUSINESS_THESIS.md: demand-led controlled storage first, replication second, landlord-funded management/JV later. Research claims are supplied but unverified; financial ranges are scenarios. No additional features or spending approved.
 - NEW DIRECTION SAVED 2026-09-08: PROJECT_HANDOFF.md records Newton's demand-led storage network vision, P0/P1/P2 requirements and MVP acceptance criteria. SpaceBuddy is the preferred brand candidate under discussion, with parking as possible future scope only. No rebrand, new MVP implementation, parking workflow or domain purchase has been performed. FUTURE.md records deferred scope.
 - Backend: https://supabase.com/dashboard/project/tmynmthxjcrnnukmpyox/editor/18424?schema=public
 - Existing Flowcraft Supabase project renamed storage and reused; no new database instance created.

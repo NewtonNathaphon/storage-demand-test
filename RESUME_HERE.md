@@ -13,6 +13,7 @@ Newton is tired and explicitly said not to build tonight. Save the full handoff 
 3. SETUP_STATUS.md: verified launch and retirement evidence.
 4. SETUP.md: operating/deployment instructions.
 5. FUTURE.md: deferred features and scope boundary.
+6. BUSINESS_THESIS.md: Newton's locked thesis to test, commercial model, supplied precedents, illustrative economics, failure conditions and evidence gates. Research claims are not independently verified; scenarios are not forecasts.
 
 Repository: C:\Users\User\storage-demand-test
 
@@ -51,6 +52,8 @@ Related repository instructions: C:\Users\User\newton-life-os\AGENTS.md, root CL
 - Earlier documents inside the historical archive may still say deletion or GetStorage launch is pending. They are historical snapshots; this handoff and SETUP_STATUS.md contain the newer state.
 
 ## New business direction
+
+Latest addition: Newton explicitly wants to lock the thesis for testing. BUSINESS_THESIS.md preserves the September 8 commercial rationale and financial scenarios. This strengthens the business brief without expanding the software build or lifting tonight's pause. The evidence gates are Node #1 economics without Newton's daily presence, Node #2 replication, then viable landlord-funded management/JV arrangements. Referral fees are supplementary; controlled operations and later managed/JV sites are the core economic thesis.
 
 Build a demand-led storage operating network in Thailand. Capture real local storage demand first, identify catchments and customer needs, find/control appropriate supply, evaluate economics, design and operate storage, then learn from recurring revenue, occupancy, pricing and retention.
 
@@ -128,4 +131,4 @@ No next-step execution is required tonight. This checkpoint is documentation onl
 
 ## Copy/paste for the next chat
 
-Read C:\Users\User\storage-demand-test\RESUME_HERE.md, then PROJECT_HANDOFF.md, SETUP_STATUS.md, SETUP.md and FUTURE.md. We paused on September 8 after saving the SpaceBuddy vision; the expanded MVP has not been built. GetStorage is live; old Flowcraft Cloudflare hosting is deleted and its data is safely archived. SpaceBuddy is the preferred working name with parking as future scope. Resume by checking current state and proposing the next narrow step; do not assume Tha Phra is Node #1 or rebuild from scratch.
+Read C:\Users\User\storage-demand-test\RESUME_HERE.md, then BUSINESS_THESIS.md, PROJECT_HANDOFF.md, SETUP_STATUS.md, SETUP.md and FUTURE.md. We paused on September 8 after saving the SpaceBuddy vision and locked business thesis to test; the expanded MVP has not been built. GetStorage is live; old Flowcraft Cloudflare hosting is deleted and its data is archived. SpaceBuddy is the preferred working name with parking as future scope. Resume by checking current state and proposing the next narrow step; do not assume Tha Phra is Node #1 or rebuild from scratch. Treat the thesis research claims as awaiting primary-source verification and the financial examples as scenarios, not forecasts.
