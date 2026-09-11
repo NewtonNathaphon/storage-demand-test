@@ -1,11 +1,14 @@
-# SpaceBuddy working direction — project handoff
+# StorageBuddy working direction — project handoff
+
+Current working brand (2026-09-11): StorageBuddy / สตอเรจบดด. Newton resumed and requested all branding updated. This supersedes earlier SpaceBuddy/GetStorage naming preferences and the September 8 pause for this branding task. The existing address and hosting project remain getstorage.pages.dev / getstorage. No domain purchase is included. The expanded MVP remains unbuilt.
+
 
 Saved from Newton's full business and technical handoff on 2026-09-08. This is the requested direction, not a claim that these features are already implemented. See SETUP_STATUS.md for verified production state.
 
 ## Brand and purpose
 
-- SpaceBuddy is Newton's preferred candidate under discussion. It accommodates storage and potentially car parking. No final brand, domain purchase, domain availability check, or trademark clearance has been completed for this name.
-- GetStorage remains the deployed identity at https://getstorage.pages.dev until a rebrand is explicitly implemented.
+- StorageBuddy is Newton's selected working brand. It accommodates storage and potentially car parking. No final brand, domain purchase, domain availability check, or trademark clearance has been completed for this name.
+- StorageBuddy uses the existing https://getstorage.pages.dev address.
 - Build a demand-led storage operating network in Thailand: capture demand, understand local needs, find/control suitable supply, design and price storage, acquire customers, operate professionally, collect recurring revenue, and learn from occupancy/pricing/retention.
 - North Star: turn underused physical space into recurring income by matching real local storage demand with the right property and operating suitable locations efficiently.
 - Parking is possible future business context, not an instruction to implement parking inventory, payments, permits, or booking now.

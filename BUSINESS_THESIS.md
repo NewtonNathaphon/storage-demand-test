@@ -1,4 +1,7 @@
-# SpaceBuddy — business thesis to test
+# StorageBuddy — business thesis to test
+
+Current working brand (2026-09-11): StorageBuddy / สตอเรจบดด. Newton resumed and requested all branding updated. This supersedes earlier SpaceBuddy/GetStorage naming preferences and the September 8 pause for this branding task. The existing address and hosting project remain getstorage.pages.dev / getstorage. No domain purchase is included. The expanded MVP remains unbuilt.
+
 
 Saved 2026-09-08 from Newton's latest business-thesis handoff. This supplements PROJECT_HANDOFF.md; it does not expand the approved MVP or authorize building tonight.
 
@@ -12,7 +15,7 @@ Build a demand-led storage operating network: find where people need storage fir
 
 The website is the demand engine and data layer for the physical storage business. Physical storage is where the strongest initial economics are expected; the later management/network layer could enable expansion without personally funding each site.
 
-Working brand: SpaceBuddy, subject to domain and brand checks. Parking may eventually fit the brand but is not part of the current storage MVP.
+Working brand: StorageBuddy, subject to domain and brand checks. Parking may eventually fit the brand but is not part of the current storage MVP.
 
 ## Commercial rationale and supplied precedents
 

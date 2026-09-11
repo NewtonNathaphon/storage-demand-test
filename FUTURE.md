@@ -1,8 +1,11 @@
 # Future scope — not authorized for the current MVP
 
+Current working brand (2026-09-11): StorageBuddy / สตอเรจบดด. Newton resumed and requested all branding updated. This supersedes earlier SpaceBuddy/GetStorage naming preferences and the September 8 pause for this branding task. The existing address and hosting project remain getstorage.pages.dev / getstorage. No domain purchase is included. The expanded MVP remains unbuilt.
+
+
 See PROJECT_HANDOFF.md. These are context or deferred possibilities, not committed product features.
 
-- Parking/carpark demand and supply under the possible SpaceBuddy brand. No parking booking, access, permit, billing or operational model has been decided.
+- Parking/carpark demand and supply under the possible StorageBuddy brand. No parking booking, access, permit, billing or operational model has been decided.
 - Native mobile apps; full marketplace; nationwide operator onboarding; full operator portal.
 - Live unit booking engine; custom payments marketplace; host payouts; insurance product.
 - Moving/logistics operation; fulfillment and SKU management.

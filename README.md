@@ -1,4 +1,7 @@
-# storage-demand-test
+# StorageBuddy
+
+Current working brand (2026-09-11): StorageBuddy / สตอเรจบดด. Newton resumed and requested all branding updated. This supersedes earlier SpaceBuddy/GetStorage naming preferences and the September 8 pause for this branding task. The existing address and hosting project remain getstorage.pages.dev / getstorage. No domain purchase is included. The expanded MVP remains unbuilt.
+
 
 Public landing page that measures real demand for self-storage across four
 Bangkok areas: **Tha Phra, Rama 3, Pinklao, ICONSIAM**.
@@ -27,4 +30,4 @@ For the latest end-of-night checkpoint and next-chat instructions, read `RESUME_
 
 `BUSINESS_THESIS.md` preserves the commercial thesis to test, including economics scenarios, risks and expansion evidence gates. Its supplied research claims require verification before reliance.
 
-Read `PROJECT_HANDOFF.md` for Newton's expanded business direction and MVP requirements, `SETUP_STATUS.md` for what is actually live, and `SETUP.md` for current operations. The existing four-area landing page described above is the current implementation, not the limit of the planned network. SpaceBuddy is the preferred brand candidate under discussion; parking remains future scope. See `FUTURE.md` for exclusions.
+Read `PROJECT_HANDOFF.md` for Newton's expanded business direction and MVP requirements, `SETUP_STATUS.md` for what is actually live, and `SETUP.md` for current operations. The existing four-area landing page described above is the current implementation, not the limit of the planned network. StorageBuddy is the preferred brand candidate under discussion; parking remains future scope. See `FUTURE.md` for exclusions.

@@ -1,4 +1,7 @@
-﻿# GetStorage operations
+# StorageBuddy operations
+
+Current working brand (2026-09-11): StorageBuddy / สตอเรจบดด. Newton resumed and requested all branding updated. This supersedes earlier SpaceBuddy/GetStorage naming preferences and the September 8 pause for this branding task. The existing address and hosting project remain getstorage.pages.dev / getstorage. No domain purchase is included. The expanded MVP remains unbuilt.
+
 
 The site is live at https://getstorage.pages.dev. See SETUP_STATUS.md for the verified launch checkpoint and remaining Flowcraft deployment cleanup.
 

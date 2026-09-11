@@ -1,4 +1,9 @@
-﻿# GetStorage launch status - 2026-09-07
+# StorageBuddy launch status - 2026-09-07
+
+Current working brand (2026-09-11): StorageBuddy / สตอเรจบดด. Newton resumed and requested all branding updated. This supersedes earlier SpaceBuddy/GetStorage naming preferences and the September 8 pause for this branding task. The existing address and hosting project remain getstorage.pages.dev / getstorage. No domain purchase is included. The expanded MVP remains unbuilt.
+
+
+## Historical September 7-8 checkpoint (brand decisions superseded above)
 
 - LIVE: https://getstorage.pages.dev
 - PAUSED FOR THE NIGHT 2026-09-08 at Newton's request. Full restart checkpoint: RESUME_HERE.md. Documentation saved only; do not start the expanded MVP until Newton returns and asks to resume.
