@@ -1,5 +1,19 @@
 # StorageBuddy — end-of-night handoff
 
+## Latest bedtime checkpoint — saved after Newton's final review
+
+Newton said “save it im heading to bed.” Stop work after saving this checkpoint; wait for his next instruction.
+
+Live site: **https://storagebuddyth.com/**. Latest website commit: **a677bb8**, following **20e15d6** and the full redesign **8d99946**. All pushed to main; live HTTP 200 and updated page contents verified.
+
+- Full green/blue/white/cream redesign is live, using the four supplied responsive Thai/English banners. Main positioning: professional care, thoughtful help, Buddy pricing.
+- Correct Thai brand is **สตอเรจบัดดี้**. Earlier damaged spelling is superseded. Header/footer subtitle spacing accommodates Thai vowel and tone marks; metadata corrected too.
+- Size guide uses recognizable, animated example inventories at a common physical scale: 2 sqm document boxes; 3 sqm shelving/suitcases/boxes; 4 sqm bicycle/boxes; 5 sqm sofa/suitcase/boxes; 8 sqm sofa/shelving/bicycle/boxes. Lists match the drawings. These are examples, not fit guarantees.
+- Latest SVG frame is `85 20 330 330`. Reviewed all five scenes, including mobile bicycle view, and checked widths 360/390/768/1440 without horizontal overflow.
+- Existing backend/model/database unchanged. Photo consent/upload/resize, estimate-to-enquiry, two-step form and anonymous area vote passed local mocked flow checks during the redesign. Four existing backend tests passed. No new real provider accuracy claim or production lead submission from those mock checks.
+- See `DESIGN_REFRESH_2026-09-11.md` for implementation details and `STRATEGY_UPDATE_2026-09-11.md` for business direction. Do not restart design, deployment or backend work automatically on resume; use Newton's next request.
+
+
 ## Codex design work resumed
 
 Newton subsequently asked Codex to take over the full website redesign. Read `DESIGN_REFRESH_2026-09-11.md` for the new green/blue/cream design, supplied responsive banners, full-page changes and verification. This supersedes the earlier design pause below. Backend behavior remains unchanged by this refresh.
