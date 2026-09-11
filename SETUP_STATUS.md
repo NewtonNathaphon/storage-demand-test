@@ -1,5 +1,7 @@
 # StorageBuddy launch status - 2026-09-07
 
+> September 11 redesign: see `VERIFICATION.md` for current deployment evidence and `OPERATIONS.md` for the Rama 3 enquiry/AI workflow. Notes below preserve the earlier launch. Later user instructions resumed and authorized implementation; the September 8 pause is historical.
+
 > Current direction: read [MASTER_BRIEF.md](MASTER_BRIEF.md) first. Newton's September 11 Rama 3 building brief supersedes older site-search, rent-case and software-scope decisions below. Other property hunting and public landlord/JV intake are deferred. This file retains earlier context and compatible technical details.
 
 

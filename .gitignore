@@ -3,3 +3,8 @@ Thumbs.db
 node_modules/
 .vscode/
 /public/
+/.wrangler/
+.env
+.env.*
+.dev.vars
+.dev.vars.*

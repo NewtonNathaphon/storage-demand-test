@@ -1,5 +1,17 @@
 # StorageBuddy
 
+## Current September 11 release
+
+**Right Space. Right Price. Right for You. / พื้นที่พอดี ราคาพอดี สำหรับคุณ**
+
+Rama 3 is Site #1. The website now offers Thai/English advice-first pages, supplied brand illustrations, original animated room comparisons, camera/gallery inputs with transient AI sizing, detailed Rama 3 enquiries and separate other-area requests. No confirmed inventory, approved tariff, payments or automatic reservations. Staff review Supabase leads; notifications and custom authenticated admin remain unbuilt.
+
+Read [OPERATIONS.md](OPERATIONS.md) for current configuration and follow-up, [VERIFICATION.md](VERIFICATION.md) for test/deployment evidence, and [ASSETS.md](ASSETS.md) for image provenance. Build: `node build.cjs`; tests: `node --test tests/estimate.test.mjs`. GitHub main remains connected to Cloudflare Pages. AI uses the server-only `ANTHROPIC_API_KEY` Pages secret and `functions/api/estimate.js`. Never place that secret in HTML or public assets.
+
+The four-area experiment described below is historical and superseded by the Rama 3 release. Existing records remain preserved. Property hunting is paused; votes only inform possible future demand.
+
+## Historical project overview
+
 > Current direction: read [MASTER_BRIEF.md](MASTER_BRIEF.md) first. Newton's September 11 Rama 3 building brief supersedes older site-search, rent-case and software-scope decisions below. Other property hunting and public landlord/JV intake are deferred. This file retains earlier context and compatible technical details.
 
 
