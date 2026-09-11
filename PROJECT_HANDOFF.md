@@ -1,5 +1,7 @@
 # StorageBuddy working direction — project handoff
 
+> September 11 implementation update: the Rama 3 redesign, AI size assistant and secondary area votes are now implemented. `OPERATIONS.md` documents the implemented release; `VERIFICATION.md` records checks. The expanded admin/quote/rental requirements below remain future work. Positioning is “Right Space. Right Price. Right for You.” Camera/photo AI processing is transient and only the chosen estimate is stored with an enquiry.
+
 > Current direction: read [MASTER_BRIEF.md](MASTER_BRIEF.md) first. Newton's September 11 Rama 3 building brief supersedes older site-search, rent-case and software-scope decisions below. Other property hunting and public landlord/JV intake are deferred. This file retains earlier context and compatible technical details.
 
 

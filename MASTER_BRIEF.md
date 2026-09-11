@@ -2,6 +2,14 @@
 
 Current source of truth: 11 September 2026. This project thread is the main StorageBuddy thread.
 
+## Later September 11 website decisions
+
+Newton authorized the Rama 3 website redesign, camera/photo AI sizing, animated room comparisons and secondary votes for other areas. The brand promise is **The right space for you**, with **Right Space. Right Price. Right for You. / พื้นที่พอดี ราคาพอดี สำหรับคุณ**. Advice and right sizing lead the customer journey. The latest supplied 09_40_40 Thai banner and 09_17_17 logo guide the visual identity. Generated facility imagery is illustrative, not evidence of the actual branch.
+
+Newton supplied the Rama 3 map pin https://maps.app.goo.gl/Yt1FtdtEJJ4cLRUZ6 and reports over 1,000 sqm available to rent. Treat this as total building space until measured fitted inventory is confirmed. The map currently names the former garment business. Enquiries can be collected now; staff confirm prices, availability and move-in readiness. Other-area voting is restored as a secondary demand signal, without announcing new branches or reopening property hunting.
+
+See `OPERATIONS.md` and `REDESIGN_PLAN.md` for current website implementation, AI processing, data compatibility and remaining operational work. The older gap description below records the site before this redesign. AI photo processing is transient in this release; an optional estimate is stored with the enquiry, not the images. The expanded authenticated admin and ongoing quote/rental workflow remain future work.
+
 This document records Newton's September 11 brief and reconciles it with the supplied research. It supersedes earlier location-search, micro-node and marketplace/supply-intake priorities in this repository. Older research remains evidence and history, not current instructions.
 
 ## Objective and decisions

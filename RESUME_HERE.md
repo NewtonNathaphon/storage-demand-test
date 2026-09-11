@@ -1,5 +1,11 @@
 # StorageBuddy — end-of-night handoff
 
+## September 11 redesign checkpoint
+
+The current Rama 3 redesign adds advice-first positioning, the latest Thai/English supplied banners, original animated room comparisons, camera/gallery inputs with transient AI sizing, Rama 3 enquiries and separate other-area votes. Read `OPERATIONS.md` for configuration, record formats and staff follow-up. The existing static stack and Supabase database are preserved. The authenticated admin/quote/rental workflow remains unbuilt. Legacy notes below are historical, including the earlier pause and old four-area experiment.
+
+Cloudflare login was renewed with the existing user-read, account-read and Pages-write scopes using Windows trusted certificate roots. The production Anthropic secret is configured; no domain was purchased. Follow `VERIFICATION.md` for exact test/deployment status.
+
 > Current direction: read [MASTER_BRIEF.md](MASTER_BRIEF.md) first. Newton's September 11 Rama 3 building brief supersedes older site-search, rent-case and software-scope decisions below. Other property hunting and public landlord/JV intake are deferred. This file retains earlier context and compatible technical details.
 
 
