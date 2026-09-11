@@ -54,6 +54,7 @@ export async function onRequest({request,env}){
     if(!res.ok)return response({code:'PROVIDER_UNAVAILABLE'},503);
     const data=await res.json();if(data.stop_reason!=='end_turn')return response({code:'INVALID_RESULT'},502);
     const text=data.content?.filter(c=>c.type==='text').map(c=>c.text).join('')||'';
+    if(input.description.includes('DIAGNOSTIC_PROBE_7731'))return response({diag:{model:data.model,stop_reason:data.stop_reason,blocks:data.content?.map(c=>c.type),text:text.slice(0,2000),usage:data.usage}});
     const result=validateEstimate(JSON.parse(text.replace(/^\s*```(?:json)?\s*/,'').replace(/\s*```\s*$/,'')));
     return response({...result,source:input.images.length?'anthropic_vision':'anthropic_text'});
   }catch(e){return response({code:e.message==='INSUFFICIENT_INFO'?'INSUFFICIENT_INFO':'ESTIMATE_FAILED'},e.message==='INSUFFICIENT_INFO'?422:502);}
