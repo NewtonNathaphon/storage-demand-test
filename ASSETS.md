@@ -1,5 +1,7 @@
 # Public asset provenance
 
+Latest user instruction removes the public image-disclaimer labels. The provenance below remains the internal record; images do not establish actual fitted facility conditions.
+
 User supplied all images in `E:\Newton's files\Work - Property\Storage\storagebuddy III`.
 
 - `assets/storagebuddy_logo.webp`: supplied `Codex Image Sep 11, 2026, 09_17_17 PM.png`, resized for delivery. Header displays the supplied icon using CSS positioning and editable text for the brand name.

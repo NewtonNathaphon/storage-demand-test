@@ -1,5 +1,9 @@
 # September 11 Rama 3 redesign verification
 
+## Later palette refinement
+
+Expanded the page palette to multiple green shades, cream, white and sky blue, with restrained coral-red accents. Removed visible brand/facility photo labels in both languages per Newton's explicit request. No form, AI or persistence behavior changed. JavaScript/metadata/DOM checks passed; Thai and English desktop/mobile layouts reviewed at 390px. Domain searches performed in Cloudflare; no purchase made.
+
 ## Completed locally
 
 - JavaScript parse, structured metadata JSON and DOM ID/reference checks passed.

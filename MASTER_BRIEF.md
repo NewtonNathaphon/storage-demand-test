@@ -4,6 +4,8 @@ Current source of truth: 11 September 2026. This project thread is the main Stor
 
 ## Later September 11 website decisions
 
+Latest visual preference: more green throughout, using multiple green shades alongside white, cream, blue/light blue and restrained red accents. Keep mobile and desktop layouts. Newton explicitly requested removal of the visible brand/facility image-disclaimer wording; this overrides earlier instructions to display those labels. Asset provenance stays documented internally.
+
 Newton authorized the Rama 3 website redesign, camera/photo AI sizing, animated room comparisons and secondary votes for other areas. The brand promise is **The right space for you**, with **Right Space. Right Price. Right for You. / พื้นที่พอดี ราคาพอดี สำหรับคุณ**. Advice and right sizing lead the customer journey. The latest supplied 09_40_40 Thai banner and 09_17_17 logo guide the visual identity. Generated facility imagery is illustrative, not evidence of the actual branch.
 
 Newton supplied the Rama 3 map pin https://maps.app.goo.gl/Yt1FtdtEJJ4cLRUZ6 and reports over 1,000 sqm available to rent. Treat this as total building space until measured fitted inventory is confirmed. The map currently names the former garment business. Enquiries can be collected now; staff confirm prices, availability and move-in readiness. Other-area voting is restored as a secondary demand signal, without announcing new branches or reopening property hunting.
