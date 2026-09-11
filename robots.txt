@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://getstorage.pages.dev/sitemap.xml
+Sitemap: https://storagebuddyth.com/sitemap.xml

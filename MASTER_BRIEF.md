@@ -4,6 +4,8 @@ Current source of truth: 11 September 2026. This project thread is the main Stor
 
 ## Later September 11 website decisions
 
+Newton purchased **storagebuddyth.com** on September 11 and authorized connecting it to the existing Cloudflare Pages project. This is the primary public domain. `getstorage.pages.dev` remains the hosting project address. No new hosting or database is needed.
+
 Latest visual preference: more green throughout, using multiple green shades alongside white, cream, blue/light blue and restrained red accents. Keep mobile and desktop layouts. Newton explicitly requested removal of the visible brand/facility image-disclaimer wording; this overrides earlier instructions to display those labels. Asset provenance stays documented internally.
 
 Newton authorized the Rama 3 website redesign, camera/photo AI sizing, animated room comparisons and secondary votes for other areas. The brand promise is **The right space for you**, with **Right Space. Right Price. Right for You. / พื้นที่พอดี ราคาพอดี สำหรับคุณ**. Advice and right sizing lead the customer journey. The latest supplied 09_40_40 Thai banner and 09_17_17 logo guide the visual identity. Generated facility imagery is illustrative, not evidence of the actual branch.

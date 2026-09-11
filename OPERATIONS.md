@@ -1,5 +1,7 @@
 # StorageBuddy Rama 3 website operations
 
+Primary public domain: **https://storagebuddyth.com**. Newton purchased it on September 11. It connects to the existing `getstorage` Pages project. The old `getstorage.pages.dev` remains the platform address. Public canonical URL, social metadata, robots and sitemap use the purchased domain. Earlier no-purchase notes below are historical.
+
 ## Current customer journey
 
 Rama 3 enquiries, AI size advice, an illustrative animated size guide, and separate other-area requests. No payments, confirmed room reservations, live inventory, approved tariff or guaranteed opening date. Staff confirm size, availability, access, price and move-in timing.
