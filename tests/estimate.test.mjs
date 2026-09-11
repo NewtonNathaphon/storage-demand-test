@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validateInput,validateEstimate,onRequest} from '../functions/api/estimate.js';
 const input={consent:true,language:'en',description:'10 boxes of books, 40 x 30 x 30cm each',images:[]};
-const estimate={min_sqm:1,max_sqm:2,confidence:'low',reasoning:'Allows space for unstackable items and retrieval.',items:['10 boxes'],questions:['Can the boxes be stacked?']};
+const estimate={min_sqm:1,max_sqm:2,confidence:'low',reasoning:'Allows space for unstackable items and retrieval.',items:['10 boxes'],questions:['Can the boxes be stacked?'],items_en:['10 x cardboard box']};
 const request=(body=input,overrides={})=>new Request('https://getstorage.pages.dev/api/estimate',{method:'POST',headers:{origin:'https://getstorage.pages.dev','Content-Type':'application/json'},body:JSON.stringify(body),...overrides});
 test('validates consent, meaningful inventory, image signatures and bounds',()=>{
   assert.equal(validateInput(input).description,input.description);
@@ -10,7 +10,7 @@ test('validates consent, meaningful inventory, image signatures and bounds',()=>
 });
 test('rejects exact, impossible or malformed AI claims',()=>{
   assert.equal(validateEstimate(estimate).source,'anthropic_vision');
-  for(const patch of [{min_sqm:NaN},{min_sqm:-1},{max_sqm:1},{max_sqm:101},{confidence:'high'},{questions:['x'.repeat(401)]},{items:'boxes'},{min_sqm:'1'},{insufficient_info:true}])assert.throws(()=>validateEstimate({...estimate,...patch}));
+  for(const patch of [{min_sqm:NaN},{min_sqm:-1},{max_sqm:1},{max_sqm:101},{confidence:'high'},{questions:['x'.repeat(401)]},{items:'boxes'},{min_sqm:'1'},{insufficient_info:true},{items_en:undefined},{items_en:'10 boxes'}])assert.throws(()=>validateEstimate({...estimate,...patch}));
 });
 test('rejects cross-origin, missing consent, oversize and absent configuration before provider calls',async()=>{
   const env={ANTHROPIC_API_KEY:'test-key',LOCAL_DEV:'true'};
