@@ -1,5 +1,15 @@
 # StorageBuddy Rama 3 website operations
 
+## Latest verified photo flow and customer records
+
+September 11 follow-up: removed the photo checkbox and “AI SIZE HELP” badge at Newton's request. Photo selection/capture now automatically requests a recommendation, with a short processing notice/privacy link and loading/error/result feedback. Live camera uses `getUserMedia`; browser camera permission is still needed. Text-only estimates use the button. The API still receives `consent:true` as its existing request authorization flag; this no longer represents a separate checkbox.
+
+Live verification after commit `c7883f3`: a real photo request returned HTTP 200 and a visible 0.25–1 sqm result for detected document boxes. This proves connectivity and rendering, not estimate accuracy for every photo. Fresh form submission named `TEST ONLY PHOTO FOLLOWUP` returned HTTP 201 and showed success. Its source is `setup_test_photo_followup_20260911`; exclude it from customer reporting. Anonymous lead reading returned HTTP 401.
+
+Open customer records: https://supabase.com/dashboard/project/tmynmthxjcrnnukmpyox/editor/18424?schema=public — project **storage**, table **public.leads**. Contact/basic fields have their own columns; detailed form answers are JSON in `customer_use`. Submitted enquiries and area votes are saved; abandoned/unfinished forms and photos are not. An estimate is saved only if attached using the result's enquiry button and then submitted. There is no custom admin dashboard or automatic LINE/email notification yet.
+
+Current code's provider model default is `claude-sonnet-5`, overridable by `ANTHROPIC_MODEL`. Older model/checkbox references below are historical. Current brand positioning is professional care, thoughtful help and Buddy pricing, as recorded in `STRATEGY_UPDATE_2026-09-11.md`.
+
 Primary public domain: **https://storagebuddyth.com**. Newton purchased it on September 11. It connects to the existing `getstorage` Pages project. The old `getstorage.pages.dev` remains the platform address. Public canonical URL, social metadata, robots and sitemap use the purchased domain. Earlier no-purchase notes below are historical.
 
 ## Current customer journey
