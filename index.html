@@ -194,7 +194,7 @@ function renderSize(){
   $('sizeTitle').textContent=s.title[n];$('sizeDescription').textContent=s.desc[n];$('sizeDimensions').textContent=t('ตัวอย่างสัดส่วน: ','Example dimensions: ')+s.dims+t(' ม.',' m');
   $('sizeItems').replaceChildren(...s.items.map(pair=>{const span=document.createElement('span');span.textContent=pair[n];return span;}));
   // Common metric scale: the objects keep their size as room footprints change.
-  const svg=$('roomIllustration'), ns='http://www.w3.org/2000/svg';svg.replaceChildren();svg.setAttribute('viewBox','0 0 500 410');
+  const svg=$('roomIllustration'), ns='http://www.w3.org/2000/svg';svg.replaceChildren();svg.setAttribute('viewBox','85 20 330 330');
   const node=(tag,attrs,parent=svg)=>{const e=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);parent.append(e);return e;};
   const dims={2:[1,2],3:[1.5,2],4:[2,2],5:[2,2.5],8:[2,4]}[selectedSize];
   const [w,d]=dims, scale=58, ox=250-(w-d)*scale*.43, oy=166;
@@ -249,7 +249,7 @@ function renderSize(){
   if(selectedSize===4){cartons(.12,.08,6);bicycle(.15,1.3);}
   if(selectedSize===5){sofa(.15,.1);cartons(.1,1.12,6);suitcase(1.35,1.63);}
   if(selectedSize===8){sofa(.15,.1);shelf(.1,1.15);cartons(1.05,1.1,6);bicycle(.15,3.15);}
-  const label=node('text',{x:250,y:375,'text-anchor':'middle',fill:'#28556a','font-family':'inherit','font-size':15,'font-weight':600});label.textContent=selectedSize+t(' ตร.ม. · ตัวอย่างการจัดเก็บ',' m² · example arrangement');
+  const label=node('text',{x:250,y:342,'text-anchor':'middle',fill:'#28556a','font-family':'inherit','font-size':15,'font-weight':600});label.textContent=selectedSize+t(' ตร.ม. · ตัวอย่างการจัดเก็บ',' m² · example arrangement');
   svg.setAttribute('aria-label',selectedSize+t(' ตารางเมตร: ',' square metres: ')+s.items.map(v=>v[n]).join(', '));
 }
 
