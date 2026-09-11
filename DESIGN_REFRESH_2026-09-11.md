@@ -1,5 +1,9 @@
 # StorageBuddy complete page refresh — September 11, 2026
 
+## Follow-up: Thai wording and useful room examples
+
+Newton flagged incomplete Thai branding and uninformative room illustrations. Corrected all public occurrences of the brand to `สตอเรจบัดดี้`, including metadata/header/footer, and enlarged subtitle line height. Reviewed page wording and localized room dimensions to Thai `ม.`. Replaced the abstract blocks with constant-scale recognizable objects and matching TH/EN inventories: 2 sqm = 8 archive boxes; 3 sqm = shelving, 2 suitcases, 4 boxes; 4 sqm = bicycle and 6 boxes; 5 sqm = sofa, suitcase and 6 boxes; 8 sqm = sofa, shelving, bicycle and 8 boxes. Examples are illustrative, not capacity guarantees. Checked SVG bounds and layout widths 360/390/768/1440; inspected all five scenes and mobile bicycle rendering.
+
 Newton explicitly resumed Codex design work after Claude's size-guide changes. The prior documentation-only/design pause is superseded for this request.
 
 ## Final design

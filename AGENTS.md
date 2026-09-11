@@ -1,5 +1,7 @@
 # StorageBuddy project instructions
 
+Latest wording correction from Newton's screenshot review: use **สตอเรจบัดดี้** in the public brand, metadata and logo subtitle. Earlier pasted `สตอเรจบดด` lost Thai marks and is superseded. Keep Thai line height sufficient for vowels/tone marks. The size guide now shows recognizable example inventories, not generic abstract blocks.
+
 Newest instruction: Newton has handed the website redesign back to Codex and explicitly requested a full green/blue/white/cream refresh using the four banners in `E:\Newton's files\Work - Property\Storage\banner`. This supersedes the design pause below. Preserve the current backend while refreshing and verifying the complete customer-facing page. See `DESIGN_REFRESH_2026-09-11.md` for the implementation and checks.
 
 Latest strategy: read `STRATEGY_UPDATE_2026-09-11.md`. Professional quality at a sensible Buddy price is the main positioning; right-sizing is a service feature, not the moat. This supersedes earlier positioning interpretations. The LEO 4 sqm enquiry was intentionally size-biased; do not lock the room mix from it. Save-only scope remains in force.
