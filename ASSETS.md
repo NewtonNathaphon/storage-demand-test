@@ -12,3 +12,6 @@ User supplied all images in `E:\Newton's files\Work - Property\Storage\storagebu
 - `assets/business_storage.webp`: `pics/pexels-tima-miroshnichenko-6169043.jpg`, stock illustration.
 
 The room guide is original SVG generated in JavaScript. Competitor artwork, price ladders, testimonials and facility claims were not copied.
+# September 11 latest supplied banners
+
+The full-page refresh uses Newton's four files from `E:\Newton's files\Work - Property\Storage\banner`: `banner_thai.png`, `banner_eng.png`, `banner_fat_thai.png`, and `banner_fat_eng.png`. They are published as `assets/buddy_banner_th.webp`, `buddy_banner_en.webp`, `buddy_banner_fat_th.webp`, and `buddy_banner_fat_en.webp`, respectively. Desktop is resized to 1,800px wide; mobile to 1,000px; WebP quality 88, retaining complete artwork. These are supplied brand illustrations, not independently verified facility photos. Older assets below remain historical.

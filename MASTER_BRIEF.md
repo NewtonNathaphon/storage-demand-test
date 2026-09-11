@@ -2,6 +2,8 @@
 
 Current source of truth: 11 September 2026. This project thread is the main StorageBuddy thread.
 
+Latest business direction: **`STRATEGY_UPDATE_2026-09-11.md` takes precedence over conflicting earlier positioning and planning notes below.** Main promise: professional care, thoughtful help, and a Buddy price — **ดูแลแบบมือโปร ช่วยเลือกแบบคนรู้ใจ ราคาแบบบัดดี้**. Right-sizing is a service feature, not the moat. The latest note records the corrected interpretation of the size-biased LEO enquiry, adaptable small-room mix, building-level electronic access with physical room padlocks, 5–15% better-value positioning, proposed THB 30k–50k/month marketing range and combined expansion gate around sustained 75%+ occupancy. These planning targets do not authorize spending or implementation. Claude handles design; Codex remains documentation-only until Newton resumes backend work.
+
 Latest research and work allocation: see `RESEARCH_UPDATE_2026-09-11.md`. Newton supplied further ChatGPT market/LEO analysis for saving only. Proposed unit percentages and prices remain unapproved test hypotheses; source documents were not independently verified in this save. **Claude handles design; Codex makes no code changes and waits for Newton's explicit instruction before backend work.**
 
 ## Later September 11 website decisions
@@ -10,7 +12,7 @@ Newton purchased **storagebuddyth.com** on September 11 and authorized connectin
 
 Latest visual preference: more green throughout, using multiple green shades alongside white, cream, blue/light blue and restrained red accents. Keep mobile and desktop layouts. Newton explicitly requested removal of the visible brand/facility image-disclaimer wording; this overrides earlier instructions to display those labels. Asset provenance stays documented internally.
 
-Newton authorized the Rama 3 website redesign, camera/photo AI sizing, animated room comparisons and secondary votes for other areas. The brand promise is **The right space for you**, with **Right Space. Right Price. Right for You. / พื้นที่พอดี ราคาพอดี สำหรับคุณ**. Advice and right sizing lead the customer journey. The latest supplied 09_40_40 Thai banner and 09_17_17 logo guide the visual identity. Generated facility imagery is illustrative, not evidence of the actual branch.
+Newton authorized the Rama 3 website redesign, camera/photo AI sizing, animated room comparisons and secondary votes for other areas. The earlier redesign used **The right space for you**, with **Right Space. Right Price. Right for You. / พื้นที่พอดี ราคาพอดี สำหรับคุณ**. This remains supporting service messaging; the latest broader positioning is professional quality at a sensible Buddy price. The supplied 09_40_40 Thai banner and 09_17_17 logo guided that visual identity. Generated facility imagery is illustrative, not evidence of the actual branch.
 
 Newton supplied the Rama 3 map pin https://maps.app.goo.gl/Yt1FtdtEJJ4cLRUZ6 and reports over 1,000 sqm available to rent. Treat this as total building space until measured fitted inventory is confirmed. The map currently names the former garment business. Enquiries can be collected now; staff confirm prices, availability and move-in readiness. Other-area voting is restored as a secondary demand signal, without announcing new branches or reopening property hunting.
 
@@ -33,7 +35,7 @@ Underwrite and launch StorageBuddy at the wife/family Rama 3 building correctly.
 
 ## Source order and review
 
-1. Newton's September 11 Master Project Brief in the current conversation: newest business decisions, including Rama 3 priority and three rent cases.
+1. Newton's latest September 11 direction in `STRATEGY_UPDATE_2026-09-11.md`, then the earlier Master Project Brief and research update where consistent: Rama 3 priority and the three rent cases remain unchanged.
 2. `E:\Newton's files\Work - Property\Storage\storagebuddy III\Storage_Thesis_Rama3_Website_Next_Steps_2026-09-10.md`: newer LEO visit, building assumptions and website reasoning. Its multi-area testing and site-selection objectives are superseded by item 1.
 3. Same folder, `Micro_Self_Storage_Research_Master_v9.xlsx`: 13 worksheets, reviewed read-only. Detailed calls/visits, benchmarks, candidate building and old financial model.
 4. Same folder, `Micro_Self_Storage_Final_Competitor_and_Site1_Playbook_v5.xlsx`: 12 worksheets, reviewed read-only. Competitors, demand evidence, RFQ and historical site-search work.

@@ -1,5 +1,9 @@
 # StorageBuddy project instructions
 
+Newest instruction: Newton has handed the website redesign back to Codex and explicitly requested a full green/blue/white/cream refresh using the four banners in `E:\Newton's files\Work - Property\Storage\banner`. This supersedes the design pause below. Preserve the current backend while refreshing and verifying the complete customer-facing page. See `DESIGN_REFRESH_2026-09-11.md` for the implementation and checks.
+
+Latest strategy: read `STRATEGY_UPDATE_2026-09-11.md`. Professional quality at a sensible Buddy price is the main positioning; right-sizing is a service feature, not the moat. This supersedes earlier positioning interpretations. The LEO 4 sqm enquiry was intentionally size-biased; do not lock the room mix from it. Save-only scope remains in force.
+
 Latest September 11 instruction: **Claude handles website design fixes. Codex is paused on code/backend work until Newton explicitly asks to resume.** Save research/documentation only for now. Read `RESEARCH_UPDATE_2026-09-11.md` for the latest supplied analysis, proposed room mix/prices and session handoff. Do not publish those proposals or deploy changes merely from the research paste. When resumed, inspect Claude's latest work first.
 
 Read `MASTER_BRIEF.md` first. Newton's September 11, 2026 Rama 3 brief supersedes older site-search and software-scope directions.

@@ -1,5 +1,13 @@
 # StorageBuddy — end-of-night handoff
 
+## Codex design work resumed
+
+Newton subsequently asked Codex to take over the full website redesign. Read `DESIGN_REFRESH_2026-09-11.md` for the new green/blue/cream design, supplied responsive banners, full-page changes and verification. This supersedes the earlier design pause below. Backend behavior remains unchanged by this refresh.
+
+## Latest strategy update — read first
+
+Read `STRATEGY_UPDATE_2026-09-11.md` for Newton's newest positioning and operating direction. Professional quality at a sensible Buddy price leads; right-sizing is a service feature. It also corrects the size-biased LEO interpretation and records phased capacity, simple padlock rooms, selective reconfiguration, proposed value/marketing targets and the combined expansion gate. This supersedes conflicting historical positioning below. Documentation only: Claude handles design and Codex waits for an explicit backend instruction.
+
 ## Latest handoff — Claude design, Codex backend later
 
 Newton explicitly instructed Codex to read/save the additional ChatGPT research and chat details, change no code, and wait to handle backend work until he says so. Claude is handling design fixes. Detailed saved context: `RESEARCH_UPDATE_2026-09-11.md`, including reported LEO transaction/offer/SOP, attributed market claims, provisional unit mix/prices and the implemented session state. These are not instructions to deploy prices, reservations, contracts or automation. Inspect Claude's latest changes before any later backend work.
