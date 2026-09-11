@@ -1,5 +1,9 @@
 # StorageBuddy — end-of-night handoff
 
+## Latest follow-up — photo recommendation and live camera
+
+Newton subsequently requested removal of “AI SIZE HELP” and the photo consent checkbox, reported uploads doing nothing, and asked for the camera button to open a camera. Implemented automatic recommendation after successful photo selection/capture, visible processing/result/error states, larger previews, and a brief photo-processing notice with privacy link. Removed the badge and checkbox; existing request authorization flag remains in the API payload. Privacy copy reflects automatic processing. Camera now uses `getUserMedia`, a preview/capture dialog, rear-camera preference on phones, upload fallback and track cleanup on close/capture. Browser camera permission remains necessary. Tested upload/auto-result with mocked API, fake-device camera capture, stream cleanup, provider failure and unsupported file errors. No physical-phone camera claim. Backend provider/model unchanged. This follow-up supersedes the stop checkpoint immediately below.
+
 ## Latest bedtime checkpoint — saved after Newton's final review
 
 Newton said “save it im heading to bed.” Stop work after saving this checkpoint; wait for his next instruction.
