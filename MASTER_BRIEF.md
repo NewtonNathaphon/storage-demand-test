@@ -2,6 +2,8 @@
 
 Current source of truth: 11 September 2026. This project thread is the main StorageBuddy thread.
 
+Latest research and work allocation: see `RESEARCH_UPDATE_2026-09-11.md`. Newton supplied further ChatGPT market/LEO analysis for saving only. Proposed unit percentages and prices remain unapproved test hypotheses; source documents were not independently verified in this save. **Claude handles design; Codex makes no code changes and waits for Newton's explicit instruction before backend work.**
+
 ## Later September 11 website decisions
 
 Newton purchased **storagebuddyth.com** on September 11 and authorized connecting it to the existing Cloudflare Pages project. This is the primary public domain. `getstorage.pages.dev` remains the hosting project address. No new hosting or database is needed.

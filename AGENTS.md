@@ -1,5 +1,7 @@
 # StorageBuddy project instructions
 
+Latest September 11 instruction: **Claude handles website design fixes. Codex is paused on code/backend work until Newton explicitly asks to resume.** Save research/documentation only for now. Read `RESEARCH_UPDATE_2026-09-11.md` for the latest supplied analysis, proposed room mix/prices and session handoff. Do not publish those proposals or deploy changes merely from the research paste. When resumed, inspect Claude's latest work first.
+
 Read `MASTER_BRIEF.md` first. Newton's September 11, 2026 Rama 3 brief supersedes older site-search and software-scope directions.
 
 Read `RESUME_HERE.md` for deployment/history, then `PROJECT_HANDOFF.md` for compatible technical details. Historical Have Space, nationwide supply intake and location-selection requirements are deferred by the current master brief.

@@ -1,5 +1,9 @@
 # StorageBuddy — end-of-night handoff
 
+## Latest handoff — Claude design, Codex backend later
+
+Newton explicitly instructed Codex to read/save the additional ChatGPT research and chat details, change no code, and wait to handle backend work until he says so. Claude is handling design fixes. Detailed saved context: `RESEARCH_UPDATE_2026-09-11.md`, including reported LEO transaction/offer/SOP, attributed market claims, provisional unit mix/prices and the implemented session state. These are not instructions to deploy prices, reservations, contracts or automation. Inspect Claude's latest changes before any later backend work.
+
 ## September 11 redesign checkpoint
 
 Latest domain decision: Newton purchased **storagebuddyth.com** and authorized its connection to Pages. It is live as the primary public address. Apex and www are configured on the existing `getstorage` project; www was still propagating through this PC's DNS cache at verification. HTTPS, a real AI request and enquiry ID 7 passed on the primary domain. Evidence is in `VERIFICATION.md`. The earlier no-domain statements below are historical.
