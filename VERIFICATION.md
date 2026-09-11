@@ -1,5 +1,14 @@
 # September 11 Rama 3 redesign verification
 
+## Purchased domain connection
+
+- Newton purchased `storagebuddyth.com` and authorized connecting it. Added apex and `www.storagebuddyth.com` as custom domains on existing Pages project `getstorage`, using Cloudflare's setup flow to create CNAME records to `getstorage.pages.dev`.
+- Primary HTTPS domain returned 200 and the current website; Chrome rendered it successfully. Plain HTTP redirects 301 to HTTPS.
+- Public canonical URL, social URLs, Organization URL, robots and sitemap now point to `https://storagebuddyth.com`, implementation commit **3e28bdc**. The original platform URL remains usable.
+- A browser enquiry on the purchased domain saved successfully and was independently confirmed as **lead ID 7**, source `setup_test_domain_20260911`; exclude from reporting.
+- Real AI estimate POST on the new origin returned 200 with a valid Thai range and `anthropic_text` provenance. Existing server secret and database reused.
+- Cloudflare marks www Active with SSL enabled. Google public DNS resolves it; HTTPS request using its public DNS address returned 200 with TLS verification enabled. This PC/Chrome still cached an earlier negative DNS result during checks, so www may take additional propagation time locally. No system DNS settings were changed.
+
 ## Later palette refinement
 
 Expanded the page palette to multiple green shades, cream, white and sky blue, with restrained coral-red accents. Removed visible brand/facility photo labels in both languages per Newton's explicit request. No form, AI or persistence behavior changed. JavaScript/metadata/DOM checks passed; Thai and English desktop/mobile layouts reviewed at 390px. Domain searches performed in Cloudflare; no purchase made.

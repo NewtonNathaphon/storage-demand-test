@@ -2,6 +2,8 @@
 
 ## September 11 redesign checkpoint
 
+Latest domain decision: Newton purchased **storagebuddyth.com** and authorized its connection to Pages. It is live as the primary public address. Apex and www are configured on the existing `getstorage` project; www was still propagating through this PC's DNS cache at verification. HTTPS, a real AI request and enquiry ID 7 passed on the primary domain. Evidence is in `VERIFICATION.md`. The earlier no-domain statements below are historical.
+
 The current Rama 3 redesign adds advice-first positioning, the latest Thai/English supplied banners, original animated room comparisons, camera/gallery inputs with transient AI sizing, Rama 3 enquiries and separate other-area votes. Read `OPERATIONS.md` for configuration, record formats and staff follow-up. The existing static stack and Supabase database are preserved. The authenticated admin/quote/rental workflow remains unbuilt. Legacy notes below are historical, including the earlier pause and old four-area experiment.
 
 Cloudflare login was renewed with the existing user-read, account-read and Pages-write scopes using Windows trusted certificate roots. The production Anthropic secret is configured; no domain was purchased. Follow `VERIFICATION.md` for exact test/deployment status.

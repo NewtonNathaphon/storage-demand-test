@@ -2,6 +2,8 @@
 
 ## Current September 11 release
 
+Primary public address: **https://storagebuddyth.com** (purchased by Newton September 11), connected to the existing Cloudflare Pages project. `getstorage.pages.dev` remains the platform address. The no-purchase and experimental-site descriptions below are historical.
+
 **Right Space. Right Price. Right for You. / พื้นที่พอดี ราคาพอดี สำหรับคุณ**
 
 Rama 3 is Site #1. The website now offers Thai/English advice-first pages, supplied brand illustrations, original animated room comparisons, camera/gallery inputs with transient AI sizing, detailed Rama 3 enquiries and separate other-area requests. No confirmed inventory, approved tariff, payments or automatic reservations. Staff review Supabase leads; notifications and custom authenticated admin remain unbuilt.
