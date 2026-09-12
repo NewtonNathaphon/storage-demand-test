@@ -103,7 +103,7 @@ body{background:var(--paper)}h1,h2,h3{color:var(--ink)}h1{line-height:1.2}h2{lin
 #roomIllustration:not(.unpacked) .room-object{animation:buddy-drop .48s cubic-bezier(.2,.75,.35,1) both;animation-delay:var(--drop-delay)}
 #roomIllustration.unpacked .room-object{animation:none;translate:none;opacity:1}
 @media(prefers-reduced-motion:reduce){#roomIllustration .room-object{animation:none!important}}
-.sizes-intro{display:grid;grid-template-columns:1fr minmax(280px,420px);gap:36px;align-items:center}.sizes-advice-photo{width:100%;height:auto;display:block;border-radius:20px}.sizes-intro h2{max-width:600px;line-height:1.4}@media(max-width:760px){.sizes-intro{grid-template-columns:1fr;gap:20px}.sizes-advice-photo{max-width:420px;justify-self:center}}
+.sizes-intro{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:center}.sizes-advice-photo{width:100%;height:auto;display:block;border-radius:20px}.sizes-intro h2{max-width:600px;line-height:1.4}@media(max-width:760px){.sizes-intro{grid-template-columns:1fr;gap:20px}.sizes-advice-photo{max-width:none;justify-self:stretch}}
 
 .promo-intro{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px}.promo-intro img{display:block;width:100%;height:auto;border-radius:20px}
 .promo-intro h2{font-size:clamp(30px,3vw,43px);line-height:1.4}
