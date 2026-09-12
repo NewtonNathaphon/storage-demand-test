@@ -1,3 +1,11 @@
+## Latest sleep checkpoint - September 12, 2026
+
+Newton said "save it im going to sleep." Stop work until his next request.
+
+Latest pushed website commit: 0e0a1e1. Removed the question4 photo from the size-section heading at his request; retain heading and interactive room selector. Header and three-step cards stay white. Hero uses banner2.png. Advisor uses buddy_size_advisor_v2.png with compact form and Buddy wording. Room selector includes 1 sqm / approximately 1.5 m high locker, drop-in animation, button-controlled separated-item view, custom sqm or width x depth fields, and one booking CTA. Custom area and dimensions save in lead JSON. Opening offers now Early Bird 50% first 2 months, Founding Buddy 50% first 4 months, six-month minimum in expandable terms. Promo image remains. Offer version presale_2026_09_12_v2. Payment remains unconfigured and registrations are unpaid interest.
+
+All changes pushed. Browser signup and room tests passed during these changes; both discount durations and custom dimensions were verified with mocked persistence. User removed only the size-heading photo, not the hero, advisor or promo image. Do not resume changes automatically.
+
 Latest presale redesign: read PRESALE_2026-09-12.md. Two-tier registration is implemented; tariffs and payment are not configured. Founder selections are unpaid interest, never paid reservations. This supersedes the enquiry-only layout instructions below.
 
 # StorageBuddy — end-of-night handoff
