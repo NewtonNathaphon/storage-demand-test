@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const output = path.join(__dirname, 'public');
 fs.mkdirSync(output, { recursive: true });
-for (const name of ['index.html', 'robots.txt', 'sitemap.xml', '_headers', '_routes.json',
+for (const name of ['index.html', 'backoffice.html', 'assets/backoffice.js', 'robots.txt', 'sitemap.xml', '_headers', '_routes.json',
   'assets/home_space.webp', 'assets/business_storage.webp', 'assets/document_storage.webp',
   'assets/buddy_banner_th.webp', 'assets/buddy_banner_en.webp',
   'assets/buddy_banner_fat_th.webp', 'assets/buddy_banner_fat_en.webp',
