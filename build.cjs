@@ -4,7 +4,7 @@ const path = require('path');
 const output = path.join(__dirname, 'public');
 fs.mkdirSync(output, { recursive: true });
 for (const name of ['index.html', 'backoffice.html', 'assets/backoffice.js', 'assets/line_official.jpg', 'robots.txt', 'sitemap.xml', '_headers', '_routes.json',
-  'assets/buddy_opening_promo.png', 'assets/buddy_room_advice.png', 'assets/buddy_hero_banner2.png', 'assets/buddy_size_advisor_v2.png', 'assets/home_space.webp', 'assets/business_storage.webp', 'assets/document_storage.webp',
+  'assets/buddy_opening_promo.png', 'assets/buddy_room_advice_v4.png', 'assets/buddy_hero_banner2.png', 'assets/buddy_size_advisor_v2.png', 'assets/home_space.webp', 'assets/business_storage.webp', 'assets/document_storage.webp',
   'assets/buddy_banner_th.webp', 'assets/buddy_banner_en.webp',
   'assets/buddy_banner_fat_th.webp', 'assets/buddy_banner_fat_en.webp',
   'assets/storagebuddy_logo_20260912.png', 'assets/storagebuddy_logo.webp', 'assets/storagebuddy_banner.webp', 'assets/storagebuddy_banner_th.webp']) {
