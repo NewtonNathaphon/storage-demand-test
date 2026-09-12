@@ -1,5 +1,7 @@
 # StorageBuddy project instructions
 
+Latest conversion update: the building is NOT confirmed. Public copy must describe planned Rama 3 storage, with no exact map, site visits, building capacity claims or immediate move-ins. Registered company address is labelled separately. One-step enquiry keeps contact/items required and extra preferences optional. Hero and mobile bar offer enquiry and LINE; size examples follow benefits. Read CONVERSION_2026-09-12.md.
+
 Latest logo correction (September 12): use the exact newer `E:/Newton's files/Work - Property/Storage/logo.png`, copied to `assets/storagebuddy_logo_20260912.png`. It supersedes storagebuddy III/logo.png. Header, footer, backoffice, favicon and Organization metadata use this asset. Render the entire image with object-fit:contain; never use negative offsets or overflow clipping for the logo.
 
 September 12 latest delivery: read `DELIVERY_2026-09-12.md` first. Newton resumed and authorized implementation/deployment. Backoffice is built and uses the existing CCAQR owner password with server-enforced active-owner access. Storage Supabase remains connected. Public phone/email/LINE and the supplied LINE QR are added; real photo-to-enquiry and persisted follow-up tests passed. Historical pause and unbuilt-admin statements below are superseded.
