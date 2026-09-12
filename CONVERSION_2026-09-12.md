@@ -9,3 +9,5 @@ Newton approved improving the customer journey and withholding the map because t
 - Local browser checks passed in Thai/English at widths 360/390/768/1440: no overflow, no map, required-field rejection and successful minimal enquiry payloads. Actual file upload with mocked provider response passed through to an enquiry containing the estimate and optional budget. No production AI quota was consumed for this unchanged provider flow.
 
 Conversion improvement is an intended outcome, not a measured claim. Compare enquiry and LINE activity after genuine traffic arrives; setup_test records remain excluded in the backoffice.
+
+Published as `4c0cd13` and verified live. Minimal enquiry with optional fields blank returned 201 and the resulting marked test record was verified in the authenticated owner backoffice. Test name: `TEST ONLY CONVERSION 20260912`; source: `setup_test_conversion_live`. No customer contact was made. Newton then requested saving and stopping for departure.

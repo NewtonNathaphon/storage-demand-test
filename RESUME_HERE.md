@@ -4,6 +4,16 @@ Latest conversion update: the building is NOT confirmed. Public copy must descri
 
 Latest logo correction (September 12): use the exact newer `E:/Newton's files/Work - Property/Storage/logo.png`, copied to `assets/storagebuddy_logo_20260912.png`. It supersedes storagebuddy III/logo.png. Header, footer, backoffice, favicon and Organization metadata use this asset. Render the entire image with object-fit:contain; never use negative offsets or overflow clipping for the logo.
 
+## Saved departure checkpoint — September 12
+
+Newton said "save it im leaving." Work is saved; stop and wait for the next request.
+
+Latest live website commit: `4c0cd13` (enquiry-focused layout and unconfirmed-location wording), following `1225a4c` (new supplied logo without clipping). Both pushed to main and live at https://storagebuddyth.com/.
+
+Final live verification: one-step enquiry with optional fields blank returned HTTP 201. The marked `TEST ONLY CONVERSION 20260912` record, source `setup_test_conversion_live`, was found in the authenticated owner backoffice. No customer was contacted. Thai/English responsive layout and photo-estimate attachment checks passed; see `CONVERSION_2026-09-12.md`. No pending user answers or approvals are needed.
+
+Backoffice: https://storagebuddyth.com/backoffice — existing CCAQR owner username/password. Supabase remains connected. Public contacts and the exact supplied LINE QR are live. The building and opening date are unconfirmed; keep the map and visit invitations removed until Newton confirms otherwise. CCAQR price-loading fix remains live (`7ed0ed6` in newton-life-os).
+
 ## September 12 latest delivery
 
 Read [DELIVERY_2026-09-12.md](DELIVERY_2026-09-12.md) first. Public company/contact/logo corrections, LINE QR, photo upload fixes and a tested owner back office are implemented. `/backoffice` uses the existing CCAQR owner username/password. Storage Supabase remains connected; the superseded email-login database access was revoked. Earlier stop and unbuilt-admin notes below are historical.
