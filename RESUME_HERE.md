@@ -1,3 +1,5 @@
+Latest presale redesign: read PRESALE_2026-09-12.md. Two-tier registration is implemented; tariffs and payment are not configured. Founder selections are unpaid interest, never paid reservations. This supersedes the enquiry-only layout instructions below.
+
 # StorageBuddy — end-of-night handoff
 
 Latest conversion update: the building is NOT confirmed. Public copy must describe planned Rama 3 storage, with no exact map, site visits, building capacity claims or immediate move-ins. Registered company address is labelled separately. One-step enquiry keeps contact/items required and extra preferences optional. Hero and mobile bar offer enquiry and LINE; size examples follow benefits. Read CONVERSION_2026-09-12.md.

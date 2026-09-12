@@ -11,4 +11,6 @@ for (const name of ['index.html', 'backoffice.html', 'assets/backoffice.js', 'as
   fs.mkdirSync(path.dirname(path.join(output, name)), { recursive: true });
   fs.copyFileSync(path.join(__dirname, name), path.join(output, name));
 }
+const rooms = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8').replace('<link rel="canonical" href="https://storagebuddyth.com/">', '<link rel="canonical" href="https://storagebuddyth.com/rooms">');
+fs.writeFileSync(path.join(output, 'rooms.html'), rooms);
 console.log('Website assets copied to public/');
