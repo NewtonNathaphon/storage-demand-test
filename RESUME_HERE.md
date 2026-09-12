@@ -1,5 +1,7 @@
 # StorageBuddy — end-of-night handoff
 
+Latest logo correction (September 12): use the exact newer `E:/Newton's files/Work - Property/Storage/logo.png`, copied to `assets/storagebuddy_logo_20260912.png`. It supersedes storagebuddy III/logo.png. Header, footer, backoffice, favicon and Organization metadata use this asset. Render the entire image with object-fit:contain; never use negative offsets or overflow clipping for the logo.
+
 ## September 12 latest delivery
 
 Read [DELIVERY_2026-09-12.md](DELIVERY_2026-09-12.md) first. Public company/contact/logo corrections, LINE QR, photo upload fixes and a tested owner back office are implemented. `/backoffice` uses the existing CCAQR owner username/password. Storage Supabase remains connected; the superseded email-login database access was revoked. Earlier stop and unbuilt-admin notes below are historical.
