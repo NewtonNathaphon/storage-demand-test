@@ -1,3 +1,7 @@
+## Latest backoffice cards - September 13
+
+Dark green backend. Click inbox rows for follow-up/status, comments and creation/activity timeline. Delete moves to Trash, restore available. New owner-only lead_action endpoint saves history atomically with updated_at conflict detection; no migration. History JSON lives in lead_followups.notes (10k existing limit). Legacy editor prevented from overwriting history. See BACKEND_GUIDE.md. Server and mocked browser checks cover comments/status/trash/restore/mobile; no real customer was modified.
+
 ## Latest registration refinement - September 13, 2026
 
 Personal/company selection at beginning; required email replaces LINE ID. Purpose includes placeholder and Other. Timing starts with placeholder then Now; duplicate date removed. Optional location is free text; budget/access-frequency/climate removed, moving help retained. Custom sqm retained. Success shows thank-you plus official LINE CTA/QR after confirmed save. Email/company saved in lead JSON and displayed/exported in backoffice. No automatic onboarding delivery exists. Read BACKEND_GUIDE.md for access and storage map. Real marked test insert returned 201; responsive and signup/custom-size tests passed.

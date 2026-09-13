@@ -30,3 +30,9 @@ Email/LINE onboarding delivery is NOT automated. Staff must follow up from the b
 ## September 13 checks
 
 Responsive TH/EN and both-offer submission/failure tests passed. Custom sqm still carries through to registration. A real marked TEST ONLY REFINED FORM submission returned HTTP 201 with the new fields; source setup_test_refined_form_20260913. No email or LINE message was sent by the tests.
+
+## Dark green enquiry cards (September 13)
+
+Click any inbox row to open the customer card. Set status and contact/follow-up dates, maintain private notes, and add timestamped comments. Activity records carry a server timestamp and the signed-in owner name. Created time comes from the original lead. Older records show their last saved follow-up; history before this feature is not reconstructed.
+
+Move to Trash is reversible deletion: the record stays in Supabase, is excluded from normal inbox/metrics, and can be restored via the Trash filter. No permanent customer records are erased. History uses a versioned JSON envelope in lead_followups.notes, preserving legacy notes. The current column allows 10,000 characters; excess writes are rejected without truncating history. Export history downloads a JSON copy. Concurrent edits are rejected with a refresh message.
