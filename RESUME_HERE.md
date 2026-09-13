@@ -1,3 +1,9 @@
+## Latest update - September 13, 2026
+
+Newton resumed and authorized the size-help signup gate and supplied banner3.png. Hero now uses assets/buddy_hero_banner3.png. First successful estimate plus one refinement on the same photos are free; changed photos or further estimates require name/mobile/consent signup. Successful Supabase leads INSERT unlocks and resumes estimation. Failed estimates do not consume attempts; failed saves retain form and stay locked. Existing booking registration also unlocks. This is a browser-local lead gate, not verified authentication; clearing storage or changing browser bypasses it. No photos or contact details are stored in localStorage.
+
+Size-help leads use customer_use.kind=size_help_signup and are separately counted/filterable in backoffice. Supabase schema/backend unchanged. Real marked TEST ONLY SIZE HELP 20260913 insert returned 201 with setup_test_size_gate_20260913 source; test rows hidden by default. Mocked browser regression passed for quota, failures, retained previous result, persistence and resumed estimate. TH/EN responsive/presale regression passed. No real provider quota consumed for these checks. Earlier sleep pause below is superseded.
+
 ## Latest sleep checkpoint - September 12, 2026
 
 Newton said "save it im going to sleep." Stop work until his next request.
