@@ -1,3 +1,7 @@
+## Latest Founding Buddy emphasis - September 13, 2026
+
+Per Newton, card says deposit just THB1,000 and deposit fully credited against rent. Four-month discount is a prominent lime display with explicit twice-as-long-as-Early-Bird comparison. Registration remains unpaid interest; payment integration unchanged. TH/EN responsive and signup regression passed.
+
 ## Latest dimensions - September 13, 2026
 
 User corrected illustrative heights: 1 sqm locker approximately 1.2 m; all other sizes approximately 2.5 m. Both geometry and TH/EN labels updated. Advisor description textarea has resize:none with internal scrolling. Room and custom-size booking checks passed; drop animation and unpack toggle retained.
