@@ -1,3 +1,7 @@
+## Latest dimensions - September 13, 2026
+
+User corrected illustrative heights: 1 sqm locker approximately 1.2 m; all other sizes approximately 2.5 m. Both geometry and TH/EN labels updated. Advisor description textarea has resize:none with internal scrolling. Room and custom-size booking checks passed; drop animation and unpack toggle retained.
+
 ## Commercial copy preference - September 13, 2026
 
 Newton wants benefit-led, action-oriented CTAs that encourage commitment, rather than passive notification language. Founding Buddy CTA now says Claim your special benefits now (Thai: immediate special benefits), per his explicit wording. Preserve accurate unpaid-interest/payment status in the registration flow.
