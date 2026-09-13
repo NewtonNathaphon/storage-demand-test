@@ -1,3 +1,7 @@
+## Latest registration refinement - September 13, 2026
+
+Personal/company selection at beginning; required email replaces LINE ID. Purpose includes placeholder and Other. Timing starts with placeholder then Now; duplicate date removed. Optional location is free text; budget/access-frequency/climate removed, moving help retained. Custom sqm retained. Success shows thank-you plus official LINE CTA/QR after confirmed save. Email/company saved in lead JSON and displayed/exported in backoffice. No automatic onboarding delivery exists. Read BACKEND_GUIDE.md for access and storage map. Real marked test insert returned 201; responsive and signup/custom-size tests passed.
+
 ## Latest Founding Buddy emphasis - September 13, 2026
 
 Per Newton, card says deposit just THB1,000 and deposit fully credited against rent. Four-month discount is a prominent lime display with explicit twice-as-long-as-Early-Bird comparison. Registration remains unpaid interest; payment integration unchanged. TH/EN responsive and signup regression passed.
