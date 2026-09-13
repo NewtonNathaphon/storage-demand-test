@@ -1,3 +1,7 @@
+## Commercial copy preference - September 13, 2026
+
+Newton wants benefit-led, action-oriented CTAs that encourage commitment, rather than passive notification language. Founding Buddy CTA now says Claim your special benefits now (Thai: immediate special benefits), per his explicit wording. Preserve accurate unpaid-interest/payment status in the registration flow.
+
 ## Latest update - September 13, 2026
 
 Newton resumed and authorized the size-help signup gate and supplied banner3.png. Hero now uses assets/buddy_hero_banner3.png. First successful estimate plus one refinement on the same photos are free; changed photos or further estimates require name/mobile/consent signup. Successful Supabase leads INSERT unlocks and resumes estimation. Failed estimates do not consume attempts; failed saves retain form and stay locked. Existing booking registration also unlocks. This is a browser-local lead gate, not verified authentication; clearing storage or changing browser bypasses it. No photos or contact details are stored in localStorage.
