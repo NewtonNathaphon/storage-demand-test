@@ -1,3 +1,13 @@
+## Latest saved checkpoint - September 13, 2026
+
+Newton said "save it" after the contact updates. All website changes are committed, pushed and verified live at https://storagebuddyth.com/. Latest website commit: 0f97cf5. Wait for the next request.
+
+- Backoffice keeps the CCAQR-style dark layout with emerald green buttons, badges, chart bars and focus/hover accents to distinguish StorageBuddy (07c67cc).
+- Founding Buddy appears before Early Bird: left on desktop and above on mobile (3004736). Both signup buttons still select their matching offers.
+- Contact row: phone with email beneath it on the left, Facebook in the middle, LINE QR card on the right. Removed the duplicate standalone LINE card. Facebook uses the direct page URL visible in Newton's supplied screenshot: https://www.facebook.com/profile.php?id=61594516011998 (0f97cf5, following 7fed112).
+- Verified Thai/English contact layouts at 360, 390, 768, 1024 and 1440px, grouped phone/email placement, Facebook href/tracking hook, QR loading and live deployment. Backoffice mock card workflow and mobile/desktop sign-in styling passed. No real customer records changed during these checks.
+- Explained that #sizes is the normal section fragment from size-guide links; no navigation change was requested or made.
+
 ## Latest backoffice cards - September 13
 
 Dark green backend. Click inbox rows for follow-up/status, comments and creation/activity timeline. Delete moves to Trash, restore available. New owner-only lead_action endpoint saves history atomically with updated_at conflict detection; no migration. History JSON lives in lead_followups.notes (10k existing limit). Legacy editor prevented from overwriting history. See BACKEND_GUIDE.md. Server and mocked browser checks cover comments/status/trash/restore/mobile; no real customer was modified.
