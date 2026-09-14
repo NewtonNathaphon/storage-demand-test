@@ -104,12 +104,12 @@ Latest domain decision: Newton purchased **storagebuddyth.com** and authorized i
 
 The current Rama 3 redesign adds advice-first positioning, the latest Thai/English supplied banners, original animated room comparisons, camera/gallery inputs with transient AI sizing, Rama 3 enquiries and separate other-area votes. Read `OPERATIONS.md` for configuration, record formats and staff follow-up. The existing static stack and Supabase database are preserved. The authenticated admin/quote/rental workflow remains unbuilt. Legacy notes below are historical, including the earlier pause and old four-area experiment.
 
-Cloudflare login was renewed with the existing user-read, account-read and Pages-write scopes using Windows trusted certificate roots. The production Anthropic secret is configured; no domain was purchased. Follow `VERIFICATION.md` for exact test/deployment status.
+Cloudflare login was renewed with the existing user-read, account-read and Pages-write scopes using Windows trusted certificate roots. The production Anthropic secret is configured. No domain was purchased during that Cloudflare login/configuration task; the active **storagebuddyth.com** domain had already been purchased and connected as described above. Follow `VERIFICATION.md` for exact test/deployment status.
 
 > Current direction: read [MASTER_BRIEF.md](MASTER_BRIEF.md) first. Newton's September 11 Rama 3 building brief supersedes older site-search, rent-case and software-scope decisions below. Other property hunting and public landlord/JV intake are deferred. This file retains earlier context and compatible technical details.
 
 
-Current working brand (2026-09-11): StorageBuddy / สตอเรจบดด. Newton resumed and requested all branding updated. This supersedes earlier SpaceBuddy/GetStorage naming preferences and the September 8 pause for this branding task. The existing address and hosting project remain getstorage.pages.dev / getstorage. No domain purchase is included. The expanded MVP remains unbuilt.
+Current working brand (2026-09-11): StorageBuddy / สตอเรจบดด. Newton resumed and requested all branding updated. This supersedes earlier SpaceBuddy/GetStorage naming preferences and the September 8 pause for this branding task. The existing address and hosting project remain getstorage.pages.dev / getstorage. No additional domain purchase was part of that earlier MVP scope; the later **storagebuddyth.com** domain decision in the redesign checkpoint above supersedes it. The expanded MVP remains unbuilt.
 
 
 ## Historical September 7-8 checkpoint (brand decisions superseded above)
