@@ -230,6 +230,9 @@ function renderEnglishHomepage(source){
     if(value?.startsWith('assets/'))changes.push([name,'/'+value]);
    }
    const englishPaths=new Map([
+    ['/guides/choose-storage-size/','/en/guides/choose-storage-size/'],
+    ['/guides/moving-renovation-checklist/','/en/guides/moving-renovation-checklist/'],
+    ['/guides/sme-stock-document-plan/','/en/guides/sme-stock-document-plan/'],
     ['/sizes/','/en/sizes/'],
     ['/personal-storage/','/en/personal-storage/'],
     ['/business-storage/','/en/business-storage/'],

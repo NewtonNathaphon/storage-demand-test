@@ -18,7 +18,13 @@ const pages={
   '/personal-storage/':'personal-storage/index.html',
   '/en/personal-storage/':'en/personal-storage/index.html',
   '/business-storage/':'business-storage/index.html',
-  '/en/business-storage/':'en/business-storage/index.html'
+  '/en/business-storage/':'en/business-storage/index.html',
+  '/guides/choose-storage-size/':'guides/choose-storage-size/index.html',
+  '/en/guides/choose-storage-size/':'en/guides/choose-storage-size/index.html',
+  '/guides/moving-renovation-checklist/':'guides/moving-renovation-checklist/index.html',
+  '/en/guides/moving-renovation-checklist/':'en/guides/moving-renovation-checklist/index.html',
+  '/guides/sme-stock-document-plan/':'guides/sme-stock-document-plan/index.html',
+  '/en/guides/sme-stock-document-plan/':'en/guides/sme-stock-document-plan/index.html'
 };
 const html=Object.fromEntries(Object.entries(pages).map(([url,file])=>[url,readFileSync(join(root,'public',file),'utf8')]));
 const one=(source,re,label)=>{const matches=[...source.matchAll(re)];assert.equal(matches.length,1,label);return matches[0][1].replace(/<[^>]+>/g,'').trim();};
@@ -48,6 +54,26 @@ test('titles, H1s and canonicals are unique and canonical',()=>{
     assert.equal(new Set(values).size,values.length,`duplicates: ${values.join(' | ')}`);
   }
   for(const [url,source] of Object.entries(html))assert.match(source,new RegExp(`rel=["']canonical["'][^>]+href=["']https://storagebuddyth\\.com${url.replaceAll('/','\\/')}`,'i'));
+});
+
+test('hreflang and Open Graph URLs are exact across all canonical pairs',()=>{
+  const reciprocalPairs=[
+    ['/','/en/'],['/sizes/','/en/sizes/'],['/location/rama-3/','/en/location/rama-3/'],
+    ['/personal-storage/','/en/personal-storage/'],['/business-storage/','/en/business-storage/'],
+    ['/guides/choose-storage-size/','/en/guides/choose-storage-size/'],
+    ['/guides/moving-renovation-checklist/','/en/guides/moving-renovation-checklist/'],
+    ['/guides/sme-stock-document-plan/','/en/guides/sme-stock-document-plan/']
+  ];
+  const alternate=(source,language)=>one(source,new RegExp(`<link[^>]+rel=["']alternate["'][^>]+hreflang=["']${language}["'][^>]+href=["']([^"']+)["']`,'gi'),language);
+  for(const [thai,english] of reciprocalPairs){
+    for(const url of [thai,english]){
+      assert.equal(alternate(html[url],'th-TH'),'https://storagebuddyth.com'+thai);
+      assert.equal(alternate(html[url],'en-TH'),'https://storagebuddyth.com'+english);
+      assert.equal(alternate(html[url],'x-default'),'https://storagebuddyth.com'+thai);
+      assert.equal(one(html[url],/<meta property=["']og:url["'] content=["']([^"']+)["'][^>]*>/gi,'one og:url'),'https://storagebuddyth.com'+url);
+      for(const property of ['og:title','og:description','og:image'])assert.match(html[url],new RegExp(`<meta property=["']${property}["'] content=["'][^"']+["']`,'i'));
+    }
+  }
 });
 
 test('homepage language URLs and path-first English initialization are explicit',()=>{
@@ -124,6 +150,77 @@ test('commercial pages cover useful search intent without pretending to be open'
   }
 });
 
+test('guides are substantial, reciprocal and connected to useful next steps',()=>{
+  const guidePairs=[
+    ['/guides/choose-storage-size/','/en/guides/choose-storage-size/','/sizes/','/en/sizes/'],
+    ['/guides/moving-renovation-checklist/','/en/guides/moving-renovation-checklist/','/personal-storage/','/en/personal-storage/'],
+    ['/guides/sme-stock-document-plan/','/en/guides/sme-stock-document-plan/','/business-storage/','/en/business-storage/']
+  ];
+  for(const [thai,english,thaiOverview,englishOverview] of guidePairs){
+    assert.ok(visibleText(html[thai]).length>1800,`${thai} is too thin`);
+    assert.ok(visibleText(html[english]).split(/\s+/).length>=800,`${english} needs at least 800 useful words`);
+    for(const [url,alternate,overview] of [[thai,english,thaiOverview],[english,thai,englishOverview]]){
+      const source=html[url];
+      assert.match(source,new RegExp(`class=["']language["'][^>]+href=["']${alternate.replaceAll('/','\\/')}["']`));
+      assert.match(source,new RegExp(`href=["']${overview.replaceAll('/','\\/')}["']`));
+      assert.match(source,/<nav[^>]+aria-label=["'][^"']*(?:breadcrumb|เส้นทาง)[^"']*["'][^>]*>/i);
+      assert.match(source,/<(?:ol|ul)\b[\s\S]*?<li\b/i);
+      for(const [otherThai,otherEnglish] of guidePairs){
+        const related=url.startsWith('/en/')?otherEnglish:otherThai;
+        assert.match(source,new RegExp(`href=["']${related.replaceAll('/','\\/')}["']`),`${url} must link ${related}`);
+      }
+      assert.match(source,/#size-help/);assert.match(source,/#contact/);
+      assert.match(source,/https:\/\/line\.me\/R\/ti\/p\/%40storagebuddy/);
+    }
+  }
+  for(const source of [html['/guides/choose-storage-size/'],html['/en/guides/choose-storage-size/']]){
+    assert.match(source,/<table\b[\s\S]*?<th\b/i);
+    assert.match(source,/L\s*[×x]\s*W\s*[×x]\s*H|กว้าง\s*[×x]\s*ยาว\s*[×x]\s*สูง/i);
+    assert.match(source,/footprint|พื้นที่ฐาน/i);assert.match(source,/volume|ปริมาตร/i);assert.match(source,/stack|ซ้อน/i);assert.match(source,/aisle|ทางเดิน/i);assert.match(source,/photo|รูป/i);assert.match(source,/illustrative|ตัวอย่าง/i);assert.match(source,/not (?:a )?(?:fit )?guarantee|ไม่รับประกัน/i);
+  }
+  for(const source of [html['/guides/moving-renovation-checklist/'],html['/en/guides/moving-renovation-checklist/']]){
+    assert.match(source,/before[\s\S]*during[\s\S]*after|ก่อน[\s\S]*ระหว่าง[\s\S]*หลัง/i);assert.match(source,/keep[\s\S]*donate[\s\S]*store|เก็บไว้ใช้[\s\S]*บริจาค[\s\S]*ฝากเก็บ/i);assert.match(source,/doorway|ประตู/i);assert.match(source,/fragile|เปราะบาง/i);assert.match(source,/retrieval|หยิบ/i);assert.match(source,/<table\b/i);assert.match(source,/print|พิมพ์/i);
+  }
+  const movingWorkedExamples=[
+    ['/guides/moving-renovation-checklist/',/ตัวอย่างสมมติแบบทำครบขั้นตอน[\s\S]*สี่กลุ่ม[\s\S]*ก่อนเคลียร์พื้นที่[\s\S]*ติดป้าย[\s\S]*โซน A[\s\S]*หยิบ[\s\S]*ปิดรายการ/],
+    ['/en/guides/moving-renovation-checklist/',/Hypothetical worked example from sorting to closeout[\s\S]*four groups[\s\S]*before clear-out[\s\S]*label[\s\S]*Zone A[\s\S]*retriev[\s\S]*closeout/i]
+  ];
+  for(const [url,workflow] of movingWorkedExamples){
+    assert.match(visibleText(html[url]),workflow,`${url} needs a visible end-to-end hypothetical worked example`);
+  }
+  for(const source of [html['/guides/sme-stock-document-plan/'],html['/en/guides/sme-stock-document-plan/']]){
+    assert.match(source,/SKU/i);assert.match(source,/fast[\s\S]*slow|หมุนเร็ว[\s\S]*หมุนช้า/i);assert.match(source,/cycle.?count|ตรวจนับ/i);assert.match(source,/legal advice|คำแนะนำทางกฎหมาย/i);assert.match(source,/fulfillment|ฟูลฟิลเมนต์/i);assert.match(source,/courier|ขนส่ง/i);assert.match(source,/<table\b[\s\S]*?<table\b/i);assert.match(source,/fictional|สมมติ/i);
+  }
+  for(const source of Object.entries(html).filter(([url])=>url.includes('/guides/')).map(([,source])=>source)){
+    assert.match(source,/<section[^>]*class=["'][^"']*faq|FAQ|คำถามที่พบบ่อย/i);
+    assert.match(source,/href=["'](?:\/en)?\/location\/rama-3\//);
+  }
+  for(const source of Object.values(html))assert.doesNotMatch(source,/moving-renovation-storage|sme-inventory-storage/);
+});
+
+test('navigation exposes the guide entry without creating a guides hub',()=>{
+  assert.match(html['/'],/href=["']\/guides\/choose-storage-size\/["'][^>]*data-en=["']Guides["']>คู่มือ/);
+  assert.match(html['/en/'],/href=["']\/en\/guides\/choose-storage-size\/["'][^>]*>Guides/);
+  for(const [url,source] of Object.entries(html).filter(([url])=>url!=='/'&&url!=='/en/')){
+    const guide=url.startsWith('/en/')?'/en/guides/choose-storage-size/':'/guides/choose-storage-size/';
+    assert.match(source,new RegExp(`<nav[^>]*>[\\s\\S]*href=["']${guide.replaceAll('/','\\/')}["']`),`${url} nav needs guide link`);
+  }
+  assert.equal(existsSync(join(root,'public','guides','index.html')),false);
+  assert.equal(existsSync(join(root,'public','en','guides','index.html')),false);
+  for(const source of Object.values(html))assert.doesNotMatch(source,/hreflang=["'](?:zh|hi|ar|de|fr)(?:-|["'])/i);
+});
+
+test('homepage and contextual pages link to the relevant guides',()=>{
+  const expected={
+    '/':['/guides/choose-storage-size/','/guides/moving-renovation-checklist/','/guides/sme-stock-document-plan/'],
+    '/en/':['/en/guides/choose-storage-size/','/en/guides/moving-renovation-checklist/','/en/guides/sme-stock-document-plan/'],
+    '/sizes/':['/guides/choose-storage-size/'],'/en/sizes/':['/en/guides/choose-storage-size/'],
+    '/personal-storage/':['/guides/moving-renovation-checklist/'],'/en/personal-storage/':['/en/guides/moving-renovation-checklist/'],
+    '/business-storage/':['/guides/sme-stock-document-plan/'],'/en/business-storage/':['/en/guides/sme-stock-document-plan/']
+  };
+  for(const [url,links] of Object.entries(expected))for(const link of links)assert.match(html[url],new RegExp(`href=["']${link.replaceAll('/','\\/')}["']`),`${url} needs ${link}`);
+});
+
 test('homepage public copy is enquiry-led and makes no unsupported booking or benefit claims',()=>{
   for(const url of ['/','/en/']){
     const text=visibleText(html[url]);
@@ -160,13 +257,23 @@ test('sitemap lists only built canonical URLs with alternates and consistent ISO
   const sitemap=readFileSync(join(root,'public','sitemap.xml'),'utf8');
   assert.doesNotMatch(sitemap,/\/rooms\/?</);
   const locs=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
+  assert.equal(locs.length,16);
   assert.deepEqual(locs,Object.keys(pages).map(url=>'https://storagebuddyth.com'+url));
+  assert.equal(locs.includes('https://storagebuddyth.com/404.html'),false);
   const lastmods=[...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map(match=>match[1]);
   assert.equal(lastmods.length,locs.length);
   assert.equal(new Set(lastmods).size,1,`inconsistent lastmod values: ${lastmods.join(' | ')}`);
   assert.match(lastmods[0],/^\d{4}-\d{2}-\d{2}$/);
   assert.equal(Number.isNaN(Date.parse(`${lastmods[0]}T00:00:00Z`)),false);
   assert.match(sitemap,/xmlns:xhtml=/);
+  for(const [url,source] of Object.entries(html)){
+    const block=sitemap.match(new RegExp(`<url><loc>https://storagebuddyth\\.com${url.replaceAll('/','\\/')}<\\/loc>([\\s\\S]*?)<\\/url>`));
+    assert.ok(block,`missing sitemap block for ${url}`);
+    for(const language of ['th-TH','en-TH','x-default']){
+      const expected=one(source,new RegExp(`<link[^>]+hreflang=["']${language}["'][^>]+href=["']([^"']+)["']`,'gi'),`${url} ${language}`);
+      assert.match(block[1],new RegExp(`hreflang=["']${language}["'][^>]+href=["']${expected.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}["']`));
+    }
+  }
   for(const url of Object.keys(pages))assert.ok(existsSync(join(root,'public',pages[url])),`missing built file for ${url}`);
 });
 

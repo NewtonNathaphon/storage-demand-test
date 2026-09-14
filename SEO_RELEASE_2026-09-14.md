@@ -19,6 +19,9 @@ Canonical public pages:
 - `/location/rama-3/` and `/en/location/rama-3/`
 - `/personal-storage/` and `/en/personal-storage/`
 - `/business-storage/` and `/en/business-storage/`
+- `/guides/choose-storage-size/` and `/en/guides/choose-storage-size/`
+- `/guides/moving-renovation-checklist/` and `/en/guides/moving-renovation-checklist/`
+- `/guides/sme-stock-document-plan/` and `/en/guides/sme-stock-document-plan/`
 
 Each page has a unique title, description, H1 and canonical URL with reciprocal `th-TH`, `en-TH` and `x-default` hreflang links. The sitemap lists only these canonical pages. `/rooms` and `/en/rooms` permanently redirect to the matching size guides.
 
@@ -47,6 +50,7 @@ The exact verification file supplied by Newton is `googlec5a82ac63469f274.html`.
 ```bash
 node build.cjs
 node --test --test-concurrency=1 tests/*.test.mjs
+node tests/guides-browser.cjs
 node tests/size-help-gate.cjs
 node tests/room-review.cjs
 node tests/presale-browser.cjs
