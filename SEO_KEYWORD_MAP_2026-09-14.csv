@@ -1,0 +1,13 @@
+priority,page,language,primary_keyword,secondary_keywords,intent,status
+P0,/,th,ห้องเก็บของให้เช่า พระราม 3,"เช่าห้องเก็บของ พระราม 3; เช่าที่เก็บของ พระราม 3; ห้องเก็บของรายเดือน พระราม 3",transactional,homepage rewrite required
+P0,/en/,en,self storage Rama 3,"self storage Bangkok; storage unit Rama 3; storage room Bangkok",transactional,new crawlable English page
+P0,/sizes/,th,ขนาดห้องเก็บของ,"ห้องเก็บของ 1 ตร.ม.; ห้องเก็บของ 2 ตร.ม.; ห้องเก็บของ 3 ตร.ม.; ห้องเก็บของ 4 ตร.ม.; ห้องเก็บของ 5 ตร.ม.; ห้องเก็บของ 8 ตร.ม.",commercial investigation,replace or redirect duplicate /rooms
+P0,/location/rama-3/,th,self storage พระราม 3,"ห้องเก็บของ สาธุประดิษฐ์; ห้องเก็บของ ยานนาวา; ที่เก็บของ บางคอแหลม",local transactional,new after public location facts confirmed
+P1,/personal-storage/,th,ห้องเก็บของส่วนตัว,"ที่เก็บของสำหรับคอนโด; เก็บเฟอร์นิเจอร์; เก็บของระหว่างย้ายบ้าน",transactional,new
+P1,/business-storage/,th,ที่เก็บสต๊อกสินค้า,"โกดังขนาดเล็กให้เช่า; ที่เก็บเอกสารบริษัท; ห้องเก็บของสำหรับธุรกิจ",transactional,new
+P1,/en/personal-storage/,en,personal storage Bangkok,"furniture storage Bangkok; condo storage Bangkok; moving storage Bangkok",transactional,new
+P1,/en/business-storage/,en,business storage Bangkok,"inventory storage Bangkok; small warehouse rental Bangkok",transactional,new
+P2,/guides/storage-room-price-bangkok/,th,ค่าเช่าห้องเก็บของ กรุงเทพ,"ห้องเก็บของ ราคา; self storage ราคา; ห้องเก็บของรายเดือน ราคา",commercial investigation,guide after prices approved
+P2,/guides/choose-storage-size/,th,เลือกขนาดห้องเก็บของ,"ห้องเก็บของกี่ตารางเมตร; ขนาด self storage; เก็บของ 10 กล่อง ใช้กี่ ตร.ม.",informational,new guide
+P2,/guides/moving-renovation-storage/,th,เก็บของระหว่างย้ายบ้าน,"ที่ฝากเฟอร์นิเจอร์; เก็บของตอนรีโนเวทคอนโด",informational,new guide
+P2,/guides/online-seller-stock-storage/,th,ที่เก็บสต๊อกสินค้าออนไลน์,"เช่าพื้นที่เก็บสินค้า; โกดังขนาดเล็กสำหรับร้านค้าออนไลน์",commercial investigation,new guide
