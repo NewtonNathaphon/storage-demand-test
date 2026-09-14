@@ -1,7 +1,7 @@
-const {chromium}=require(process.env.TEMP+'/storagebuddy-review-tools/node_modules/playwright');
+const {launchBrowser,outputPath}=require('./browser-runtime.cjs');
 const assert=require('node:assert/strict');
 (async()=>{
- const browser=await chromium.launch({channel:'chrome',headless:true});
+ const browser=await launchBrowser();
  try{
  const page=await browser.newPage({viewport:{width:390,height:850}});let requests=0,failEstimate=true,failSave=true,saved=[];const errors=[];
  page.on('pageerror',e=>errors.push(e.message));
@@ -13,7 +13,7 @@ const assert=require('node:assert/strict');
  failEstimate=false;await page.locator('#estimateBtn').click();await page.waitForFunction(()=>JSON.parse(localStorage.getItem('sb_size_help_v1')||'{}').count===1);
  await page.locator('#itemDescription').fill('12 boxes and a suitcase');assert(await page.locator('#aiResult').isVisible());await page.locator('#estimateBtn').click();await page.waitForFunction(()=>JSON.parse(localStorage.getItem('sb_size_help_v1')||'{}').count===2);
  await page.locator('#itemDescription').fill('20 boxes and two suitcases');await page.locator('#estimateBtn').click();assert(await page.locator('#buddySignupDialog').isVisible());assert.equal(requests,3);
- await page.locator('#buddySignupDialog').screenshot({path:process.env.TEMP+'/storagebuddy-review-tools/size-gate-mobile.png'});
+ await page.locator('#buddySignupDialog').screenshot({path:outputPath('size-gate-mobile.png')});
  await page.locator('#closeBuddySignup').click();assert(await page.locator('#aiResult').isVisible());await page.locator('#aiResult button').click();assert.equal(await page.locator('#fSize').inputValue(),'3sqm');
  await page.reload();await page.locator('#itemDescription').fill('20 boxes and two suitcases');await page.locator('#estimateBtn').click();assert(await page.locator('#buddySignupDialog').isVisible());assert.equal(requests,3);
  await page.locator('#buddyName').fill('TEST ONLY SIZE HELP');await page.locator('#buddyPhone').fill('0000000000');await page.locator('#buddyConsent').check();await page.locator('#buddySignupSubmit').click();await page.waitForFunction(()=>!document.querySelector('#buddySignupSubmit').disabled);assert(await page.locator('#buddySignupDialog').isVisible());assert.equal(requests,3);assert.equal(await page.locator('#buddyName').inputValue(),'TEST ONLY SIZE HELP');

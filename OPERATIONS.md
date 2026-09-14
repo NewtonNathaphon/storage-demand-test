@@ -10,7 +10,7 @@ Open customer records: https://supabase.com/dashboard/project/tmynmthxjcrnnukmpy
 
 Current code's provider model default is `claude-sonnet-5`, overridable by `ANTHROPIC_MODEL`. Older model/checkbox references below are historical. Current brand positioning is professional care, thoughtful help and Buddy pricing, as recorded in `STRATEGY_UPDATE_2026-09-11.md`.
 
-Primary public domain: **https://storagebuddyth.com**. Newton purchased it on September 11. It connects to the existing `getstorage` Pages project. The old `getstorage.pages.dev` remains the platform address. Public canonical URL, social metadata, robots and sitemap use the purchased domain. Earlier no-purchase notes below are historical.
+Primary public domain: **https://storagebuddyth.com**. Newton purchased it on September 11, before this SEO task, and it is active on the existing `getstorage` Pages project. The old `getstorage.pages.dev` remains the platform address. Public canonical URL, social metadata, robots and sitemap use the custom domain. Earlier notes saying no custom domain was active are historical.
 
 ## Current customer journey
 
@@ -34,7 +34,7 @@ The site retains entered values on a failed/uncertain save. Network timeouts can
 
 ## AI configuration and limitations
 
-Cloudflare Pages project `getstorage`, production secret `ANTHROPIC_API_KEY`. Never place the key in HTML, Git, build output or browser storage. Existing shared credential remains unchanged at its source. Model defaults to `claude-sonnet-4-6`; `ANTHROPIC_MODEL` can override it after validation. Set `AI_ENABLED=false` to disable paid estimation and redeploy. Normal enquiry forms remain usable when AI is unavailable.
+Cloudflare Pages project `getstorage`, production secret `ANTHROPIC_API_KEY`. Never place the key in HTML, Git, build output or browser storage. Existing shared credential remains unchanged at its source. Model defaults to `claude-sonnet-5`; `ANTHROPIC_MODEL` can override it after validation. Set `AI_ENABLED=false` to disable paid estimation and redeploy. Normal enquiry forms remain usable when AI is unavailable.
 
 Endpoint `/api/estimate` accepts only same-origin JSON POST, explicit consent, up to four JPEG/PNG/WebP images and 1,600 description characters. Client resizes photos to 1,280px maximum dimension and re-encodes JPEG, removing original metadata. Server independently checks byte limits, signatures and response structure. Max response tokens and provider timeout are bounded. Neither StorageBuddy's server nor its lead table retains the submitted images; Anthropic processes them under its provider terms. Photos are held in browser memory until removed or the page is closed.
 
@@ -52,6 +52,6 @@ The user reports over 1,000 sqm available to rent. Website describes total build
 
 ## Build and deployment
 
-Run `node build.cjs`, `node --test tests/estimate.test.mjs`, and compile Pages Functions with Wrangler. GitHub main remains connected to Cloudflare Pages. `build.cjs` explicitly allowlists public files; internal docs, source research and secrets remain outside `public/`. Functions live in the repository's `functions/` directory, not the static asset output. `_routes.json` invokes Functions only on `/api/*`.
+Run `npm install`, `node build.cjs`, `node --test --test-concurrency=1 tests/*.test.mjs`, and the four browser journeys listed in `SEO_RELEASE_2026-09-14.md`. GitHub `main` remains connected to Cloudflare Pages. `build.cjs` explicitly allowlists public files; internal docs, source research and secrets remain outside `public/`. Functions live in the repository's `functions/` directory, not the static asset output. `_routes.json` invokes Pages Functions site-wide so `functions/_middleware.js` can canonicalize the exact `www` host; `/assets/*` is excluded to avoid function overhead for images and CSS. This Pages middleware is the sole hostname redirect mechanism.
 
-On this Windows machine Wrangler required `NODE_USE_SYSTEM_CA=1` to trust the system certificate roots. Do not disable TLS verification. A domain purchase is not required for deployment on `getstorage.pages.dev`. No domain has been bought by this task.
+On this Windows machine Wrangler required `NODE_USE_SYSTEM_CA=1` to trust the system certificate roots. Do not disable TLS verification. Deployment can use `getstorage.pages.dev` without buying a domain. The active `storagebuddyth.com` custom domain was purchased before this SEO task; this task did not purchase a domain.

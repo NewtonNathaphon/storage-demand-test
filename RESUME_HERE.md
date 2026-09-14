@@ -1,3 +1,7 @@
+## Latest SEO release work — September 14, 2026
+
+Read `SEO_RELEASE_2026-09-14.md` first. It is the current handoff for the crawlable Thai/English page network, exact keywords, pre-opening truthfulness, responsive WebPs, `www` and `/rooms` redirects, Google verification file, test commands, rollback checkpoint and deployment/Search Console status. Its current status supersedes historical discount, `/rooms`, language and image-delivery notes below.
+
 ## Latest saved checkpoint - September 13, 2026
 
 Newton said "save it" after the contact updates. All website changes are committed, pushed and verified live at https://storagebuddyth.com/. Latest website commit: 0f97cf5. Wait for the next request.

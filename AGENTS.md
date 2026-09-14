@@ -1,3 +1,5 @@
+Latest SEO release work: read `SEO_RELEASE_2026-09-14.md` first. It records the canonical Thai/English page network, truthful pre-opening keyword rules, responsive-image build, redirects, Search Console verification file, tests, deployment status and rollback tag. It supersedes older `/rooms`, discount, same-URL language-switch and unoptimized-image notes below.
+
 Latest presale redesign: read PRESALE_2026-09-12.md. Two-tier registration is implemented; tariffs and payment are not configured. Founder selections are unpaid interest, never paid reservations. This supersedes the enquiry-only layout instructions below.
 
 # StorageBuddy project instructions
