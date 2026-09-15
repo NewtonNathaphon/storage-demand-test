@@ -225,9 +225,13 @@ function renderEnglishHomepage(source){
     if(property==='og:image')changes.push(['content','https://storagebuddyth.com/assets/buddy_banner_en.webp']);
    }
    if(token.name==='link'&&current('rel')==='canonical')changes.push(['href','https://storagebuddyth.com/en/']);
-   for(const name of ['src','srcset','href']){
+   for(const name of ['src','href']){
     const value=current(name);
     if(value?.startsWith('assets/'))changes.push([name,'/'+value]);
+   }
+   for(const name of ['srcset','imagesrcset','data-en-srcset','data-th-srcset']){
+    const value=current(name);
+    if(value)changes.push([name,value.replace(/(^|,\s*)assets\//g,'$1/assets/')]);
    }
    const englishPaths=new Map([
     ['/register/','/register/?lang=en'],

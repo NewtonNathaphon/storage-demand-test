@@ -47,3 +47,5 @@ Do not "upgrade" the model here without re-running the Thai checks.
 
 ## 2026-09-15 ? Support card grid regression
 A picture display:contents override split the support image wrapper into grid content, producing an empty cell and oversized card. Keep picture as a real grid item. Verify full affected sections at desktop/mobile, not only page hero screenshots.
+
+English responsive image fix: prefix every srcset candidate with /assets/, not just the first. At high device pixel density, browsers select larger candidates; tests must verify image decoding at DPR 2 on /en/, including lazy advisor/support images.

@@ -43,3 +43,5 @@ September 15 latest sizing UI preference: customer-facing size assistance is bra
 Latest photo/card request: put populated questionnaire answers first in the owner lead card with readable labels; hide empty legacy fields. New questionnaire uploads are privately attached at submission and shown as clickable thumbnails in the owner card. This supersedes earlier statements that questionnaire photos are never saved. Homepage-only estimation photos remain transient.
 
 Questionnaire size choices must not show prices, including the locker. All prices appear in the following timing/price step.
+
+Questionnaire simplification: remove the optional exact-start-date field; retain only move-in timing choices. Old saved exact dates remain readable in backoffice.
