@@ -1,3 +1,7 @@
+## Latest checkpoint ? September 15, 2026
+
+Published 24c3174: restored Newton?s approved homepage (Image 1, pre-SEO visible design) and added the separate shareable form at https://storagebuddyth.com/register/. Both verified live in fresh browser tabs after deployment; homepage screenshot matches the original headline/navigation/three-step layout. Form opens directly with no homepage or size helper. Mobile/desktop form, failed-save recovery, mocked successful save, existing presale/photo flow and size-help gate tests passed. Existing Supabase and owner inbox retained. See HOMEPAGE_RESTORE_2026-09-15.md. Do not change the homepage for a separate form/campaign request.
+
 ## Latest SEO release work — September 14, 2026
 
 Read `SEO_RELEASE_2026-09-14.md` first. It is the current handoff for the crawlable Thai/English page network, exact keywords, pre-opening truthfulness, responsive WebPs, `www` and `/rooms` redirects, Google verification file, test commands, rollback checkpoint and deployment/Search Console status. Its current status supersedes historical discount, `/rooms`, language and image-delivery notes below.
