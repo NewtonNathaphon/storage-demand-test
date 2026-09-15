@@ -13,7 +13,7 @@ const allowlist=['index.html','404.html','backoffice.html','googlec5a82ac63469f2
   'assets/buddy_banner_th.webp','assets/buddy_banner_en.webp','assets/buddy_banner_fat_th.webp','assets/buddy_banner_fat_en.webp','assets/storagebuddy_logo_20260912.png','assets/storagebuddy_logo.webp','assets/storagebuddy_banner.webp','assets/storagebuddy_banner_th.webp'];
 for(const name of allowlist){const target=path.join(output,name);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(__dirname,name),target);}
 const thai=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
-for(const name of ['registration.js','demand-form.css','demand-model.js','demand-dashboard.js'])fs.copyFileSync(path.join(__dirname,'assets',name),path.join(output,'assets',name));
+for(const name of ['questionnaire-ai.js','registration.js','demand-form.css','demand-model.js','demand-dashboard.js'])fs.copyFileSync(path.join(__dirname,'assets',name),path.join(output,'assets',name));
 fs.mkdirSync(path.join(output,'register'),{recursive:true});
 fs.writeFileSync(path.join(output,'register/index.html'),renderRegistrationPage(thai));
 const english=renderEnglishHomepage(thai);

@@ -44,3 +44,6 @@ Fix: test it (`curl -s -o /dev/null -w "%{http_code}" https://...`) instead of a
 measurements as too weak to estimate and returns `insufficient_info` every time, at any
 effort level, even with the original prompt wording. Verified live. Use `claude-sonnet-5`.
 Do not "upgrade" the model here without re-running the Thai checks.
+
+## 2026-09-15 ? Support card grid regression
+A picture display:contents override split the support image wrapper into grid content, producing an empty cell and oversized card. Keep picture as a real grid item. Verify full affected sections at desktop/mobile, not only page hero screenshots.
