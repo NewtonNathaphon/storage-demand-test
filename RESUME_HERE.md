@@ -1,3 +1,7 @@
+## Current ? Demand Validation V2, September 15
+
+Release fc32942 is live and verified. TWO distinct pages: main website / (first-customer messaging, familiar style) and /register/ (three-step intent questionnaire, contact details last). Main CTA and size/AI choices pass into the questionnaire. Backoffice shows V2 timing/qualification/readiness/attribution metrics and owner demand statuses. 65 Node tests and browser regressions pass; one marked live questionnaire saved successfully, excluded from normal metrics. Pricing is withheld: Newton is preparing the list. No confirmed exact building/photo supplied. Read DEMAND_V2_2026-09-15.md. This supersedes the earlier restoration-only checkpoint below.
+
 ## Latest checkpoint ? September 15, 2026
 
 Published 24c3174: restored Newton?s approved homepage (Image 1, pre-SEO visible design) and added the separate shareable form at https://storagebuddyth.com/register/. Both verified live in fresh browser tabs after deployment; homepage screenshot matches the original headline/navigation/three-step layout. Form opens directly with no homepage or size helper. Mobile/desktop form, failed-save recovery, mocked successful save, existing presale/photo flow and size-help gate tests passed. Existing Supabase and owner inbox retained. See HOMEPAGE_RESTORE_2026-09-15.md. Do not change the homepage for a separate form/campaign request.
