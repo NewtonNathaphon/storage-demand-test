@@ -33,3 +33,5 @@ Current brand: StorageBuddy / สตอเรจบดด. Active site: wife/fam
 Keep static HTML/CSS/vanilla JS, Cloudflare Pages and the existing Supabase database. Preserve existing leads/events and the locked Flowcraft archive. Publish only the explicit assets in `build.cjs`; never expose research workbooks, internal documents, SQL, private photos or financial details.
 
 Use the current conversation as the main project thread. Inspect existing work and explain the concrete approach before substantive building. Test the affected user flow before declaring completion. Do not restart generic property searches or assume the Rama 3 facility is already operating.
+
+September 15 latest sizing UI preference: customer-facing size assistance is branded Buddy. Do not mention AI in questionnaire headings, helper copy or sizing error messages. Keep the actual estimator working.

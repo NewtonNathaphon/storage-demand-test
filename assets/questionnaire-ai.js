@@ -2,11 +2,17 @@
 (()=>{
  let photos=[],controller=null,revision=0,preparing=false,applied=false;
  const message=text=>{$('estimateMessage').textContent=text;};
+ const loader=document.createElement('div');
+ loader.className='buddy-loading';loader.hidden=true;loader.setAttribute('aria-hidden','true');
+ loader.innerHTML='<span class="buddy-loading-box"><span class="buddy-loading-eyes"></span><span class="buddy-loading-smile"></span></span><span class="buddy-loading-dots"><i></i><i></i><i></i></span>';
+ $('estimateMessage').before(loader);
  function render(){
   const result=questionnaireEstimate;
   $('estimateResult').hidden=!result;
   if(result){$('estimateRange').textContent=`${result.min_sqm}–${result.max_sqm} ${t('ตร.ม.','m²')}`;$('estimateReason').textContent=result.reasoning;}
   $('estimateSize').disabled=preparing||!!controller;
+  loader.hidden=!controller;
+  $('estimateResult').setAttribute('aria-busy',String(!!controller));
   $('estimatePreviews').replaceChildren();
   photos.forEach((url,index)=>{const button=document.createElement('button');button.type='button';button.setAttribute('aria-label',t(`ลบรูป ${index+1}`,`Remove photo ${index+1}`));const img=document.createElement('img');img.src=url;img.alt='';button.append(img);button.onclick=()=>{invalidate();photos.splice(index,1);render();};$('estimatePreviews').append(button);});
  }
