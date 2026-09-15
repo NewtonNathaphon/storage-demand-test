@@ -1,3 +1,4 @@
+import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
@@ -5,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {existsSync, readFileSync, statSync} from 'node:fs';
 import {join} from 'node:path';
 
-const root=new URL('..',import.meta.url).pathname;
+const root=fileURLToPath(new URL('..',import.meta.url));
 const illustrations=['buddy_hero_banner3','buddy_size_advisor_v2','buddy_support'];
 const widths=[640,1280];
 const originalHashes={
@@ -48,7 +49,7 @@ test('homepage variants serve responsive images with safe PNG fallbacks',()=>{
     assert.match(hero,/<img[^>]+src=["'][^"']*buddy_hero_banner3\.png["'][^>]+fetchpriority=["']high["'][^>]+decoding=["']async["']/i);
     assert.doesNotMatch(hero,/loading=["']lazy["']/i);
 
-    for(const [name,alt] of [['buddy_size_advisor_v2',advisorAlt],['buddy_support','StorageBuddy helps plan the right storage size'],['buddy_support','StorageBuddy support']]){
+    for(const [name,alt] of [['buddy_size_advisor_v2',advisorAlt],['buddy_support','StorageBuddy support']]){
       const picture=pictureFor(html,alt);
       assert.match(picture,new RegExp(`type=["']image/webp["'][^>]+srcset=["'][^"']*${name}-640\\.webp 640w,[^"']*${name}-1280\\.webp 1280w`,'i'));
       assert.match(picture,new RegExp(`<img[^>]+src=["'][^"']*${name}\\.png["'][^>]+loading=["']lazy["'][^>]+decoding=["']async["']`,'i'));

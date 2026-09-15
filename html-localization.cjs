@@ -230,6 +230,7 @@ function renderEnglishHomepage(source){
     if(value?.startsWith('assets/'))changes.push([name,'/'+value]);
    }
    const englishPaths=new Map([
+    ['/register/','/register/?lang=en'],
     ['/guides/choose-storage-size/','/en/guides/choose-storage-size/'],
     ['/guides/moving-renovation-checklist/','/en/guides/moving-renovation-checklist/'],
     ['/guides/sme-stock-document-plan/','/en/guides/sme-stock-document-plan/'],

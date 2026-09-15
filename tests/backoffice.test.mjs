@@ -29,3 +29,12 @@ test('card history preserves notes, appends comments, handles trash/restore and 
  assert.equal((await action('comment',{comment:'stale',expected_updated_at:'2000-01-01T00:00:00Z'})).status,409);assert.equal(JSON.parse(row.notes).history.length,4);
  }finally{globalThis.fetch=original;}
 });
+
+test('demand statuses persist in owner history without changing constrained legacy status columns',async()=>{
+ const original=globalThis.fetch;let row={lead_id:4,status:'new',notes:'Prior note',contacted_on:null,follow_up_on:null,updated_at:'2026-09-15T00:00:00Z'};
+ try{globalThis.fetch=async(url,options={})=>{if(url.includes('/auth/v1/user'))return Response.json({id:'owner'});if(url.includes('/ccaqr_user_profiles'))return Response.json([{role:'owner',active:true,display_name:'Owner'}]);if(!options.method)return Response.json([row]);row=JSON.parse(options.body);return Response.json([row]);};
+ const action=extra=>onRequest({env:{STORAGE_BACKOFFICE_KEY:'test'},request:req('resource=lead_action',{method:'POST',body:JSON.stringify({lead_id:4,action:'update',expected_updated_at:row.updated_at,status:'quoted',notes:'Customer can confirm',contacted_on:null,follow_up_on:null,...extra})})});
+ assert.equal((await action({demand_status:'READY_TO_CONFIRM'})).status,200);assert.equal(row.status,'quoted');const meta=JSON.parse(row.notes);assert.equal(meta.demand_status,'READY_TO_CONFIRM');assert.equal(meta.history[0].changes.demand_status.to,'READY_TO_CONFIRM');assert.equal(meta.notes,'Customer can confirm');
+ assert.equal((await action({demand_status:'arbitrary'})).status,400);assert.equal((await action({demand_status:null,status:'contacted'})).status,200);assert.equal(JSON.parse(row.notes).demand_status,undefined);
+ }finally{globalThis.fetch=original;}
+});

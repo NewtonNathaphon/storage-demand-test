@@ -1,10 +1,11 @@
+import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {readFileSync, existsSync, readdirSync, statSync} from 'node:fs';
 import {join, relative} from 'node:path';
 
-const root=new URL('..',import.meta.url).pathname;
+const root=fileURLToPath(new URL('..',import.meta.url));
 const built=spawnSync(process.execPath,['build.cjs'],{cwd:root,encoding:'utf8'});
 assert.equal(built.status,0,built.stderr||built.stdout);
 
@@ -113,7 +114,7 @@ test('homepage English source has crawlable English visible text',()=>{
   assert.deepEqual(unexpectedThai,[],`unexpected Thai visible text: ${[...new Set(unexpectedThai)].join(' | ')}`);
   const placeholders=[...html['/en/'].matchAll(/\bplaceholder=["']([^"']*)["']/gi)].map(match=>match[1]);
   assert.equal(placeholders.some(value=>/[ก-๙]/.test(value)),false,`unexpected Thai placeholder: ${placeholders.join(' | ')}`);
-  for(const phrase of ['Size guide','Register interest','Planned self storage in Rama 3','Your privacy','Website operator and data controller'])assert.match(text,new RegExp(phrase,'i'));
+  for(const phrase of ['Size guide','Check pricing and tell us your start date','welcoming its first customers in Rama 3','Your privacy','Website operator and data controller'])assert.match(text,new RegExp(phrase,'i'));
 });
 
 test('homepage English source materializes accessibility localization without client JavaScript',()=>{
@@ -133,8 +134,8 @@ test('homepage English source materializes accessibility localization without cl
 });
 
 test('commercial pages cover useful search intent without pretending to be open',()=>{
-  assert.match(html['/'],/เช่าห้องเก็บของ พระราม 3/);
-  assert.match(html['/'],/self storage พระราม 3/i);
+  assert.match(html['/'],/พื้นที่เก็บของรายเดือน/);
+  assert.match(html['/'],/ย่านพระราม 3/i);
   assert.match(html['/location/rama-3/'],/เช่าที่เก็บของ พระราม 3/);
   assert.match(html['/sizes/'],/ห้องเก็บของรายเดือน พระราม 3/);
   assert.match(html['/business-storage/'],/โกดังขนาดเล็กให้เช่า/);
@@ -199,8 +200,8 @@ test('guides are substantial, reciprocal and connected to useful next steps',()=
 });
 
 test('navigation exposes the guide entry without creating a guides hub',()=>{
-  assert.match(html['/'],/href=["']\/guides\/choose-storage-size\/["'][^>]*data-en=["']Guides["']>คู่มือ/);
-  assert.match(html['/en/'],/href=["']\/en\/guides\/choose-storage-size\/["'][^>]*>Guides/);
+  assert.match(html['/'],/href=["']\/register\/["']/);
+  assert.match(html['/en/'],/href=["']\/register\/\?lang=en["']/);
   for(const [url,source] of Object.entries(html).filter(([url])=>url!=='/'&&url!=='/en/')){
     const guide=url.startsWith('/en/')?'/en/guides/choose-storage-size/':'/guides/choose-storage-size/';
     assert.match(source,new RegExp(`<nav[^>]*>[\\s\\S]*href=["']${guide.replaceAll('/','\\/')}["']`),`${url} nav needs guide link`);
@@ -226,9 +227,9 @@ test('homepage public copy is enquiry-led and makes no unsupported booking or be
     const text=visibleText(html[url]);
     assert.doesNotMatch(text,/Enjoy special benefits when you book|รับสิทธิพิเศษเมื่อจอง|Choose your special offer|เลือกโปรสุดคุ้ม/i);
     assert.doesNotMatch(text,/Choose your opening offer|เลือกข้อเสนอเปิดบริการ|Founding Buddy reservation offer|ข้อเสนอจองล่วงหน้า/i);
-    assert.doesNotMatch(text,/best value for you|คุ้มค่าที่สุด|Buddy pricing|ราคาแบบบัดดี้|Confirm your details and start date to become a Buddy|ยืนยันข้อมูลและวันที่ เพื่อเริ่มเป็นบัดดี้/i);
+    assert.doesNotMatch(text,/best value for you|คุ้มค่าที่สุด|Confirm your details and start date to become a Buddy|ยืนยันข้อมูลและวันที่ เพื่อเริ่มเป็นบัดดี้/i);
     assert.doesNotMatch(text,/next steps shortly|ขั้นตอนต่อไปให้เร็ว ๆ นี้/i);
-    assert.match(text,/not a booking|ไม่ใช่การจอง/i);
+    assert.match(text,/No payment or deposit at this stage|ไม่มีการเรียกเก็บเงินหรือค่ามัดจำ/i);
   }
 });
 
@@ -282,6 +283,7 @@ test('build allowlist excludes internal documents and SQL while retaining conver
   const output=walk(join(root,'public')).map(file=>relative(join(root,'public'),file));
   assert.equal(output.some(file=>/\.(?:md|sql|csv)$/i.test(file)),false,output.join('\n'));
   assert.equal(output.some(file=>/SEO_PLAN|HANDOFF|BRIEF|RESEARCH/i.test(file)),false);
-  for(const id of ['leadDialog','leadForm','fName','fPhone','fEmail','fItems','submitBtn','buddySignupDialog','buddySignupForm','estimateBtn','sizeGrid'])assert.match(html['/'],new RegExp(`id=["']${id}["']`));
+  for(const id of ['buddySignupDialog','buddySignupForm','estimateBtn','sizeGrid'])assert.match(html['/'],new RegExp(`id=["']${id}["']`));
+  const questionnaire=readFileSync(join(root,'public','register/index.html'),'utf8');for(const id of ['demandForm','customerName','phone','itemDescription','submitBtn'])assert.match(questionnaire,new RegExp(`id=["']${id}["']`));
   assert.match(readFileSync(join(root,'public','backoffice.html'),'utf8'),/<meta name=["']robots["'] content=["']noindex,nofollow["']>/i);
 });

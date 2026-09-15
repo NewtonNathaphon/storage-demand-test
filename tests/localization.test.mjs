@@ -1,3 +1,4 @@
+import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
@@ -7,7 +8,7 @@ import {join, relative} from 'node:path';
 import localization from '../html-localization.cjs';
 
 const {localizeHtml}=localization;
-const root=new URL('..',import.meta.url).pathname;
+const root=fileURLToPath(new URL('..',import.meta.url));
 
 const build=()=>{
   const result=spawnSync(process.execPath,['build.cjs'],{cwd:root,encoding:'utf8'});

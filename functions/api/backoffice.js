@@ -4,6 +4,7 @@ const AUTH_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 const DATA_URL='https://tmynmthxjcrnnukmpyox.supabase.co';
 const json=(data,status=200)=>Response.json(data,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 const columns={leads:'id,created_at,area,size,segment,customer_use,lean,name,phone,when_needed,utm_source',events:'id,created_at,session_id,event_type,area,detail,utm_source',lead_followups:'lead_id,status,notes,contacted_on,follow_up_on,updated_at'};
+const demandStatuses=['NEW','QUALIFIED','PRICE_ACCEPTED','WANTS_VISIT','READY_TO_CONFIRM','WAITING_FOR_AVAILABILITY','NOT_READY','PRICE_TOO_HIGH','LOST'];
 export function validateFollowup(value){
   if(!value||!Number.isSafeInteger(value.lead_id)||value.lead_id<1||!['new','contacted','quoted','won','lost'].includes(value.status)||typeof value.notes!=='string'||value.notes.length>10000)throw Error('INVALID_INPUT');
   for(const key of ['contacted_on','follow_up_on'])if(value[key]!==null&&(!/^\d{4}-\d{2}-\d{2}$/.test(value[key]||'')||!Number.isFinite(Date.parse(value[key]))||new Date(value[key]).toISOString().slice(0,10)!==value[key]))throw Error('INVALID_INPUT');
@@ -34,8 +35,13 @@ export async function onRequest({request,env}){
       let meta;try{meta=JSON.parse(old.notes);}catch{}if(meta?.format!=='buddy_history_v1')meta={format:'buddy_history_v1',notes:old.notes||'',history:[],deleted:false};
       const at=new Date().toISOString(),actor=roles[0].display_name||user.email||'Owner';let next={...old},entry={at,actor,type:input.action};
       if(input.action==='update'){
+        if(input.demand_status!==undefined&&input.demand_status!==null&&!demandStatuses.includes(input.demand_status))return json({message:'Invalid demand status'},400);
         try{next=validateFollowup({...input,lead_id:input.lead_id});}catch{return json({message:'Invalid follow-up details'},400);}
         entry.changes={};for(const k of ['status','contacted_on','follow_up_on'])if(next[k]!==old[k])entry.changes[k]={from:old[k],to:next[k]};
+        if(input.demand_status!==undefined&&input.demand_status!==(meta.demand_status||null)){
+          entry.changes.demand_status={from:meta.demand_status||null,to:input.demand_status};
+          if(input.demand_status===null)delete meta.demand_status;else meta.demand_status=input.demand_status;
+        }
         if(input.notes!==meta.notes)entry.changes.notes={from:meta.notes,to:input.notes};meta.notes=input.notes;
       }else if(input.action==='comment'){
         if(typeof input.comment!=='string'||!input.comment.trim()||input.comment.length>2000)return json({message:'Write a comment of up to 2,000 characters.'},400);entry.text=input.comment.trim();
