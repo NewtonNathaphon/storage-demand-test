@@ -1,5 +1,9 @@
 # Mistakes log — storage-demand-test
 
+## 2026-09-15 — Separate form means a separate page
+
+Newton wanted a shareable form page while preserving his approved homepage. Do not equate a homepage section anchor with that request or rewrite the homepage for it. Fetch origin before comparing local source to production: a stale checkout hid the September 14 SEO changes. Screenshots of an unrefreshed tab can show an older deployed version; a hash fragment does not explain changed copy or navigation. Verify both the existing homepage and the new independent URL before reporting completion.
+
 Lessons from past sessions. Read before working; append when something goes wrong.
 
 ## 2026-09-11 — Testing the /api/estimate endpoint
