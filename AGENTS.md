@@ -35,3 +35,5 @@ Keep static HTML/CSS/vanilla JS, Cloudflare Pages and the existing Supabase data
 Use the current conversation as the main project thread. Inspect existing work and explain the concrete approach before substantive building. Test the affected user flow before declaring completion. Do not restart generic property searches or assume the Rama 3 facility is already operating.
 
 September 15 latest sizing UI preference: customer-facing size assistance is branded Buddy. Do not mention AI in questionnaire headings, helper copy or sizing error messages. Keep the actual estimator working.
+
+Latest photo/card request: put populated questionnaire answers first in the owner lead card with readable labels; hide empty legacy fields. New questionnaire uploads are privately attached at submission and shown as clickable thumbnails in the owner card. This supersedes earlier statements that questionnaire photos are never saved. Homepage-only estimation photos remain transient.

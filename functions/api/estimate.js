@@ -20,7 +20,7 @@ export function validateEstimate(value){
   for(const key of ['items','questions','items_en'])if(!Array.isArray(value[key])||value[key].length>12||value[key].some(v=>typeof v!=='string'||v.length>400))throw Error('INVALID_RESULT');
   return {min_sqm:value.min_sqm,max_sqm:value.max_sqm,reasoning:value.reasoning,confidence:value.confidence,items:value.items,questions:value.questions,source:'anthropic_vision',version:1};
 }
-async function readLimited(request){
+export async function readLimited(request){
   if(Number(request.headers.get('content-length'))>MAX_BODY)throw Error('TOO_LARGE');
   if(!request.body)throw Error('INVALID_INPUT');
   const reader=request.body.getReader();let total=0;const chunks=[];
@@ -29,7 +29,7 @@ async function readLimited(request){
 }
 // Best-effort per-datacentre abuse controls, not a global financial budget.
 // Production deployments should additionally set provider spending limits.
-async function rateAllowed(request,env){
+export async function rateAllowed(request,env){
   if(typeof caches==='undefined')return env.LOCAL_DEV==='true';
   const ip=request.headers.get('CF-Connecting-IP');if(!ip)return env.LOCAL_DEV==='true';
   const hour=Math.floor(Date.now()/3600000);

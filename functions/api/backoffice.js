@@ -14,7 +14,7 @@ export async function onRequest({request,env}){
   if(!['GET','POST'].includes(request.method))return json({message:'Method not allowed'},405);
   const url=new URL(request.url),origin=request.headers.get('origin');if((origin&&origin!==url.origin)||(request.method==='POST'&&origin!==url.origin))return json({message:'Forbidden'},403);
   const authorization=request.headers.get('authorization');if(!/^Bearer [A-Za-z0-9._-]+$/.test(authorization||'')||authorization.length>12000)return json({message:'Please sign in'},401);
-  const resource=url.searchParams.get('resource');if(!['identity','lead_action'].includes(resource)&&!Object.hasOwn(columns,resource))return json({message:'Not found'},404);
+  const resource=url.searchParams.get('resource');if(!['identity','lead_action','lead_photos'].includes(resource)&&!Object.hasOwn(columns,resource))return json({message:'Not found'},404);
   try{
     const headers={apikey:AUTH_KEY,Authorization:authorization};
     const userRes=await fetch(AUTH_URL+'/auth/v1/user',{headers,signal:AbortSignal.timeout(10000)});if(!userRes.ok)return json({message:'Your session expired. Please sign in again.'},401);const user=await userRes.json();if(!user.id)return json({message:'Please sign in'},401);
@@ -22,6 +22,22 @@ export async function onRequest({request,env}){
     if(resource==='identity')return json({email:user.email,name:roles[0].display_name});
     if(!env.STORAGE_BACKOFFICE_KEY)return json({message:'Back office is not configured'},503);
     const dataHeaders={apikey:env.STORAGE_BACKOFFICE_KEY,'Content-Type':'application/json'};if(env.STORAGE_BACKOFFICE_KEY.startsWith('eyJ'))dataHeaders.Authorization='Bearer '+env.STORAGE_BACKOFFICE_KEY;
+    if(resource==='lead_photos'){
+      if(request.method!=='GET')return json({message:'Method not allowed'},405);
+      const id=url.searchParams.get('lead_id');if(!/^[1-9]\d{0,14}$/.test(id||''))return json({message:'Invalid lead'},400);
+      const leadRes=await fetch(DATA_URL+'/rest/v1/leads?id=eq.'+id+'&select=customer_use',{headers:dataHeaders,signal:AbortSignal.timeout(10000)});if(!leadRes.ok)throw Error('READ');
+      const lead=(await leadRes.json())[0];if(!lead)return json({message:'Lead not found'},404);
+      let details;try{details=JSON.parse(lead.customer_use);}catch{return json([]);}
+      const photos=Array.isArray(details.photos)?details.photos.slice(0,4):[];
+      const result=[];
+      for(const photo of photos){
+        if(photo.bucket!=='lead-photos'||!/^[a-f0-9-]{36}\/[0-3]\.(jpg|png|webp)$/.test(photo.path||''))continue;
+        const signed=await fetch(DATA_URL+'/storage/v1/object/sign/lead-photos/'+photo.path,{method:'POST',headers:dataHeaders,body:JSON.stringify({expiresIn:300}),signal:AbortSignal.timeout(10000)});
+        if(!signed.ok)throw Error('PHOTO');const data=await signed.json();if(typeof data.signedURL!=='string'||!data.signedURL.startsWith('/object/sign/lead-photos/'))throw Error('PHOTO');
+        result.push({url:DATA_URL+'/storage/v1'+data.signedURL});
+      }
+      return json(result);
+    }
     if(resource==='lead_action'){
       if(request.method!=='POST')return json({message:'Method not allowed'},405);
       const raw=await request.text();if(raw.length>16000)return json({message:'Request too large'},413);

@@ -3,6 +3,7 @@ const assert=require('node:assert/strict');const {launchBrowser,outputPath}=requ
  const page=await browser.newPage(),errors=[],saved=[];let mode='ok',request;
  page.on('pageerror',e=>errors.push(e.message));
  await page.route('**/*.supabase.co/rest/v1/**',r=>{if(r.request().url().includes('/leads'))saved.push(r.request().postDataJSON());return r.fulfill({status:201,body:'[]'});});
+ await page.route('**/api/intake',r=>{const data=r.request().postDataJSON();assert.equal(data.images.length,1);assert.equal(data.consent,true);saved.push(data.row);return r.fulfill({status:200,contentType:'application/json',body:'{"saved":true}'});});
  await page.route('**/api/estimate',r=>{request=r.request().postDataJSON();return r.fulfill({status:mode==='ok'?200:503,contentType:'application/json',body:JSON.stringify(mode==='ok'?{min_sqm:3,max_sqm:4,reasoning:'Allow room for boxes and a sofa.',confidence:'medium',items:['10 boxes','1 sofa'],questions:[],source:'anthropic_text',version:1}:{error:'UNAVAILABLE'})});});
  await page.goto('http://127.0.0.1:8788/register/?lang=en');
  await page.locator('[name="use_case"][value="moving"]').check();await page.locator('[name="requested_size"][value="unsure"]').check();assert(await page.locator('#estimateSize').isVisible());

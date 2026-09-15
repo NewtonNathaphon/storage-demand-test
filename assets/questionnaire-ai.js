@@ -52,6 +52,12 @@
   message(t('เลือกขนาดที่แนะนำแล้ว กดถัดไปได้เลย','Recommended size selected. You can continue.'));track('questionnaire_estimate_accepted');
  };
  window.refreshSizeAssistant=render;
+ const submissionId=crypto.randomUUID();
+ window.saveQuestionnaireWithPhotos=async row=>{
+  if(preparing)return false;
+  if(!photos.length)return sbInsert('leads',row);
+  try{const response=await fetch('/api/intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({row,images:photos,consent:true,submission_id:submissionId}),signal:AbortSignal.timeout(120000)});return response.ok&&(await response.json()).saved===true;}catch{return false;}
+ };
  window.disposeSizeAssistant=()=>{revision++;controller?.abort();controller=null;photos=[];render();};
  window.addEventListener('pagehide',window.disposeSizeAssistant);
  render();
