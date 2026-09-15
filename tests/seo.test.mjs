@@ -127,7 +127,7 @@ test('homepage English source materializes accessibility localization without cl
   const translatedImages=[...source.matchAll(/<img\b[^>]*\balt=["']([^"']*)["'][^>]*\bdata-en-alt=["']([^"']*)["'][^>]*>/gi)];
   assert.ok(translatedImages.length,'at least one localized image alt required');
   for(const [,alt,englishAlt] of translatedImages)assert.equal(alt,englishAlt);
-  assert.match(source,/<svg\b[^>]*\bid=["']roomIllustration["'][^>]*\baria-label=["']Illustrative storage room["']/i);
+  assert.match(source,/<svg\b[^>]*\bid=["']roomIllustration["'][^>]*\baria-label=["']Storage room size comparison["']/i);
 
   const accessibilityText=[...source.matchAll(/\b(?:alt|aria-label)=["']([^"']*)["']/gi)].map(match=>match[1].replaceAll('สตอเรจบัดดี้',''));
   assert.equal(accessibilityText.some(value=>/[ก-๙]/.test(value)),false,`unexpected Thai accessibility text: ${accessibilityText.filter(value=>/[ก-๙]/.test(value)).join(' | ')}`);
