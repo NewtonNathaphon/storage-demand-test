@@ -41,3 +41,5 @@ Use the current conversation as the main project thread. Inspect existing work a
 September 15 latest sizing UI preference: customer-facing size assistance is branded Buddy. Do not mention AI in questionnaire headings, helper copy or sizing error messages. Keep the actual estimator working.
 
 Latest photo/card request: put populated questionnaire answers first in the owner lead card with readable labels; hide empty legacy fields. New questionnaire uploads are privately attached at submission and shown as clickable thumbnails in the owner card. This supersedes earlier statements that questionnaire photos are never saved. Homepage-only estimation photos remain transient.
+
+Questionnaire size choices must not show prices, including the locker. All prices appear in the following timing/price step.
