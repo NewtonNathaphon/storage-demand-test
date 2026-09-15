@@ -1,3 +1,5 @@
+Latest price revision: rooms 2sqm=2490, 3=2890, 4=3690, 5=4290, 6=4990, 8=6590, 10=7890 THB/month. Locker is 590 THB per individual stacked box (upper OR lower); selectable separately as locker, not automatically inferred from room area. Config version launch_2026_09_15_r2. Prior launch prices below are historical.
+
 Latest launch pricing approval (September 15): Newton approved the next-step flow replacing price-opinion plus readiness questions. Publish monthly room prices 2sqm=2490, 3=3290, 4=3990, 5=4590, 6=5290, 8=6590, 10=7890 on /register/. Save exact price or range and next_step; callback interest is not ready-to-confirm or explicit price acceptance. Locker 590 dimensions/VAT treatment are awaiting clarification; do not conflate locker with room sizes. This supersedes earlier no-price instructions for these approved rooms.
 
 Latest explicit wording preference: Newton forbids visible illustration/generated-image disclaimer labels in Thai or English. Remove them and never reintroduce them. This overrides the earlier Demand V2 artwork-label instruction. Keep accurate first-customer/service-status copy.
