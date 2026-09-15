@@ -1,3 +1,19 @@
+## Saved final checkpoint - September 15, 2026
+
+Newton said "done save it". All requested implementation is complete, committed, pushed and verified live. Latest code release: ec6f375. Wait for the next request; do not redesign or change pricing without direction. This section supersedes historical checkpoints below.
+
+- Keep main website / and shareable questionnaire /register/ separate.
+- Questionnaire: optional Buddy text/photo sizing, smiling green box loading animation, no customer-facing AI wording. Contact details last. No optional exact-date field; timing choices remain.
+- Size choices show NO prices. The next step shows the relevant exact/range launch price and four next actions: interested/callback, visit, cheaper size, information only. No price-opinion question or duplicate readiness question. Budget optional only for cheaper-size requests. Confirmation repeats size, price and timing.
+- Current monthly room rates: 2 sqm 2490; 3 sqm 2890; 4 sqm 3690; 5 sqm 4290; 6 sqm 4990; 8 sqm 6590; 10 sqm 7890. Config version launch_2026_09_15_r2. Locker = 590 per one stacked box, upper OR lower, selected separately. VAT/minimum term/detailed dimensions have not been specified; do not invent them. Preserve historical quoted prices on saved enquiries.
+- Backoffice opens with populated questionnaire answers, readable labels, and private photo thumbnails with enlarged popup. Follow-up/history below. New questionnaire photos save privately at final submission via /api/intake; only references go in the lead. Owner-only photo URL signing, no public bucket access. Earlier #17 had no stored photos and cannot be recovered. Test #18 verifies actual photo saving and display; excluded from normal reporting.
+- Dashboard records next_step and price snapshot/range; interested-after-price is separate from ready-to-confirm and historical explicit acceptance.
+- Support card compact on desktop/mobile. English responsive image paths fixed for every srcset candidate; hero/advisor/support verified live at 2x pixel density.
+- Locker price removed from first-step label (680a3d6). Optional date removed and English images fixed (ec6f375). Final live verification passed. 70 Node tests and relevant registration, pricing/locker, sizing/photo, owner gallery, dashboard, and responsive image browser checks passed across the releases.
+- Never reintroduce illustration/generated-image disclaimer labels. Keep accurate first-customer status and no payment/deposit collection.
+
+See DEMAND_V2_2026-09-15.md and AGENTS.md for details.
+
 ## Current ? Demand Validation V2, September 15
 
 Release fc32942 is live and verified. TWO distinct pages: main website / (first-customer messaging, familiar style) and /register/ (three-step intent questionnaire, contact details last). Main CTA and size/AI choices pass into the questionnaire. Backoffice shows V2 timing/qualification/readiness/attribution metrics and owner demand statuses. 65 Node tests and browser regressions pass; one marked live questionnaire saved successfully, excluded from normal metrics. Pricing is withheld: Newton is preparing the list. No confirmed exact building/photo supplied. Read DEMAND_V2_2026-09-15.md. This supersedes the earlier restoration-only checkpoint below.
