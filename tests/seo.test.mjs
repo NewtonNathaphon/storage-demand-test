@@ -114,7 +114,7 @@ test('homepage English source has crawlable English visible text',()=>{
   assert.deepEqual(unexpectedThai,[],`unexpected Thai visible text: ${[...new Set(unexpectedThai)].join(' | ')}`);
   const placeholders=[...html['/en/'].matchAll(/\bplaceholder=["']([^"']*)["']/gi)].map(match=>match[1]);
   assert.equal(placeholders.some(value=>/[ก-๙]/.test(value)),false,`unexpected Thai placeholder: ${placeholders.join(' | ')}`);
-  for(const phrase of ['Size guide','Check pricing and tell us your start date','welcoming its first customers in Rama 3','Your privacy','Website operator and data controller'])assert.match(text,new RegExp(phrase,'i'));
+  for(const phrase of ['Size guide','Add us on LINE Official','expected to open in early 2027','Your privacy','Website operator and data controller'])assert.match(text,new RegExp(phrase,'i'));
 });
 
 test('homepage English source materializes accessibility localization without client JavaScript',()=>{
