@@ -45,9 +45,9 @@ test('responsive WebP illustrations are generated and published',()=>{
 test('homepage variants serve responsive images with safe PNG fallbacks',()=>{
   for(const [html,advisorAlt] of [[thai,'บัดดี้ช่วยลูกค้าเลือกขนาดพื้นที่เก็บของ'],[english,'A Buddy advisor helping a customer choose storage space']]){
     const hero=pictureFor(html,'StorageBuddy');
+    assert(html.indexOf('id="why-buddy"')<html.indexOf('buddy_hero_banner3-640.webp'));
     assert.match(hero,/type=["']image\/webp["'][^>]+srcset=["'][^"']*buddy_hero_banner3-640\.webp 640w,[^"']*buddy_hero_banner3-1280\.webp 1280w/i);
-    assert.match(hero,/<img[^>]+src=["'][^"']*buddy_hero_banner3\.png["'][^>]+fetchpriority=["']high["'][^>]+decoding=["']async["']/i);
-    assert.doesNotMatch(hero,/loading=["']lazy["']/i);
+    assert.match(hero,/<img[^>]+src=["'][^"']*buddy_hero_banner3\.png["'][^>]+loading=["']lazy["'][^>]+decoding=["']async["']/i);
 
     for(const [name,alt] of [['buddy_size_advisor_v2',advisorAlt],['buddy_support','StorageBuddy support']]){
       const picture=pictureFor(html,alt);
