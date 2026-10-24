@@ -200,8 +200,10 @@ test('guides are substantial, reciprocal and connected to useful next steps',()=
 });
 
 test('navigation exposes the guide entry without creating a guides hub',()=>{
-  assert.match(html['/'],/href=["']\/register\/["']/);
-  assert.match(html['/en/'],/href=["']\/register\/\?lang=en["']/);
+  assert.match(html['/'],/href=["']#sizes["']/);
+  assert.match(html['/en/'],/href=["']#sizes["']/);
+  assert.match(html['/'],/data-contact=["']line_hero["']/);
+  assert.match(html['/en/'],/data-contact=["']line_hero["']/);
   for(const [url,source] of Object.entries(html).filter(([url])=>url!=='/'&&url!=='/en/')){
     const guide=url.startsWith('/en/')?'/en/guides/choose-storage-size/':'/guides/choose-storage-size/';
     assert.match(source,new RegExp(`<nav[^>]*>[\\s\\S]*href=["']${guide.replaceAll('/','\\/')}["']`),`${url} nav needs guide link`);
