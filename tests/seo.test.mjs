@@ -139,8 +139,8 @@ test('commercial pages cover useful search intent without pretending to be open'
   assert.match(html['/location/rama-3/'],/เช่าที่เก็บของ พระราม 3/);
   assert.match(html['/sizes/'],/ห้องเก็บของรายเดือน พระราม 3/);
   assert.match(html['/business-storage/'],/โกดังขนาดเล็กให้เช่า/);
-  assert.match(html['/sizes/'],/1 ตร\.ม\.[\s\S]*2 ตร\.ม\.[\s\S]*3 ตร\.ม\.[\s\S]*4 ตร\.ม\.[\s\S]*5 ตร\.ม\.[\s\S]*8 ตร\.ม\./);
-  assert.match(html['/en/sizes/'],/1 sqm[\s\S]*2 sqm[\s\S]*3 sqm[\s\S]*4 sqm[\s\S]*5 sqm[\s\S]*8 sqm/i);
+  assert.match(html['/sizes/'],/1 ตร\.ม\.[\s\S]*2 ตร\.ม\.[\s\S]*3 ตร\.ม\.[\s\S]*4 ตร\.ม\.[\s\S]*6 ตร\.ม\.[\s\S]*8 ตร\.ม\./);
+  assert.match(html['/en/sizes/'],/1 sqm[\s\S]*2 sqm[\s\S]*3 sqm[\s\S]*4 sqm[\s\S]*6 sqm[\s\S]*8 sqm/i);
   assert.match(html['/location/rama-3/'],/HomePro พระราม 3[\s\S]*สาธุประดิษฐ์[\s\S]*ยานนาวา[\s\S]*บางคอแหลม[\s\S]*สาทร/);
   assert.match(html['/en/location/rama-3/'],/HomePro Rama 3[\s\S]*Sathu Pradit[\s\S]*Yan Nawa[\s\S]*Bang Kho Laem[\s\S]*Sathorn/i);
   assert.match(html['/personal-storage/'],/คอนโด[\s\S]*ย้ายบ้าน[\s\S]*รีโนเวท[\s\S]*เฟอร์นิเจอร์/);
