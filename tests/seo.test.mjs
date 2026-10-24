@@ -94,7 +94,7 @@ test('campaign query survives every same-origin internal navigation path',()=>{
   }
   for(const source of [html['/sizes/'],html['/en/sizes/']]){
     assert.match(source,/#size-help/);
-    assert.match(source,/#contact/);
+    assert.match(source,/https:\/\/line\.me\/R\/ti\/p\/%40storagebuddy/);
   }
   for(const [thai,english] of [
     ['/sizes/','/en/sizes/'],
@@ -135,14 +135,17 @@ test('homepage English source materializes accessibility localization without cl
 
 test('commercial pages cover useful search intent without pretending to be open',()=>{
   assert.match(html['/'],/พื้นที่เก็บของรายเดือน/);
-  assert.match(html['/'],/ย่านพระราม 3/i);
-  assert.match(html['/location/rama-3/'],/เช่าที่เก็บของ พระราม 3/);
+  assert.match(html['/'],/พระราม 3/i);
+  assert.match(html['/location/rama-3/'],/ห้องเก็บของให้เช่ารายเดือนในพระราม 3/);
   assert.match(html['/sizes/'],/ห้องเก็บของรายเดือน พระราม 3/);
   assert.match(html['/business-storage/'],/โกดังขนาดเล็กให้เช่า/);
   assert.match(html['/sizes/'],/1 ตร\.ม\.[\s\S]*2 ตร\.ม\.[\s\S]*3 ตร\.ม\.[\s\S]*4 ตร\.ม\.[\s\S]*6 ตร\.ม\.[\s\S]*8 ตร\.ม\./);
   assert.match(html['/en/sizes/'],/1 sqm[\s\S]*2 sqm[\s\S]*3 sqm[\s\S]*4 sqm[\s\S]*6 sqm[\s\S]*8 sqm/i);
-  assert.match(html['/location/rama-3/'],/HomePro พระราม 3[\s\S]*สาธุประดิษฐ์[\s\S]*ยานนาวา[\s\S]*บางคอแหลม[\s\S]*สาทร/);
-  assert.match(html['/en/location/rama-3/'],/HomePro Rama 3[\s\S]*Sathu Pradit[\s\S]*Yan Nawa[\s\S]*Bang Kho Laem[\s\S]*Sathorn/i);
+  for(const url of ['/location/rama-3/','/en/location/rama-3/']){
+    assert.match(html[url],/13\.694481999999997/);
+    assert.match(html[url],/100\.515812/);
+    assert.match(html[url],/https:\/\/maps\.app\.goo\.gl\/BCQxirDJ51kDRYcHA/);
+  }
   assert.match(html['/personal-storage/'],/คอนโด[\s\S]*ย้ายบ้าน[\s\S]*รีโนเวท[\s\S]*เฟอร์นิเจอร์/);
   assert.match(html['/business-storage/'],/สต็อก[\s\S]*เอกสาร[\s\S]*ไม่ใช่โกดังโลจิสติกส์/);
   assert.match(html['/en/business-storage/'],/inventory[\s\S]*documents[\s\S]*not a full logistics warehouse/i);
@@ -170,7 +173,7 @@ test('guides are substantial, reciprocal and connected to useful next steps',()=
         const related=url.startsWith('/en/')?otherEnglish:otherThai;
         assert.match(source,new RegExp(`href=["']${related.replaceAll('/','\\/')}["']`),`${url} must link ${related}`);
       }
-      assert.match(source,/#size-help/);assert.match(source,/#contact/);
+      assert.match(source,/#size-help/);
       assert.match(source,/https:\/\/line\.me\/R\/ti\/p\/%40storagebuddy/);
     }
   }
@@ -211,6 +214,26 @@ test('navigation exposes the guide entry without creating a guides hub',()=>{
   assert.equal(existsSync(join(root,'public','guides','index.html')),false);
   assert.equal(existsSync(join(root,'public','en','guides','index.html')),false);
   for(const source of Object.values(html))assert.doesNotMatch(source,/hreflang=["'](?:zh|hi|ar|de|fr)(?:-|["'])/i);
+});
+
+test('pre-opening location, LINE, homepage links and concept captions stay consistent',()=>{
+  const thai='คาดเปิดต้นปี 2570 โดยกำหนดการอาจเปลี่ยนตามความคืบหน้าการก่อสร้าง';
+  const english='Expected to open in early 2027; timing may change depending on construction progress.';
+  for(const [url,source] of Object.entries(html)){
+    const phrase=url.startsWith('/en/')?english:thai;
+    if(url==='/'||url==='/en/'){
+      assert.match(source,new RegExp(`<meta name="description" content="[^"]*${phrase}`));
+      assert.match(source,new RegExp(`<meta property="og:description" content="[^"]*${phrase}`));
+      assert.match(source,/href="\/(?:en\/)?sizes\/"/);
+      assert.match(source,/href="\/(?:en\/)?location\/rama-3\/"/);
+      assert.match(source,url==='/en/'?/Concept visualization · interior/:/ภาพจำลอง · ภายในอาคาร/);
+      assert.match(source,url==='/en/'?/Concept visualization · building exterior/:/ภาพจำลอง · ด้านหน้าอาคาร/);
+    }else{
+      assert.match(source,new RegExp(phrase),`${url} opening caveat`);
+      assert.match(source,/<a class="button" href="https:\/\/line\.me\/R\/ti\/p\/%40storagebuddy"/);
+      assert.doesNotMatch(source,/HomePro|location and opening remain unconfirmed|สถานที่ให้บริการจริง วันเปิด และจำนวนห้องยังไม่ยืนยัน/);
+    }
+  }
 });
 
 test('homepage and contextual pages link to the relevant guides',()=>{
@@ -266,6 +289,7 @@ test('sitemap lists only built canonical URLs with alternates and consistent ISO
   const lastmods=[...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map(match=>match[1]);
   assert.equal(lastmods.length,locs.length);
   assert.equal(new Set(lastmods).size,1,`inconsistent lastmod values: ${lastmods.join(' | ')}`);
+  assert.equal(lastmods[0],'2026-10-24');
   assert.match(lastmods[0],/^\d{4}-\d{2}-\d{2}$/);
   assert.equal(Number.isNaN(Date.parse(`${lastmods[0]}T00:00:00Z`)),false);
   assert.match(sitemap,/xmlns:xhtml=/);

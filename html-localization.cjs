@@ -217,10 +217,10 @@ function renderEnglishHomepage(source){
     changes.push(['data-page-language','en']);
    }
    if(token.name==='meta'){
-    if(current('name')==='description')changes.push(['content','Planned self storage near Rama 3, Bangkok, with size guidance for personal belongings, furniture and small business inventory. Location, opening and rooms are not yet confirmed.']);
+     if(current('name')==='description')changes.push(['content','StorageBuddy monthly self storage in Rama 3, Bangkok. Expected to open in early 2027; timing may change depending on construction progress. Explore sizes, the building map and LINE.']);
     const property=current('property');
     if(property==='og:title')changes.push(['content','Self Storage Rama 3, Bangkok | StorageBuddy']);
-    if(property==='og:description')changes.push(['content','Plan storage near Rama 3 and register for confirmed location, opening and room updates.']);
+     if(property==='og:description')changes.push(['content','StorageBuddy monthly self storage in Rama 3, Bangkok. Expected to open in early 2027; timing may change depending on construction progress. Ask Buddy on LINE.']);
     if(property==='og:url')changes.push(['content','https://storagebuddyth.com/en/']);
     if(property==='og:image')changes.push(['content','https://storagebuddyth.com/assets/buddy_banner_en.webp']);
    }
