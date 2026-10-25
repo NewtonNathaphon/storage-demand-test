@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {existsSync, readFileSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import {join} from 'node:path';
+import {createRequire} from 'node:module';
 
 const root=fileURLToPath(new URL('..',import.meta.url));
 const sourcePath=join(root,'404.html');
@@ -38,12 +39,14 @@ test('branded bilingual 404 source is safe and truthful',()=>{
   assert.doesNotMatch(source,/<script\b|<form\b/i,'404 should remain a static, non-collecting page');
 });
 
-test('allowlisted build publishes only the intended 404 source',()=>{
+test('allowlisted build publishes the 404 source with the shared Google tag',()=>{
   const buildSource=readFileSync(join(root,'build.cjs'),'utf8');
   assert.match(buildSource,/allowlist\s*=\s*\[[\s\S]*?["']404\.html["']/,'404.html must be explicitly allowlisted');
 
   const built=spawnSync(process.execPath,['build.cjs'],{cwd:root,encoding:'utf8'});
   assert.equal(built.status,0,built.stderr||built.stdout);
   assert.equal(existsSync(publicPath),true,'build did not publish public/404.html');
-  assert.equal(readFileSync(publicPath,'utf8'),readFileSync(sourcePath,'utf8'),'published 404 must exactly match its source');
+  const {installGoogleAds}=createRequire(import.meta.url)('../google-ads.cjs');
+  assert.equal(readFileSync(publicPath,'utf8'),installGoogleAds(readFileSync(sourcePath,'utf8')),'published 404 must match its source plus the shared tag');
 });
+
