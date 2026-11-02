@@ -2,3 +2,9 @@
 /rooms/ /sizes/ 301
 /en/rooms /en/sizes/ 301
 /en/rooms/ /en/sizes/ 301
+/ratecard /price/ 301
+/ratecard/ /price/ 301
+/prices /price/ 301
+/prices/ /price/ 301
+/en/price /price/?lang=en 301
+/en/price/ /price/?lang=en 301
