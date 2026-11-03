@@ -4,7 +4,6 @@ const path=require('path');
 const {pages}=require('./seo-pages.cjs');
 const {renderEnglishHomepage}=require('./html-localization.cjs');
 const {renderRegistrationPage}=require('./registration-page.cjs');
-const {renderPricePage}=require('./price-page.cjs');
 const {installGoogleAds}=require('./google-ads.cjs');
 const output=path.join(__dirname,'public');
 if(path.resolve(output)!==path.resolve(__dirname,'public'))throw new Error('Unexpected build output');
@@ -20,8 +19,6 @@ const thai=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
 for(const name of ['questionnaire-ai.js','registration.js','demand-form.css','demand-model.js','demand-dashboard.js'])fs.copyFileSync(path.join(__dirname,'assets',name),path.join(output,'assets',name));
 fs.mkdirSync(path.join(output,'register'),{recursive:true});
 fs.writeFileSync(path.join(output,'register/index.html'),installGoogleAds(renderRegistrationPage(thai)));
-fs.mkdirSync(path.join(output,'price'),{recursive:true});
-fs.writeFileSync(path.join(output,'price/index.html'),installGoogleAds(renderPricePage()));
 const english=renderEnglishHomepage(thai);
 const enTarget=path.join(output,'en/index.html');fs.mkdirSync(path.dirname(enTarget),{recursive:true});fs.writeFileSync(enTarget,installGoogleAds(english));
 for(const item of pages){const target=path.join(output,item.file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,installGoogleAds(item.html));}
