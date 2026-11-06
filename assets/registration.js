@@ -108,7 +108,7 @@ $('demandForm').onsubmit=async event=>{
  const summary=summaryText(),ok=await (window.saveQuestionnaireWithPhotos?window.saveQuestionnaireWithPhotos(row):sbInsert('leads',row));
  busy=false;for(const id of ['submitBtn','backBtn','langBtn'])$(id).disabled=false;
  if(ok){savedSummary=summary;submitted=true;updateQuote();window.disposeSizeAssistant?.();$('demandForm').hidden=true;document.querySelector('.form-progress').hidden=true;$('leadSuccess').hidden=false;$('successMessenger').hidden=details.contact_preference!=='messenger';$('leadSuccess').focus();$('leadSuccess').scrollIntoView({behavior:'smooth',block:'start'});track('demand_saved',details.readiness_level);
-  if(details.next_step==='reserve_free'&&typeof window.gtag==='function')window.gtag('event','conversion',{send_to:'AW-16778280533/c4qzCMDIurMdENX8wMA-'});
+  if(['reserve_free','quote_request'].includes(details.next_step)&&typeof window.gtag==='function')window.gtag('event','conversion',{send_to:'AW-16778280533/c4qzCMDIurMdENX8wMA-'});
  }
  else{fail(t('ยังยืนยันการบันทึกไม่ได้ ข้อมูลที่กรอกยังอยู่ กรุณาลองส่งอีกครั้ง','We couldn’t confirm your save. Your answers are still here. Please try again.'));track('demand_save_failed');}
 };

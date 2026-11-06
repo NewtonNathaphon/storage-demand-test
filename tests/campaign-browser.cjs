@@ -26,17 +26,22 @@ const assertQuery=actual=>assert.deepEqual(Object.fromEntries(new URL(actual).se
     assertQuery(page.url());
 
     await page.goto(`${origin}/sizes/?${query}`,{waitUntil:'networkidle'});
-    await page.locator('a.button[href*="#size-help"]').click();
-    await page.waitForURL(url=>url.pathname==='/'&&url.hash==='#size-help');
+    await page.locator('a[href^="/guides/choose-storage-size/"]').first().click();
+    await page.waitForURL(url=>url.pathname==='/guides/choose-storage-size/');
     assertQuery(page.url());
 
-    await page.goto(`${origin}/en/business-storage/?${query}`,{waitUntil:'networkidle'});
-    await page.locator('a.button[href*="#contact"]').click();
-    await page.waitForURL(url=>url.pathname==='/en/'&&url.hash==='#contact');
-    assertQuery(page.url());
+    // Homepage size card opens the reservation form with the size and the campaign codes.
+    await page.goto(`${origin}/?${query}`,{waitUntil:'networkidle'});
+    await page.locator('#sizeGrid button',{hasText:/^7 /}).click();
+    await page.locator('#sizeCta').click();
+    await page.waitForURL(url=>url.pathname==='/register/');
+    const reg=new URL(page.url());
+    for(const [key,value] of Object.entries(queryObject))assert.equal(reg.searchParams.get(key),value,key);
+    assert.equal(reg.searchParams.get('size'),'7');
+    assert(await page.locator('[name="requested_size"][value="7"]').isChecked());
 
     assert.deepEqual(errors,[]);
-    console.log('PASS UTM query survives homepage language, generated language alternate and homepage CTAs; LINE stays unchanged');
+    console.log('PASS UTM query survives language switches, guide links and the homepage size button into the reservation form; LINE stays unchanged');
   }finally{
     await browser.close();
   }
