@@ -1,3 +1,5 @@
+REMINDER FOR EVERY SESSION (Newton asked, 2026-11-06): remind Newton at the start of each conversation to create a Google Ads conversion action for **reservation completed** on /register/ and send its label (AW-16778280533/...). Then fire it on the `demand_saved` success view, next to the existing LINE-click conversion. Remove this note once it is installed.
+
 November 6, 2026 company change: StorageBuddy is now operated by **บริษัท สตอเรจ บัดดี้ จำกัด / STORAGE BUDDY CO., LTD.**, tax/registration ID **0105569203477**. Phone 062-879-3645 and the registered address are unchanged. This supersedes every FLOWCRAFT PROCESS SOLUTION reference below; do not reintroduce the old company or tax ID. Public email: nathaphon@storagebuddyth.com. Company renters can tick 5% withholding tax on rent (following LEO).
 
 Latest price revision: rooms 2sqm=2490, 3=2890, 4=3690, 5=4290, 6=4990, 8=6590, 10=7890 THB/month. Locker is 590 THB per individual stacked box (upper OR lower); selectable separately as locker, not automatically inferred from room area. Config version launch_2026_09_15_r2. Prior launch prices below are historical.

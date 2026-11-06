@@ -23,7 +23,7 @@ const beforeOpening=()=>{const m=moveIn();return m.code==='now'||(m.code==='in_m
 
 // Prefill from the homepage size helper or a ?size= link: pick the exact room, or the next size up.
 const querySize=Number(params.get('size')),prefillSize=Number(context?.size)||(Number.isFinite(querySize)&&querySize>0&&querySize<=1000?querySize:null);
-function selectSize(sqm){const room=ROOMS.find(r=>r.sqm>=sqm);const value=room?String(room.sqm):'over_10';const input=document.querySelector(`input[name="requested_size"][value="${value}"]`);if(input)input.checked=true;if(!room)$('largeSqm').value=String(Math.ceil(sqm));}
+function selectSize(sqm){if(sqm<=1){document.querySelector('input[name="requested_size"][value="locker"]').checked=true;return;}const room=ROOMS.find(r=>r.sqm>=sqm);const value=room?String(room.sqm):'over_10';const input=document.querySelector(`input[name="requested_size"][value="${value}"]`);if(input)input.checked=true;if(!room)$('largeSqm').value=String(Math.ceil(sqm));}
 if(prefillSize)selectSize(prefillSize);
 if(context?.items)$('itemDescription').value=String(context.items).slice(0,1800);
 let questionnaireEstimate=context?.ai_estimate||null,exactRequestedSize=prefillSize,savedSummary=null;
