@@ -139,8 +139,8 @@ test('commercial pages cover useful search intent without pretending to be open'
   assert.match(html['/location/rama-3/'],/ห้องเก็บของให้เช่ารายเดือนในพระราม 3/);
   assert.match(html['/sizes/'],/ห้องเก็บของรายเดือน พระราม 3/);
   assert.match(html['/business-storage/'],/โกดังขนาดเล็กให้เช่า/);
-  assert.match(html['/sizes/'],/1 ตร\.ม\.[\s\S]*2 ตร\.ม\.[\s\S]*3 ตร\.ม\.[\s\S]*4 ตร\.ม\.[\s\S]*6 ตร\.ม\.[\s\S]*8 ตร\.ม\./);
-  assert.match(html['/en/sizes/'],/1 sqm[\s\S]*2 sqm[\s\S]*3 sqm[\s\S]*4 sqm[\s\S]*6 sqm[\s\S]*8 sqm/i);
+  assert.match(html['/sizes/'],/ล็อกเกอร์ 1×1 ม\.[\s\S]*2 ตร\.ม\.[\s\S]*4 ตร\.ม\.[\s\S]*5 ตร\.ม\.[\s\S]*6 ตร\.ม\.[\s\S]*7 ตร\.ม\.[\s\S]*8 ตร\.ม\.[\s\S]*9 ตร\.ม\.[\s\S]*10 ตร\.ม\./);assert.doesNotMatch(html['/sizes/'],/>3 ตร\.ม\./);
+  assert.match(html['/en/sizes/'],/Locker 1×1 m[\s\S]*2 sqm[\s\S]*4 sqm[\s\S]*5 sqm[\s\S]*6 sqm[\s\S]*7 sqm[\s\S]*8 sqm[\s\S]*9 sqm[\s\S]*10 sqm/i);
   for(const url of ['/location/rama-3/','/en/location/rama-3/']){
     assert.match(html[url],/13\.694481999999997/);
     assert.match(html[url],/100\.515812/);
