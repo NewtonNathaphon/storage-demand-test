@@ -48,7 +48,7 @@
  };
  $('acceptEstimate').onclick=()=>{
   if(!questionnaireEstimate)return;
-  const input=document.querySelector(`[name="requested_size"][value="${sizeRange(questionnaireEstimate.max_sqm)}"]`);input.checked=true;input.dispatchEvent(new Event('change',{bubbles:true}));applied=true;exactRequestedSize=null;
+  const room=DEMAND_CONFIG.rooms.find(r=>r.sqm>=questionnaireEstimate.max_sqm),input=document.querySelector(`[name="requested_size"][value="${room?room.sqm:'over_10'}"]`);if(!room)$('largeSqm').value=String(Math.ceil(questionnaireEstimate.max_sqm));input.checked=true;input.dispatchEvent(new Event('change',{bubbles:true}));applied=true;exactRequestedSize=null;
   message(t('เลือกขนาดที่แนะนำแล้ว กดถัดไปได้เลย','Recommended size selected. You can continue.'));track('questionnaire_estimate_accepted');
  };
  window.refreshSizeAssistant=render;
