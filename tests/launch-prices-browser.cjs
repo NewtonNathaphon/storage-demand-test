@@ -18,7 +18,7 @@ const assert=require('node:assert/strict');const {launchBrowser,outputPath}=requ
  await pick('expected_duration','1_month');let text=await panel();assert(text.includes('฿3,990/month'));assert(text.includes('฿7,980'));assert(text.includes('pay 5 get 6'));
  await pick('expected_duration','3_months');text=await panel();assert(text.includes('฿11,371'));assert(text.includes('฿11,970'));assert(text.includes('฿15,361'));
  await pick('expected_duration','6_months');text=await panel();assert(text.includes('Founding Buddy'));assert(text.includes('฿19,950'));assert(text.includes('฿23,940'));assert(text.includes('฿21,546'));assert(text.includes('None'));
- await pick('expected_duration','12_months');text=await panel();assert(text.includes('฿27,930'));assert(text.includes('฿47,880'));assert(text.includes('฿2,328'));assert(text.includes('฿19,950'));assert(text.includes('฿39,900'));assert(text.includes('first 30 rooms'));
+ await pick('expected_duration','12_months');text=await panel();assert(text.includes('฿27,930'));assert(text.includes('฿47,880'));assert(text.includes('฿2,328'));assert(text.includes('฿19,950'));assert(text.includes('฿39,900'));assert(text.includes('limited, first come first served'));assert(!text.includes('30 rooms'));assert(text.includes('continues monthly at the normal rate'));
  assert.equal((await p2.locator('#nextBtn').innerText()).trim(),'Reserve this price free →');
  await pick('expected_duration','over_12_months');assert((await panel()).includes('first 12 months'));await pick('expected_duration','12_months');
  for(const width of [390,1440]){await p2.setViewportSize({width,height:1000});assert(await p2.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p2.screenshot({path:outputPath('launch-price-step-'+width+'.png'),fullPage:true});}
@@ -33,8 +33,8 @@ const assert=require('node:assert/strict');const {launchBrowser,outputPath}=requ
  d=JSON.parse(saved2.at(-1).customer_use);assert.equal(d.requested_size,'over_10');assert.equal(d.requested_sqm,20);assert.equal(d.payment_plan,null);assert.equal(d.next_step,'quote_request');assert.equal(d.desired_move_in,'now');
  console.log('PASS large space request without an automatic price, saved as a quote request');
  await p2.goto('http://127.0.0.1:8788/register/?lang=en');await pick('use_case','personal');await pick('requested_size','locker');await p2.locator('#nextBtn').click();await pick('desired_move_in','unsure');await pick('expected_duration','12_months');
- text=await panel();assert(text.includes('฿7,800'));assert(text.includes('pay 10 get 12'));assert(!text.includes('Founding'));assert(text.includes('locker box'));
+ text=await panel();assert(text.includes('฿5,460'));assert(text.includes('Pay 7 months, store for 12'));assert(text.includes('Founding'));assert(text.includes('฿9,360'));assert(text.includes('locker box'));
  await p2.locator('#nextBtn').click();await pick('contact_preference','phone');await p2.locator('#customerName').fill('TEST LOCKER');await p2.locator('#phone').fill('0000000000');await p2.locator('#consent').check();await p2.locator('#submitBtn').click();await p2.locator('#leadSuccess').waitFor({state:'visible'});
- d=JSON.parse(saved2.at(-1).customer_use);assert.equal(d.requested_size,'locker');assert.equal(d.quoted_product_type,'locker');assert.equal(d.quoted_price,780);assert.equal(d.payment_plan,'prepay_12');assert.equal(d.quote_total,7800);
- console.log('PASS locker uses normal plans (no Founding), THB780 per box, persisted plan');
+ d=JSON.parse(saved2.at(-1).customer_use);assert.equal(d.requested_size,'locker');assert.equal(d.quoted_product_type,'locker');assert.equal(d.quoted_price,780);assert.equal(d.payment_plan,'founding_12');assert.equal(d.quote_total,5460);assert.equal(d.founding_offer,true);
+ console.log('PASS locker gets Founding Buddy too, THB780 per box, persisted plan');
 }finally{await b.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
