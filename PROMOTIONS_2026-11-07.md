@@ -43,6 +43,6 @@ For a 4 sqm room (THB 3,990 list rent):
 - 90 bilingual size-duration render combinations, mobile 390px and desktop 1440px.
 - Failed save/retry, double submission, back navigation, language changes and exact saved payloads tested with mocked persistence and blocked external network calls.
 - Thai and English mobile screenshots visually reviewed.
-- Separate conversion-tracking work must be integrated and the combined build/tests rerun before release.
+- Conversion-tracking work is now integrated and the combined 95-test suite plus five browser suites passed. See INTEGRATION_2026-11-07.md.
 
 The site remains a static snapshot of the approved sheet. Later sheet edits require an explicit source sync and regression check; this patch does not create a live spreadsheet integration.
