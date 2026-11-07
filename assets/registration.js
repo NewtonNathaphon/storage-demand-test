@@ -8,7 +8,7 @@ const LEAD_CONVERSIONS=Object.freeze({
 });
 let leadConversionSent=false;
 function trackSavedLead(nextStep){
- const sendTo=LEAD_CONVERSIONS[nextStep];
+ const sendTo=Object.hasOwn(LEAD_CONVERSIONS,nextStep)?LEAD_CONVERSIONS[nextStep]:null;
  if(leadConversionSent||!sendTo||typeof window.gtag!=='function')return;
  try{window.gtag('event','conversion',{send_to:sendTo,transaction_id:leadConversionId});leadConversionSent=true;}catch{}
 }
@@ -74,12 +74,21 @@ function renderPrice(){const box=$('priceResult'),item=selection(),duration=chos
  if(beforeOpening())box.append(el('p','price-note',t(`เราคาดเปิด${DEMAND_CONFIG.opening.th} จองสิทธิ์ไว้ก่อนได้ บัดดี้จะแจ้งวันเปิดให้ก่อนใคร`,`We expect to open in ${DEMAND_CONFIG.opening.en}. Reserve now and Buddy will tell you the opening date first.`)));
 }
 function summaryText(){const q=activeQuote(),item=selection(),m=moveIn(),start=m.code==='now'?t('ตอนนี้เลย','right now'):m.date?moveInLabel(moveInOptions.find(o=>o.value===chosen('desired_move_in'))):t('ยังไม่แน่ใจ','not sure yet');
- const what=q?`${itemLabel(q.item)} · ${durationLabel()} · ${q.founding?'Founding ':''}${q.plan.id==='monthly'?baht(q.item.monthly)+t('/เดือน','/month'):baht(q.total)}`:`${itemLabel(item)} · ${durationLabel()} · ${t('บัดดี้แจ้งราคาให้','Buddy will send your price')}`;
+ const what=q?`${itemLabel(q.item)} · ${durationLabel()} · ${q.founding?'Founding ':''}${q.plan.id==='monthly'?baht(q.item.monthly)+t('/เดือน','/month'):baht(q.total)}`:`${itemLabel(item)} · ${durationLabel()} · ${t('บัดดี้จะติดต่อเพื่อหารือเรื่องขนาดและราคา','Buddy will discuss size options and pricing')}`;
  return what+' · '+t('เริ่ม ','Start ')+start+(q?' · '+t('เงินประกัน ','Deposit ')+baht(q.deposit)+' · '+t('ชำระวันทำสัญญา ','Due at signing ')+baht(q.atSigning):'');}
 function updateQuote(){$('largeField').hidden=chosen('requested_size')!=='over_10';renderPrice();const q=activeQuote();
- const askPrice=!q&&chosen('expected_duration')&&['over_10','unsure'].includes(chosen('requested_size'));$('nextBtn').textContent=step===1&&q?t('จองราคานี้ฟรี →','Reserve this price free →'):step===1&&askPrice?t('ขอราคาฟรี →','Request my price →'):t('ถัดไป →','Continue →');
- $('bookingSummary').textContent=t('สรุปการจอง: ','Your reservation: ')+summaryText();
- if(savedSummary)$('successSummary').textContent=savedSummary;}
+ const askPrice=!q&&chosen('expected_duration')&&chosen('requested_size');$('nextBtn').textContent=step===1&&q?t('จองราคานี้ฟรี →','Reserve this price free →'):step===1&&askPrice?t('ขอราคาฟรี →','Request my price →'):t('ถัดไป →','Continue →');
+ $('bookingSummary').textContent=(q?t('สรุปการจอง: ','Your reservation: '):t('คำขอราคาของคุณ: ','Your price request: '))+summaryText();
+ const copy=(id,th,en)=>{const node=$(id);node.textContent=q?node.dataset[lang==='en'?'en':'th']:t(th,en);};
+ copy('contactQuestion','ให้บัดดี้ติดต่อเรื่องคำขอราคาของคุณทางไหน?','How should Buddy contact you about your price request?');
+ copy('lineContactHint','หลังส่งคำขอ เพิ่ม @storagebuddy บน LINE เพื่อคุยกับบัดดี้เรื่องคำขอราคาของคุณ','After sending, add @storagebuddy on LINE to discuss your price request with Buddy.');
+ copy('submitBtn','ส่งคำขอราคา','Send price request');
+ copy('submissionNote','ส่งคำขอได้ฟรี ยังไม่ใช่การจองห้อง บัดดี้จะติดต่อเพื่อหารือว่าสามารถจัดพื้นที่ขนาดที่คุณต้องการได้หรือไม่','Sending a request is free and does not reserve a room. Buddy will discuss whether we can offer the size you need.');
+ copy('successTitle','บันทึกคำขอราคาของคุณแล้ว','Your price request is saved!');
+ copy('successStepContact','บัดดี้จะติดต่อเพื่อหารือว่าสามารถจัดพื้นที่ขนาดที่คุณต้องการได้หรือไม่','Buddy will contact you to discuss whether we can offer the size you need.');
+ copy('successStepOptions','หากมีตัวเลือกที่เหมาะสม บัดดี้จะแจ้งราคาและรายละเอียดให้คุณพิจารณา','If a suitable option is available, Buddy will share its price and details for you to consider.');
+ copy('successStepAgreement','คำขอนี้ยังไม่ใช่การยืนยันการจองห้อง และไม่มีการชำระเงินในขั้นตอนนี้','This request does not confirm a room reservation. No payment is collected at this stage.');
+ if(savedSummary)$('successSummary').textContent=summaryText();}
 // Renter details: company renters give tax details so receipts and the 5% withholding are correct.
 const isCompany=()=>chosen('customer_type')==='company';
 function updateRenter(){const company=isCompany(),pref=chosen('contact_preference');$('companyFields').hidden=!company;$('branchField').hidden=!company||chosen('company_branch')!=='branch';$('lineField').hidden=pref!=='line';$('messengerField').hidden=pref!=='messenger';$('phoneHint').hidden=pref!=='phone';
@@ -117,7 +126,7 @@ $('demandForm').onsubmit=async event=>{
   next_step:q?'reserve_free':'quote_request',price_response:null,budget_thb:null,readiness_level:q?'reserved_free':'needs_quote',phone:$('phone').value.trim(),line_id:chosen('contact_preference')==='line'?$('lineId').value.trim():'',messenger_name:chosen('contact_preference')==='messenger'?$('messengerName').value.trim():'',contact_preference:chosen('contact_preference'),email:$('email').value.trim(),address:$('address').value.trim(),customer_type:chosen('customer_type'),company_name:isCompany()?$('companyName').value.trim():'',tax_id:isCompany()?taxDigits():'',company_branch:isCompany()?(chosen('company_branch')==='branch'?$('branchNo').value.trim():'00000'):'',withholding_tax:isCompany()&&$('withholdingTax').checked,entry_point:context?.entry||'standalone_questionnaire',language:lang,payment_status:'not_collected',consent_at:new Date().toISOString(),consent_version:'reserve_storage_buddy_2026_11_06'};
  // Legacy price_shown is an integer column. Preserve exact amounts in customer_use.quote_total and quote_average_monthly.
  const row={area:'rama3',size:requested,segment:uses()[0],customer_use:JSON.stringify(details),lean:'rama3_enquiry',lean_score:null,name:$('customerName').value.trim(),phone:details.phone,when_needed:m.date?m.code+':'+m.date.slice(0,7):m.code,price_shown:q?Math.round(q.plan.id==='monthly'?q.item.monthly:q.total):null,utm_source:source,utm_area:'rama3',user_agent:navigator.userAgent.slice(0,500)};
- busy=true;for(const id of ['submitBtn','backBtn','langBtn'])$(id).disabled=true;$('formMessage').textContent=t('กำลังบันทึกการจองสิทธิ์…','Saving your reservation…');
+ busy=true;for(const id of ['submitBtn','backBtn','langBtn'])$(id).disabled=true;$('formMessage').textContent=q?t('กำลังบันทึกการจองสิทธิ์…','Saving your reservation…'):t('กำลังบันทึกคำขอราคาของคุณ…','Saving your price request…');
  const summary=summaryText(),ok=await (window.saveQuestionnaireWithPhotos?window.saveQuestionnaireWithPhotos(row):sbInsert('leads',row));
  busy=false;for(const id of ['submitBtn','backBtn','langBtn'])$(id).disabled=false;
  if(ok){savedSummary=summary;submitted=true;updateQuote();window.disposeSizeAssistant?.();$('demandForm').hidden=true;document.querySelector('.form-progress').hidden=true;$('leadSuccess').hidden=false;$('successMessenger').hidden=details.contact_preference!=='messenger';$('leadSuccess').focus();$('leadSuccess').scrollIntoView({behavior:'smooth',block:'start'});track('demand_saved',details.readiness_level);

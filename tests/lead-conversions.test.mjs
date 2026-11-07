@@ -41,5 +41,5 @@ test('missing or throwing analytics does not undo the saved result',async()=>{
  for(const gtag of [undefined,()=>{throw Error('blocked');}]){const h=harness();h.context.window.gtag=gtag;await h.submit();assert.equal(h.context.submitted,true);assert.equal(h.events.length,0);}
 });
 test('unsupported action does not convert; reload alone does not convert',()=>{
- const h=harness();vm.runInContext("trackSavedLead('interested')",h.context);assert.equal(h.events.length,0);assert.equal(harness().events.length,0);
+ const h=harness();vm.runInContext("trackSavedLead('interested');trackSavedLead('toString');trackSavedLead('__proto__')",h.context);assert.equal(h.events.length,0);assert.equal(harness().events.length,0);
 });

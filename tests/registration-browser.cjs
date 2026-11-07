@@ -1,6 +1,7 @@
 const assert=require('node:assert/strict');const {launchBrowser,outputPath}=require('./browser-runtime.cjs');
 (async()=>{const browser=await launchBrowser();try{
  const page=await browser.newPage(),saved=[],errors=[];let fail=true;page.on('pageerror',e=>errors.push(e.message));
+ await page.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());
  await page.route('**/*.supabase.co/rest/v1/**',r=>{if(r.request().url().includes('/leads')){if(fail)return r.fulfill({status:500,body:'{}'});saved.push(r.request().postDataJSON());}return r.fulfill({status:201,body:'[]'});});
  await page.goto('http://127.0.0.1:8788/register/?utm_source=facebook&utm_medium=paid_social&utm_campaign=first-customers&utm_content=ad-A',{waitUntil:'networkidle'});
  assert(await page.locator('#demandForm').isVisible());assert.equal(await page.locator('#size-help').count(),0);assert(!(await page.locator('#phone').isVisible()));

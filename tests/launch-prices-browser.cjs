@@ -1,7 +1,8 @@
 const assert=require('node:assert/strict');const {launchBrowser,outputPath}=require('./browser-runtime.cjs');
 // Prices stay hidden until a size and a length of stay are chosen; plans follow the approved Promotions tab.
 (async()=>{const b=await launchBrowser();
- {const p=await b.newPage();await p.route('**/*.supabase.co/rest/v1/**',r=>r.fulfill({status:201,body:'[]'}));
+ {const p=await b.newPage();await p.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());
+await p.route('**/*.supabase.co/rest/v1/**',r=>r.fulfill({status:201,body:'[]'}));
  await p.goto('http://127.0.0.1:8788/register/?lang=en&size=6');assert(await p.locator('[name="requested_size"][value="6"]').isChecked());
  const sizes=await p.locator('[name="requested_size"]').evaluateAll(els=>els.map(el=>el.value));assert.deepEqual(sizes,['locker','2','4','5','6','7','8','9','10','over_10','unsure']);
  assert.equal(await p.locator('[name="next_step"]').count(),0);assert.equal(await p.locator('#quotedRoom').count(),0);
@@ -10,7 +11,8 @@ const assert=require('node:assert/strict');const {launchBrowser,outputPath}=requ
  await p.locator('[name="expected_duration"][value="6_months"]').check();assert((await p.locator('#pricePanel').innerText()).includes('฿19,960'));
  await p.goto('http://127.0.0.1:8788/register/?lang=en&size=3');assert(await p.locator('[name="requested_size"][value="4"]').isChecked(),'a size we do not have rounds up to the next room');
  await p.close();}
- const p2=await b.newPage(),saved2=[];await p2.route('**/*.supabase.co/rest/v1/**',r=>{if(r.request().url().includes('/leads'))saved2.push(r.request().postDataJSON());return r.fulfill({status:201,body:'[]'});});
+ const p2=await b.newPage(),saved2=[];await p2.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());
+await p2.route('**/*.supabase.co/rest/v1/**',r=>{if(r.request().url().includes('/leads'))saved2.push(r.request().postDataJSON());return r.fulfill({status:201,body:'[]'});});
  try{const panel=()=>p2.locator('#pricePanel').innerText();const pick=async(name,value)=>p2.locator(`[name="${name}"][value="${value}"]`).check();
  await p2.goto('http://127.0.0.1:8788/register/?lang=en');await pick('use_case','moving');await pick('requested_size','4');await p2.locator('#nextBtn').click();
  assert(!(await panel()).includes('฿'),'price hidden before length of stay');
