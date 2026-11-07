@@ -1,5 +1,17 @@
 'use strict';
 const $=id=>document.getElementById(id),t=(th,en)=>lang==='en'?en:th;
+// One non-personal ID per form attempt, reused across failed-save retries.
+const leadConversionId=window.crypto?.randomUUID?.()||`sb-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+const LEAD_CONVERSIONS=Object.freeze({
+ reserve_free:'AW-16778280533/c4qzCMDIurMdENX8wMA-',
+ quote_request:'AW-16778280533/aIXhCOD09LMdENX8wMA-' // Secondary; not a reservation.
+});
+let leadConversionSent=false;
+function trackSavedLead(nextStep){
+ const sendTo=LEAD_CONVERSIONS[nextStep];
+ if(leadConversionSent||!sendTo||typeof window.gtag!=='function')return;
+ try{window.gtag('event','conversion',{send_to:sendTo,transaction_id:leadConversionId});leadConversionSent=true;}catch{}
+}
 let lang=params.get('lang')==='en'?'en':'th',step=0,busy=false,submitted=false,context=null;
 try{const staged=JSON.parse(sessionStorage.getItem('sb_intake_context')||'null');sessionStorage.removeItem('sb_intake_context');if(staged&&Date.now()-staged.at<30*60*1000)context=staged;}catch{}
 const translated=[...document.querySelectorAll('[data-en]')];translated.forEach(el=>el.dataset.th=el.innerHTML);document.querySelectorAll('[data-en-placeholder]').forEach(el=>el.dataset.thPlaceholder=el.placeholder);
@@ -109,7 +121,7 @@ $('demandForm').onsubmit=async event=>{
  const summary=summaryText(),ok=await (window.saveQuestionnaireWithPhotos?window.saveQuestionnaireWithPhotos(row):sbInsert('leads',row));
  busy=false;for(const id of ['submitBtn','backBtn','langBtn'])$(id).disabled=false;
  if(ok){savedSummary=summary;submitted=true;updateQuote();window.disposeSizeAssistant?.();$('demandForm').hidden=true;document.querySelector('.form-progress').hidden=true;$('leadSuccess').hidden=false;$('successMessenger').hidden=details.contact_preference!=='messenger';$('leadSuccess').focus();$('leadSuccess').scrollIntoView({behavior:'smooth',block:'start'});track('demand_saved',details.readiness_level);
-  if(['reserve_free','quote_request'].includes(details.next_step)&&typeof window.gtag==='function')window.gtag('event','conversion',{send_to:'AW-16778280533/c4qzCMDIurMdENX8wMA-'});
+  trackSavedLead(details.next_step);
  }
  else{fail(t('ยังยืนยันการบันทึกไม่ได้ ข้อมูลที่กรอกยังอยู่ กรุณาลองส่งอีกครั้ง','We couldn’t confirm your save. Your answers are still here. Please try again.'));track('demand_save_failed');}
 };
