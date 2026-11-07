@@ -254,7 +254,7 @@ test('homepage public copy is enquiry-led and makes no unsupported booking or be
     assert.doesNotMatch(text,/Choose your opening offer|เลือกข้อเสนอเปิดบริการ|Founding Buddy reservation offer|ข้อเสนอจองล่วงหน้า/i);
     assert.doesNotMatch(text,/best value for you|คุ้มค่าที่สุด|Confirm your details and start date to become a Buddy|ยืนยันข้อมูลและวันที่ เพื่อเริ่มเป็นบัดดี้/i);
     assert.doesNotMatch(text,/next steps shortly|ขั้นตอนต่อไปให้เร็ว ๆ นี้/i);
-    assert.match(text,/No payment or deposit at this stage|ไม่มีการเรียกเก็บเงินหรือค่ามัดจำ/i);
+    assert.match(text,/A deposit of one month of list rent is due at contract signing|เงินประกันเท่ากับค่าเช่าปกติ 1 เดือน ชำระวันทำสัญญา/i);
   }
 });
 
