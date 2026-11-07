@@ -15,10 +15,10 @@ const config=require('../demand-config.cjs');
   for(const [size,monthly]of prices)for(const[duration,months,paid,discount]of durations){
    await p.evaluate(({size,duration})=>{document.querySelector('[name="requested_size"][value="'+size+'"]').checked=true;document.querySelector('[name="expected_duration"][value="'+duration+'"]').checked=true;updateQuote();},{size,duration});
    const data=await p.evaluate(()=>{const q=activeQuote();return{q,rows:[...document.querySelectorAll('.price-row')].map(r=>r.innerText),text:document.getElementById('pricePanel').innerText,summary:document.getElementById('bookingSummary').innerText};});
-   const total=Math.round(monthly*paid*(100-discount))/100;
+   const total=Math.round(monthly*paid*(100-discount)/100);
    assert.equal(data.q.total,total,size+' '+duration+' '+language);assert.equal(data.q.deposit,monthly);assert.equal(data.q.atSigning,total+monthly);
-   assert(data.rows.some(row=>row.includes(language==='en'?'1 month of list rent':'ค่าเช่าปกติ 1 เดือน')));
-   assert(data.summary.includes(language==='en'?'Due at signing':'ชำระวันทำสัญญา'));
+   assert(data.rows.some(row=>row.includes(language==='en'?'1 month':'1 เดือน')&&row.includes(language==='en'?'Deposit':'เงินประกัน')));assert(!data.rows.some(row=>row.includes(language==='en'?'Due when you sign':'ชำระวันทำสัญญา')),'deposit is not added to the rent');
+   assert(data.summary.includes(language==='en'?'Deposit 1 month':'เงินประกัน 1 เดือน'));assert(!data.summary.includes(language==='en'?'Due at signing':'ชำระวันทำสัญญา'));
    if(months>=6){assert(data.text.includes(language==='en'?'limited, first come first served':'จำนวนจำกัด'));assert(!data.text.includes(language==='en'?'30 rooms':'30 ห้อง'),'the room quota is never shown to customers');assert(data.text.includes(language==='en'?'14 days after opening':'14 วันหลังเปิดบริการ'));}
    if(duration==='over_12_months')assert(data.text.includes(language==='en'?'first 12 months':'12 เดือนแรก'));
   }

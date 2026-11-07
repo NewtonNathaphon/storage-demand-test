@@ -28,22 +28,21 @@ test('all six approved plans and nine list prices match the live sheet snapshot'
 test('all 54 size-plan quotes preserve exact rent, list-rent deposit, savings and signing amount',()=>{
  for(const monthly of sourcePrices)for(const plan of sourcePlans){
   const q=priceFor({monthly},plan);
-  const expected=monthly*plan.paid*(1-plan.discount/100);
-  assert(Math.abs(q.total-expected)<1e-8,monthly+' '+plan.id+' rent');
+  const expected=Math.round(monthly*plan.paid*(100-plan.discount)/100);
+  assert.equal(q.total,expected,monthly+' '+plan.id+' rent in whole baht');
   assert.equal(q.deposit,monthly,monthly+' '+plan.id+' deposit');
   assert.equal(q.atSigning,q.total+monthly);
   assert.equal(q.saving,monthly*plan.months-q.total);
   assert.equal(q.average,q.total/plan.months);
  }
 });
-test('fractional-baht quotes are not floored or silently rounded away',()=>{
+test('quotes round to whole baht with normal rounding (Newton, 7 Nov)',()=>{
  const q=priceFor({monthly:3990},sourcePlans[1]);
- assert.equal(q.total,11371.5);assert.equal(q.average,3790.5);assert.equal(q.saving,598.5);assert.equal(q.atSigning,15361.5);
- assert.equal(baht(q.total),'฿11,371.50');assert.equal(baht(q.average),'฿3,790.50');assert.equal(baht(q.atSigning),'฿15,361.50');
- assert.equal(baht(priceFor({monthly:3990},sourcePlans[5]).average),'฿2,327.50');
+ assert.equal(q.total,11372);assert.equal(q.saving,598);assert.equal(baht(q.total),'฿11,372');assert.equal(baht(q.average),'฿3,791');
+ assert.equal(baht(priceFor({monthly:3990},sourcePlans[5]).average),'฿2,328');assert.equal(baht(priceFor({monthly:2490},sourcePlans[1]).total),'฿7,097');
 });
 test('public terms distinguish free reservation from signing and disclose promotion limits',()=>{
- assert.match(script,/1 month of list rent/);
+ assert.match(script,/t\('เงินประกัน','Deposit'\),t\('1 เดือน','1 month'\)/,'deposit shown as its own line');assert.doesNotMatch(script,/Due when you sign|Due at signing/,'deposit is not added to the rent');
  assert.match(script,/limited, first come first served/);assert.doesNotMatch(script,/first \$\{DEMAND_CONFIG.founding.rooms\} rooms|\$\{DEMAND_CONFIG.founding.rooms\} ห้องแรก/,'Newton: never show the room quota to customers');
  assert.match(script,/\$\{DEMAND_CONFIG.founding.daysAfterOpening\} days after opening/);
  assert.match(script,/This price covers the first 12 months/);
