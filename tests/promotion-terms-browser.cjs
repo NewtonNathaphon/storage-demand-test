@@ -19,7 +19,7 @@ const config=require('../demand-config.cjs');
    assert.equal(data.q.total,total,size+' '+duration+' '+language);assert.equal(data.q.deposit,monthly);assert.equal(data.q.atSigning,total+monthly);
    assert(data.rows.some(row=>row.includes(language==='en'?'1 month of list rent':'ค่าเช่าปกติ 1 เดือน')));
    assert(data.summary.includes(language==='en'?'Due at signing':'ชำระวันทำสัญญา'));
-   if(months>=6){assert(data.text.includes(language==='en'?'first 30 rooms':'30 ห้องแรก'));assert(data.text.includes(language==='en'?'14 days after opening':'14 วันหลังเปิดบริการ'));}
+   if(months>=6){assert(data.text.includes(language==='en'?'limited, first come first served':'จำนวนจำกัด'));assert(!data.text.includes(language==='en'?'30 rooms':'30 ห้อง'),'the room quota is never shown to customers');assert(data.text.includes(language==='en'?'14 days after opening':'14 วันหลังเปิดบริการ'));}
    if(duration==='over_12_months')assert(data.text.includes(language==='en'?'first 12 months':'12 เดือนแรก'));
   }
   await p.evaluate(()=>{document.querySelector('[name="requested_size"][value="4"]').checked=true;document.querySelector('[name="expected_duration"][value="12_months"]').checked=true;updateQuote();});

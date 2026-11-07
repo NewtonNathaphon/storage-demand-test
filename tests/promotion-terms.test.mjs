@@ -44,10 +44,10 @@ test('fractional-baht quotes are not floored or silently rounded away',()=>{
 });
 test('public terms distinguish free reservation from signing and disclose promotion limits',()=>{
  assert.match(script,/1 month of list rent/);
- assert.match(script,/first \$\{DEMAND_CONFIG.founding.rooms\} rooms/);
+ assert.match(script,/limited, first come first served/);assert.doesNotMatch(script,/first \$\{DEMAND_CONFIG.founding.rooms\} rooms|\$\{DEMAND_CONFIG.founding.rooms\} ห้องแรก/,'Newton: never show the room quota to customers');
  assert.match(script,/\$\{DEMAND_CONFIG.founding.daysAfterOpening\} days after opening/);
  assert.match(script,/This price covers the first 12 months/);
- assert.doesNotMatch(script,/continue monthly at the standard price|round down to the whole baht/);
+ assert.match(script,/continue monthly at the standard price/,'Newton-approved renewal wording');assert.doesNotMatch(script,/round down to the whole baht/);
  assert.match(script,/price_shown:q\?Math.round/,'legacy integer column stays safe while exact quote is in customer_use');
  for(const file of ['index.html','registration-page.cjs','seo-pages.cjs']){
   const s=fs.readFileSync(new URL('../'+file,import.meta.url),'utf8');
