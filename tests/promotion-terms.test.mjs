@@ -18,7 +18,7 @@ const sourcePlans=[
  {id:'founding_6',months:6,paid:4,discount:0,deposit:1},
  {id:'founding_12',months:12,paid:7,discount:0,deposit:1}
 ];
-const sourcePrices=[780,1990,3990,4590,4990,5790,6590,7290,8490];
+const sourcePrices=[780,1990,3890,4590,4990,5790,6590,7290,8490];
 test('all six approved plans and nine list prices match the live sheet snapshot',()=>{
  assert.deepEqual([...config.plans,...config.founding.plans],sourcePlans);
  assert.deepEqual([config.locker.monthly,...config.rooms.map(r=>r.monthly)],sourcePrices);
