@@ -27,7 +27,7 @@ const config=require('../demand-config.cjs');
  }
  // Preserve historical data rather than rewriting prior quotes under current terms.
  await p.goto('http://127.0.0.1:8788/backoffice.html');
- const historical=await p.evaluate(()=>questionnaireFields({},{kind:'demand_validation_v2',payment_plan:'founding_12',quote_total:27930,quote_average_monthly:2328,deposit_amount:0}).find(([name])=>name==='Price shown for the plan')[1]);
+ const historical=await p.evaluate(()=>questionnaireFields({},{kind:'demand_validation_v2',payment_plan:'founding_12',quote_total:27230,quote_average_monthly:2269,deposit_amount:0}).find(([name])=>name==='Price shown for the plan')[1]);
  assert(historical.includes('deposit recorded ฿0'));assert(!historical.includes('no deposit'));
  console.log('PASS bilingual 90 size-duration renders; correct deposit/signing values, offer limits, first-year scope, 390/1440 layouts, historical quote display');
 }finally{await b.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
