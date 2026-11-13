@@ -38,3 +38,19 @@ test('demand statuses persist in owner history without changing constrained lega
  assert.equal((await action({demand_status:'arbitrary'})).status,400);assert.equal((await action({demand_status:null,status:'contacted'})).status,200);assert.equal(JSON.parse(row.notes).demand_status,undefined);
  }finally{globalThis.fetch=original;}
 });
+test('ad spend: owner-only, validated month/channel/amount, upsert by month and channel',async()=>{
+  const {validateAdSpend}=await import('../functions/api/backoffice.js');
+  assert.deepEqual(validateAdSpend({month:'2026-11',channel:'google_ads',amount_thb:1234.5,note:' receipt 7 '}),{month:'2026-11-01',channel:'google_ads',amount_thb:1234.5,note:'receipt 7'});
+  for(const bad of [{month:'2026-13',channel:'google_ads',amount_thb:1,note:''},{month:'2026-11',channel:'tiktok',amount_thb:1,note:''},{month:'2026-11',channel:'google_ads',amount_thb:-1,note:''},{month:'2026-11',channel:'google_ads',amount_thb:1.234,note:''},{month:'2026-11',channel:'google_ads',amount_thb:'5',note:''},{month:'2026-11',channel:'google_ads',amount_thb:1,note:'x'.repeat(501)}])assert.throws(()=>validateAdSpend(bad));
+  const original=globalThis.fetch,calls=[];try{
+    globalThis.fetch=async(url,options={})=>{calls.push({url:String(url),options});if(String(url).includes('/auth/v1/user'))return Response.json({id:'user',email:'owner@example.com'});if(String(url).includes('ccaqr_user_profiles'))return Response.json([{role:'owner',active:true,display_name:'Owner'}]);if(String(url).includes('/rest/v1/ad_spend'))return Response.json(options.method==='POST'?[JSON.parse(options.body)]:[]);return Response.json([]);};
+    const env={STORAGE_BACKOFFICE_KEY:'service-key'};
+    assert.equal((await onRequest({request:req('resource=ad_spend'),env})).status,200);assert(calls.at(-1).url.includes('/rest/v1/ad_spend?select=month,channel,amount_thb'));
+    const post=body=>req('resource=ad_spend',{method:'POST',headers:{origin,authorization:'Bearer test.token.value','content-type':'application/json'},body:JSON.stringify(body)});
+    assert.equal((await onRequest({request:post({month:'2026-11',channel:'google_ads',amount_thb:-5,note:''}),env})).status,400);
+    const ok=await onRequest({request:post({month:'2026-11',channel:'google_ads',amount_thb:900,note:'n'}),env});assert.equal(ok.status,200);
+    const saved=calls.at(-1);assert(saved.url.endsWith('/rest/v1/ad_spend?on_conflict=month,channel'));assert.equal(saved.options.headers.apikey,'service-key');const row=JSON.parse(saved.options.body);assert.equal(row.month,'2026-11-01');assert.equal(row.updated_by,'Owner');
+    globalThis.fetch=async url=>String(url).includes('/auth/v1/user')?Response.json({id:'user'}):Response.json([{role:'admin',active:true}]);
+    assert.equal((await onRequest({request:post({month:'2026-11',channel:'google_ads',amount_thb:900,note:''}),env})).status,403,'non-owners cannot write spend');
+  }finally{globalThis.fetch=original;}
+});

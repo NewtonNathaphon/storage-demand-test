@@ -10,11 +10,16 @@ export function validateFollowup(value){
   for(const key of ['contacted_on','follow_up_on'])if(value[key]!==null&&(!/^\d{4}-\d{2}-\d{2}$/.test(value[key]||'')||!Number.isFinite(Date.parse(value[key]))||new Date(value[key]).toISOString().slice(0,10)!==value[key]))throw Error('INVALID_INPUT');
   return {lead_id:value.lead_id,status:value.status,notes:value.notes,contacted_on:value.contacted_on,follow_up_on:value.follow_up_on,updated_at:new Date().toISOString()};
 }
+// Monthly ad spend typed by the owner from the ad platform receipt. Amounts in THB with up to 2 decimals.
+export function validateAdSpend(value){
+  if(!value||!/^\d{4}-(0[1-9]|1[0-2])$/.test(value.month||'')||!['google_ads','facebook_ads','other'].includes(value.channel)||typeof value.amount_thb!=='number'||!Number.isFinite(value.amount_thb)||value.amount_thb<0||value.amount_thb>=10000000||Math.round(value.amount_thb*100)!==Number((value.amount_thb*100).toFixed(6))||typeof value.note!=='string'||value.note.length>500)throw Error('INVALID_INPUT');
+  return {month:value.month+'-01',channel:value.channel,amount_thb:Math.round(value.amount_thb*100)/100,note:value.note.trim()};
+}
 export async function onRequest({request,env}){
   if(!['GET','POST'].includes(request.method))return json({message:'Method not allowed'},405);
   const url=new URL(request.url),origin=request.headers.get('origin');if((origin&&origin!==url.origin)||(request.method==='POST'&&origin!==url.origin))return json({message:'Forbidden'},403);
   const authorization=request.headers.get('authorization');if(!/^Bearer [A-Za-z0-9._-]+$/.test(authorization||'')||authorization.length>12000)return json({message:'Please sign in'},401);
-  const resource=url.searchParams.get('resource');if(!['identity','lead_action','lead_photos'].includes(resource)&&!Object.hasOwn(columns,resource))return json({message:'Not found'},404);
+  const resource=url.searchParams.get('resource');if(!['identity','lead_action','lead_photos','ad_spend'].includes(resource)&&!Object.hasOwn(columns,resource))return json({message:'Not found'},404);
   try{
     const headers={apikey:AUTH_KEY,Authorization:authorization};
     const userRes=await fetch(AUTH_URL+'/auth/v1/user',{headers,signal:AbortSignal.timeout(10000)});if(!userRes.ok)return json({message:'Your session expired. Please sign in again.'},401);const user=await userRes.json();if(!user.id)return json({message:'Please sign in'},401);
@@ -37,6 +42,16 @@ export async function onRequest({request,env}){
         result.push({url:DATA_URL+'/storage/v1'+data.signedURL});
       }
       return json(result);
+    }
+    if(resource==='ad_spend'){
+      const base=DATA_URL+'/rest/v1/ad_spend';
+      if(request.method==='GET'){const res=await fetch(base+'?select=month,channel,amount_thb,note,updated_at,updated_by&order=month.desc,channel.asc&limit=240',{headers:dataHeaders,signal:AbortSignal.timeout(10000)});if(!res.ok)throw Error('READ');return json(await res.json());}
+      if(!request.headers.get('content-type')?.startsWith('application/json'))return json({message:'Forbidden'},403);
+      const raw=await request.text();if(raw.length>4000)return json({message:'Request too large'},413);
+      let row;try{row=validateAdSpend(JSON.parse(raw));}catch{return json({message:'Check the month, amount and note.'},400);}
+      row.updated_at=new Date().toISOString();row.updated_by=String(roles[0].display_name||user.email||'Owner').slice(0,200);
+      const res=await fetch(base+'?on_conflict=month,channel',{method:'POST',headers:{...dataHeaders,Prefer:'resolution=merge-duplicates,return=representation'},body:JSON.stringify(row),signal:AbortSignal.timeout(10000)});
+      if(!res.ok)throw Error('SAVE');return json(await res.json());
     }
     if(resource==='lead_action'){
       if(request.method!=='POST')return json({message:'Method not allowed'},405);

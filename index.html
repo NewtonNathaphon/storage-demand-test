@@ -260,11 +260,14 @@ function preserveCampaignLinks(){
 preserveCampaignLinks();
 
 if(location.pathname.replace(/\/$/,'')==='/rooms')addEventListener('load',()=>document.getElementById('sizes').scrollIntoView());
-const source = (params.get('utm_source') || 'direct').slice(0,120);
+// Google Ads click IDs (auto-tagging) mark a visit as google_ads even without UTM tags. Kept 30 days in this browser so a later booking still counts.
+const adClick=(()=>{const key='sb_ad_click',param=['gclid','gbraid','wbraid'].find(name=>params.get(name));let saved=null;try{saved=JSON.parse(localStorage.getItem(key)||'null');}catch{}if(param){saved={source:'google_ads',param,click_id:params.get(param).slice(0,200),at:new Date().toISOString()};try{localStorage.setItem(key,JSON.stringify(saved));}catch{}}return saved&&saved.source==='google_ads'&&typeof saved.click_id==='string'&&Date.now()-Date.parse(saved.at)<30*864e5?saved:null;})();
+const source = (params.get('utm_source') || adClick?.source || 'direct').slice(0,120);
 const CONFIGURED = SUPABASE_URL.startsWith('https://') && !!SUPABASE_ANON_KEY;
 let sessionId; try {sessionId=sessionStorage.getItem('sb_session');if(!sessionId){sessionId=crypto.randomUUID();sessionStorage.setItem('sb_session',sessionId);}}catch{sessionId=crypto.randomUUID();}
 async function sbInsert(table,row){
   if(!CONFIGURED)return false;
+  if(table==='leads'&&typeof adClick!=='undefined'&&adClick){try{const d=JSON.parse(row.customer_use);if(d&&typeof d==='object'&&!d.ad_click)row={...row,customer_use:JSON.stringify({...d,ad_click:adClick})};}catch{}}
   try{const res=await fetch(SUPABASE_URL+'/rest/v1/'+table,{method:'POST',headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify(row),signal:AbortSignal.timeout(20000)});return res.ok;}catch{return false;}
 }
 function track(event_type,detail=''){void sbInsert('events',{session_id:sessionId,event_type,area:'rama3',detail,utm_source:source});}
