@@ -31,3 +31,10 @@ test('photo intake preserves satang in the quote snapshot while retaining the le
  for(const [key,value] of Object.entries(details))assert.equal(input.details[key],value);
  assert.equal(input.row.price_shown,11372);
 });
+test('photo intake keeps a well-formed Google Ads click and drops anything else',()=>{
+ const withClick=click=>validateIntake({...body,row:{...body.row,customer_use:JSON.stringify({kind:'demand_validation_v2',ad_click:click})}}).details.ad_click;
+ const good={source:'google_ads',param:'gclid',click_id:'abc123',at:'2026-11-13T06:00:00.000Z'};
+ assert.deepEqual(withClick({...good,extra:'<script>'}),good);
+ for(const bad of [{...good,source:'facebook_ads'},{...good,param:'utm'},{...good,click_id:'x'.repeat(201)},{...good,click_id:7},'google_ads'])assert.equal(withClick(bad),undefined);
+ assert.equal(withClick(null),null);
+});
