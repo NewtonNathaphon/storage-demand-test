@@ -18,3 +18,15 @@ ALTER TABLE public.ad_daily ENABLE ROW LEVEL SECURITY;
 REVOKE ALL ON public.ad_daily FROM anon, authenticated;
 GRANT SELECT, INSERT, UPDATE ON public.ad_daily TO service_role;
 COMMIT;
+-- Feed keys: only SHA-256 hashes are stored. The key itself lives in the Google Ads script (Newton's Drive copy), never in git.
+BEGIN;
+CREATE TABLE IF NOT EXISTS public.ad_ingest_keys (
+  key_hash text PRIMARY KEY CHECK (key_hash ~ '^[0-9a-f]{64}$'),
+  label text NOT NULL DEFAULT '' CHECK (length(label) <= 100),
+  active boolean NOT NULL DEFAULT true,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+ALTER TABLE public.ad_ingest_keys ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON public.ad_ingest_keys FROM anon, authenticated;
+GRANT SELECT ON public.ad_ingest_keys TO service_role;
+COMMIT;
