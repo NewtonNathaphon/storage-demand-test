@@ -19,7 +19,7 @@ export async function onRequest({request,env}){
   if(!['GET','POST'].includes(request.method))return json({message:'Method not allowed'},405);
   const url=new URL(request.url),origin=request.headers.get('origin');if((origin&&origin!==url.origin)||(request.method==='POST'&&origin!==url.origin))return json({message:'Forbidden'},403);
   const authorization=request.headers.get('authorization');if(!/^Bearer [A-Za-z0-9._-]+$/.test(authorization||'')||authorization.length>12000)return json({message:'Please sign in'},401);
-  const resource=url.searchParams.get('resource');if(!['identity','lead_action','lead_photos','ad_spend'].includes(resource)&&!Object.hasOwn(columns,resource))return json({message:'Not found'},404);
+  const resource=url.searchParams.get('resource');if(!['identity','lead_action','lead_photos','ad_spend','ad_daily'].includes(resource)&&!Object.hasOwn(columns,resource))return json({message:'Not found'},404);
   try{
     const headers={apikey:AUTH_KEY,Authorization:authorization};
     const userRes=await fetch(AUTH_URL+'/auth/v1/user',{headers,signal:AbortSignal.timeout(10000)});if(!userRes.ok)return json({message:'Your session expired. Please sign in again.'},401);const user=await userRes.json();if(!user.id)return json({message:'Please sign in'},401);
@@ -42,6 +42,11 @@ export async function onRequest({request,env}){
         result.push({url:DATA_URL+'/storage/v1'+data.signedURL});
       }
       return json(result);
+    }
+    if(resource==='ad_daily'){
+      if(request.method!=='GET')return json({message:'Method not allowed'},405);
+      const res=await fetch(DATA_URL+'/rest/v1/ad_daily?select=day,impressions,clicks,cost_thb,conversions,line_clicks,reservations,quote_requests,updated_at&channel=eq.google_ads&order=day.desc&limit=400',{headers:dataHeaders,signal:AbortSignal.timeout(10000)});
+      if(!res.ok)throw Error('READ');return json(await res.json());
     }
     if(resource==='ad_spend'){
       const base=DATA_URL+'/rest/v1/ad_spend';

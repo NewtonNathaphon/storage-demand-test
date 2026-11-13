@@ -80,27 +80,55 @@ $('closePhoto').onclick=()=>$('photoViewer').close();$('previousPhoto').onclick=
 $('photoViewer').addEventListener('click',e=>{if(e.target===$('photoViewer')){const box=$('photoViewer').getBoundingClientRect();if(e.clientX<box.left||e.clientX>box.right||e.clientY<box.top||e.clientY>box.bottom)$('photoViewer').close();}});
 $('photoViewer').addEventListener('keydown',e=>{if(e.key==='ArrowLeft')$('previousPhoto').click();if(e.key==='ArrowRight')$('nextPhoto').click();});
 
-// Google Ads: monthly spend typed by the owner, against ad visits and enquiries in the loaded date range.
-let adSpend=[];
+// Google Ads: daily numbers sent by the Google Ads script (ad_daily), the owner's monthly spend (ad_spend) as a fallback,
+// and the website's own count of ad visitors and bookings (utm_source / customer_use.ad_click).
+let adSpend=[],adDaily=[];
 function isGoogleAd(src){return /^(google_ads|google|adwords|gads)$/i.test(src||'');}
 const monthKey=date=>dateKey(date).slice(0,7);
-const thbText=n=>n===null||n===undefined?'—':'฿'+Number(n).toLocaleString('en-GB',{maximumFractionDigits:2});
-async function loadAdSpend(){try{adSpend=await api('ad_spend');$('adStatus').textContent='';}catch(e){adSpend=[];$('adStatus').textContent='Spend could not be loaded: '+e.message;}renderAds();}
-function adMonths(){const out=[];if(!$('from').value||!$('through').value)return out;let [y,m]=$('from').value.slice(0,7).split('-').map(Number);const [ey,em]=$('through').value.slice(0,7).split('-').map(Number);while((y<ey||(y===ey&&m<=em))&&out.length<36){out.push(y+'-'+String(m).padStart(2,'0'));m++;if(m>12){m=1;y++;}}return out.reverse();}
-function adSummary(){const tests=$('includeTests').checked;
+const thbText=n=>n===null||n===undefined||!Number.isFinite(n)?'—':'฿'+Number(n).toLocaleString('en-GB',{maximumFractionDigits:2});
+const pctText=n=>n===null||!Number.isFinite(n)?'—':(n*100).toLocaleString('en-GB',{maximumFractionDigits:1})+'%';
+const numText=n=>Number(n||0).toLocaleString('en-GB',{maximumFractionDigits:1});
+async function loadAdSpend(){const [spend,daily]=await Promise.allSettled([api('ad_spend'),api('ad_daily')]);adSpend=spend.status==='fulfilled'?spend.value:[];adDaily=daily.status==='fulfilled'?daily.value.map(d=>({...d,cost_thb:Number(d.cost_thb),conversions:Number(d.conversions),line_clicks:Number(d.line_clicks),reservations:Number(d.reservations),quote_requests:Number(d.quote_requests)})):[];
+ $('adStatus').textContent=spend.status==='rejected'?'Monthly spend could not be loaded: '+spend.reason.message:'';renderAds();}
+function rangeDays(){const out=[];if(!$('from').value||!$('through').value)return out;for(let c=new Date($('from').value+'T00:00:00Z'),last=new Date($('through').value+'T00:00:00Z');c<=last&&out.length<400;c=new Date(+c+864e5))out.push(c.toISOString().slice(0,10));return out;}
+function adMonths(){return [...new Set(rangeDays().map(d=>d.slice(0,7)))].reverse();}
+function adWebsite(){const tests=$('includeTests').checked;
  const leads=rows.filter(r=>!cardMeta(r.id).deleted&&(tests||!isTest(r))&&!['area_vote','size_help_signup'].includes(safeDetails(r).kind||r.lean)&&(isGoogleAd(r.utm_source)||safeDetails(r).ad_click?.source==='google_ads'));
- const views=events.filter(e=>e.event_type==='page_view'&&isGoogleAd(e.utm_source)&&(tests||!isTest(e)));
- return adMonths().map(month=>{const row=adSpend.find(x=>String(x.month).slice(0,7)===month&&x.channel==='google_ads');const spend=row?Number(row.amount_thb):null;
-  const visits=new Set(views.filter(v=>monthKey(v.created_at)===month).map(v=>v.session_id).filter(Boolean)).size;
+ const views=events.filter(e=>e.event_type==='page_view'&&isGoogleAd(e.utm_source)&&(tests||!isTest(e)));return {leads,views};}
+const convOf=d=>d.line_clicks+d.reservations+d.quote_requests;
+function monthSpend(month){const days=adDaily.filter(d=>d.day.slice(0,7)===month);if(days.length)return {spend:days.reduce((a,d)=>a+d.cost_thb,0),from:'daily'};const row=adSpend.find(x=>String(x.month).slice(0,7)===month&&x.channel==='google_ads');return row?{spend:Number(row.amount_thb),from:'monthly',note:row.note}:{spend:null,from:null};}
+function adSummary(){const {leads,views}=adWebsite();
+ return adMonths().map(month=>{const s=monthSpend(month);const visits=new Set(views.filter(v=>monthKey(v.created_at)===month).map(v=>v.session_id).filter(Boolean)).size;
   const monthLeads=leads.filter(r=>monthKey(r.created_at)===month),reservations=monthLeads.filter(r=>safeDetails(r).next_step==='reserve_free').length;
-  return {month,spend,note:row?.note||'',visits,enquiries:monthLeads.length,reservations,perReservation:spend!==null&&reservations?spend/reservations:null,perEnquiry:spend!==null&&monthLeads.length?spend/monthLeads.length:null};});}
-function renderAds(){const body=$('adRows');if(!body)return;body.replaceChildren();const data=adSummary();
- for(const r of data){const tr=document.createElement('tr');for(const v of [r.month,r.spend===null?'not entered':thbText(r.spend),r.visits,r.enquiries,r.reservations,thbText(r.perReservation),thbText(r.perEnquiry)])tr.append(el('td',String(v)));if(r.note)tr.title=r.note;body.append(tr);}
- if(!data.length){const tr=document.createElement('tr'),td=el('td','Choose a date range.');td.colSpan=7;tr.append(td);body.append(tr);}}
+  return {month,spend:s.spend,source:s.from,note:s.note||'',visits,enquiries:monthLeads.length,reservations,perReservation:s.spend!==null&&reservations?s.spend/reservations:null,perEnquiry:s.spend!==null&&monthLeads.length?s.spend/monthLeads.length:null};});}
+function barChart(id,days,value,label,startId,endId){const box=$(id);box.replaceChildren();const max=Math.max(0,...days.map(value));for(const d of days){const v=value(d),bar=el('div','','bar');bar.style.height=(max?v/max*100:0)+'%';if(v>0)bar.style.minHeight='2px';bar.title=label(d);bar.setAttribute('aria-label',bar.title);bar.tabIndex=0;box.append(bar);}$(startId).textContent=days[0]?.day||'';$(endId).textContent=days.at(-1)?.day||'';}
+function renderAds(){if(!$('adRows'))return;const days=rangeDays(),byDay=new Map(adDaily.map(d=>[d.day,d])),inRange=days.map(day=>byDay.get(day)||{day,impressions:0,clicks:0,cost_thb:0,conversions:0,line_clicks:0,reservations:0,quote_requests:0,missing:true});
+ const hasDaily=inRange.some(d=>!d.missing),{leads,views}=adWebsite(),inDates=r=>{const k=dateKey(r.created_at);return k>=$('from').value&&k<=$('through').value;};
+ const spend=hasDaily?inRange.reduce((a,d)=>a+d.cost_thb,0):adMonths().reduce((a,m)=>{const s=monthSpend(m).spend;return s===null?a:(a??0)+s;},null);
+ const clicks=inRange.reduce((a,d)=>a+d.clicks,0),impr=inRange.reduce((a,d)=>a+d.impressions,0),line=inRange.reduce((a,d)=>a+d.line_clicks,0),res=inRange.reduce((a,d)=>a+d.reservations,0),quotes=inRange.reduce((a,d)=>a+d.quote_requests,0),conv=line+res+quotes;
+ const myLeads=leads.filter(inDates),myRes=myLeads.filter(r=>safeDetails(r).next_step==='reserve_free').length,visits=new Set(views.filter(inDates).map(v=>v.session_id).filter(Boolean)).size;
+ const last=adDaily.reduce((a,d)=>d.updated_at>a?d.updated_at:a,'');$('adSync').textContent=last?'Updated from Google Ads '+displayDate(last):'';$('adSetup').hidden=adDaily.length>0;
+ $('adMetrics').replaceChildren();for(const [label,value,note] of [
+  ['Spend',thbText(spend),hasDaily?'From Google Ads':spend===null?'Not connected yet':'From the monthly box'],
+  ['Clicks',hasDaily?numText(clicks):'—',hasDaily?numText(impr)+' times your ad was shown':'Needs the Google Ads feed'],
+  ['Cost per click',hasDaily&&clicks?thbText(spend/clicks):'—','Spend ÷ clicks'],
+  ['Conversions',hasDaily?numText(conv):'—',hasDaily?numText(line)+' LINE chats · '+numText(res)+' reservations':'Counted by Google Ads'],
+  ['Conversion rate',hasDaily&&clicks?pctText(conv/clicks):'—','Conversions ÷ clicks'],
+  ['Cost per conversion',hasDaily&&conv?thbText(spend/conv):'—','Spend ÷ conversions'],
+  ['Ad visits',String(visits),'Counted by your website'],
+  ['Bookings from ads',String(myLeads.length),myRes+' free reservations · '+(spend!==null&&myRes?thbText(spend/myRes)+' per reservation':'no cost yet')]]){const card=el('div','','metric');card.append(el('small',label),el('b',value),el('span',note));$('adMetrics').append(card);}
+ const day=d=>new Date(d.day+'T00:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'});
+ barChart('adSpendChart',inRange,d=>d.cost_thb,d=>day(d)+': '+thbText(d.cost_thb)+' · '+d.clicks+' clicks','adChartStart','adChartEnd');
+ barChart('adClickChart',inRange,d=>d.clicks,d=>day(d)+': '+d.clicks+' clicks'+(d.clicks?' · '+thbText(d.cost_thb/d.clicks)+' per click':''),'adClickStart','adClickEnd');
+ barChart('adConvChart',inRange,convOf,d=>day(d)+': '+numText(convOf(d))+' conversions ('+numText(d.line_clicks)+' LINE, '+numText(d.reservations)+' reservations, '+numText(d.quote_requests)+' quotes)','adConvStart','adConvEnd');
+ const dailyBody=$('adDailyRows');dailyBody.replaceChildren();for(const d of inRange.filter(d=>!d.missing).reverse()){const tr=document.createElement('tr');for(const v of [day(d),thbText(d.cost_thb),String(d.clicks),d.clicks?thbText(d.cost_thb/d.clicks):'—',numText(d.line_clicks),numText(d.reservations),d.clicks?pctText(convOf(d)/d.clicks):'—'])tr.append(el('td',v));dailyBody.append(tr);}
+ if(!dailyBody.children.length){const tr=document.createElement('tr'),td=el('td','No daily numbers from Google Ads for these dates yet.');td.colSpan=7;tr.append(td);dailyBody.append(tr);}
+ const body=$('adRows');body.replaceChildren();for(const r of adSummary()){const tr=document.createElement('tr');for(const v of [r.month,r.spend===null?'not entered':thbText(r.spend)+(r.source==='monthly'?' (typed)':''),r.visits,r.enquiries,r.reservations,thbText(r.perReservation),thbText(r.perEnquiry)])tr.append(el('td',String(v)));if(r.note)tr.title=r.note;body.append(tr);}}
 function fillAdForm(){const row=adSpend.find(x=>String(x.month).slice(0,7)===$('adMonth').value&&x.channel==='google_ads');$('adAmount').value=row?Number(row.amount_thb):'';$('adNote').value=row?.note||'';}
 if($('adSpendForm')){
  $('adMonth').value=dateKey(Date.now()).slice(0,7);$('adMonth').onchange=fillAdForm;
  $('adSpendForm').onsubmit=async e=>{e.preventDefault();const amount=Number($('adAmount').value);if(!/^\d{4}-\d{2}$/.test($('adMonth').value)||$('adAmount').value===''||!Number.isFinite(amount)||amount<0){$('adStatus').textContent='Check the month and amount.';return;}
   $('adSave').disabled=true;$('adStatus').textContent='Saving…';try{await api('ad_spend',{method:'POST',body:JSON.stringify({month:$('adMonth').value,channel:'google_ads',amount_thb:Math.round(amount*100)/100,note:$('adNote').value.slice(0,500)})});await loadAdSpend();fillAdForm();$('adStatus').textContent='Saved '+$('adMonth').value+'.';}catch(err){$('adStatus').textContent=err.message;}finally{$('adSave').disabled=false;}};
- $('adExport').onclick=()=>{const lines=[['Month','Google Ads spend (THB)','Ad visits','Ad enquiries','Free reservations','Cost per reservation (THB)','Cost per enquiry (THB)','Note'],...adSummary().map(r=>[r.month,r.spend??'',r.visits,r.enquiries,r.reservations,r.perReservation===null?'':r.perReservation.toFixed(2),r.perEnquiry===null?'':r.perEnquiry.toFixed(2),r.note])];const url=URL.createObjectURL(new Blob(['﻿'+lines.map(l=>l.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='storagebuddy-google-ads-'+$('from').value+'-to-'+$('through').value+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+ $('adExport').onclick=()=>{const byDay=new Map(adDaily.map(d=>[d.day,d]));const lines=[['Date','Spend (THB)','Impressions','Clicks','Cost per click (THB)','LINE chats','Reservations (Google)','Quote requests (Google)','Conversion rate'],...rangeDays().filter(d=>byDay.has(d)).map(day=>{const d=byDay.get(day);return [day,d.cost_thb.toFixed(2),d.impressions,d.clicks,d.clicks?(d.cost_thb/d.clicks).toFixed(2):'',d.line_clicks,d.reservations,d.quote_requests,d.clicks?(convOf(d)/d.clicks).toFixed(4):''];}),[],['Month','Spend (THB)','Spend source','Ad visits','Bookings from ads','Free reservations','Cost per reservation (THB)','Cost per booking (THB)','Note'],...adSummary().map(r=>[r.month,r.spend??'',r.source||'',r.visits,r.enquiries,r.reservations,r.perReservation===null?'':r.perReservation.toFixed(2),r.perEnquiry===null?'':r.perEnquiry.toFixed(2),r.note])];
+  const url=URL.createObjectURL(new Blob(['﻿'+lines.map(l=>l.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='storagebuddy-google-ads-'+$('from').value+'-to-'+$('through').value+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 }
