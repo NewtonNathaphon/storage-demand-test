@@ -1,6 +1,6 @@
 // StorageBuddy: send Google Ads daily numbers to the back office every hour.
 // Where: Google Ads -> Tools -> Bulk actions -> Scripts -> + New script. Paste this whole file.
-// 1. Replace PASTE_YOUR_SECRET_HERE with the same secret you saved in Cloudflare as ADS_INGEST_TOKEN.
+// 1. Replace PASTE_YOUR_SECRET_HERE with the feed key (its SHA-256 must be active in the ad_ingest_keys table). The copy in Newton's Google Drive already has it.
 // 2. Click Authorize, then Preview (the log should say "Sent N days: HTTP 200"), then Save.
 // 3. Set Frequency to Hourly.
 // It sends the last 30 days each time, so Google's late corrections are picked up. It never changes your ads.

@@ -16,7 +16,16 @@ test('ads feed needs the shared secret and only writes ad_daily with the server 
  assert.equal((await onRequest({request:new Request('https://storagebuddyth.com/api/ads-ingest'),env})).status,405);
  const original=globalThis.fetch,calls=[];try{globalThis.fetch=async(url,options)=>{calls.push({url:String(url),options});return new Response(null,{status:201});};
   const today=new Date().toISOString().slice(0,10);const res=await onRequest({request:req({rows:[{...row,day:today}]}),env});assert.equal(res.status,200);assert.deepEqual(await res.json(),{saved:1});
-  assert.equal(calls.length,1);assert(calls[0].url.endsWith('/rest/v1/ad_daily?on_conflict=day,channel'));assert.equal(calls[0].options.headers.apikey,'service-key');
+  assert.equal(calls.length,1,'env secret matches without a key lookup');assert(calls[0].url.endsWith('/rest/v1/ad_daily?on_conflict=day,channel'));assert.equal(calls[0].options.headers.apikey,'service-key');
   assert.equal((await onRequest({request:req({rows:[{...row,day:today,currency:'USD'}]}),env})).status,400);assert.equal(calls.length,1,'invalid data never reaches the database');
+ }finally{globalThis.fetch=original;}
+});
+test('ads feed also accepts a key whose SHA-256 is active in ad_ingest_keys, and nothing else',async()=>{
+ const key='k'.repeat(64),hash='3c2baf3e2a7e5a2b2fbb5a6e0dbbd1c7b5d3f74c7fa0e7f7d7b0b0e4c8f1a1b2';const env={STORAGE_BACKOFFICE_KEY:'service-key'};const today=new Date().toISOString().slice(0,10);
+ const expected=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(key)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+ const original=globalThis.fetch,calls=[];try{globalThis.fetch=async(url,options)=>{url=String(url);calls.push(url);if(url.includes('/ad_ingest_keys'))return Response.json(url.includes('key_hash=eq.'+expected)?[{key_hash:expected}]:[]);return new Response(null,{status:201});};
+  assert.equal((await onRequest({request:req({rows:[{...row,day:today}]},'Bearer '+key),env})).status,200);assert(calls.some(u=>u.includes('/ad_daily')));
+  calls.length=0;assert.equal((await onRequest({request:req({rows:[{...row,day:today}]},'Bearer '+'z'.repeat(64)),env})).status,401);assert(!calls.some(u=>u.includes('/ad_daily')),'unknown key never writes');
+  assert.equal((await onRequest({request:req({rows:[{...row,day:today}]},'Bearer short'),env})).status,401);
  }finally{globalThis.fetch=original;}
 });
